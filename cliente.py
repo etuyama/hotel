@@ -37,7 +37,7 @@ class Cliente(Pessoa):
         if isinstance(endereco, str):
             self.__endereco = endereco
 
-    def validar_maioridade(self):
-        if self.idade >= 18:
+    def validar_maioridade(self):  # essa função poderia ser na classe hotel dentro do método de efetuar a reserva
+        if self.__idade >= 18:
             return True
         return False
