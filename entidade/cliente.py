@@ -1,4 +1,4 @@
-from pessoa import Pessoa
+from entidade.pessoa import Pessoa
 
 
 class Cliente(Pessoa):

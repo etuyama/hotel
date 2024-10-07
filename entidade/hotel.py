@@ -1,9 +1,9 @@
-from quarto_standard import QuartoStandard
-from quarto_suite import QuartoSuite
-from quarto_luxo import QuartoLuxo
-from servico import Servico
+from entidade.quarto_standard import QuartoStandard
+from entidade.quarto_suite import QuartoSuite
+from entidade.quarto_luxo import QuartoLuxo
+from entidade.servico import Servico
 from cliente import Cliente
-from reserva import Reserva
+from entidade.reserva import Reserva
 from funcionario import Funcionario
 
 
