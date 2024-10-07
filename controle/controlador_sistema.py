@@ -1,17 +1,18 @@
 from limite.tela_sistema import TelaSistema
-from controle.controlador_reservas import ControladorReservas
+#from controle.controlador_reservas import ControladorReservas
 from controle.controlador_clientes import ControladorClientes
-from controle.controlador_servicos import ControladorServicos
-from controle.controlador_quartos import ControladorQuartos
+#from controle.controlador_servicos import ControladorServicos
+#from controle.controlador_quartos import ControladorQuartos
 
 class ControladorSistema:
 
     def __init__(self):
+        self.__tela_sistema = TelaSistema()
         self.__controlador_clientes = ControladorClientes(self)
-        self.__controlador_reservas = ControladorReservas(self)
-        self.__controlador_servicos = ControladorServicos(self)
-        self.__controlador_quartos = ControladorQuartos(self)
-        self.__tela_sistema = TelaSistema(self)
+        #self.__controlador_reservas = ControladorReservas(self)
+        #self.__controlador_servicos = ControladorServicos(self)
+        #self.__controlador_quartos = ControladorQuartos(self)
+
 
     @property
     def controlador_clientes(self):
@@ -48,11 +49,11 @@ class ControladorSistema:
         exit(0)
 
     def abre_tela(self):
-        lista_opcoes = {1 : self.cadastra_clientes(),
-                        2 : self.cadastra_reservas(),
-                        3 : self.cadastra_servicos(),
-                        4 : self.cadastra_quartos(),
-                        0 : self.encerra_sistema()
+        lista_opcoes = {1 : self.cadastra_clientes,
+                        2 : self.cadastra_reservas,
+                        3 : self.cadastra_servicos,
+                        4 : self.cadastra_quartos,
+                        0 : self.encerra_sistema
                         }
 
         while True:

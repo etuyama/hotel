@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Reorganização e renomeação de arquivos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_sistema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/hotel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/quarto_luxo.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/quarto_luxo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/quarto_standard.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/quarto_standard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/quarto_suite.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/quarto_suite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/realiza_servico.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/realiza_servico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/reserva.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/reserva.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/limite/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_sistema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -172,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728342977693</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Reorganização e renomeação de arquivos">
+      <option name="closed" value="true" />
+      <created>1728343766325</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1728343766325</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +200,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1728343687012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1728344846333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

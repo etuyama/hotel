@@ -21,7 +21,7 @@ class TelaCliente():
         print("-------- DADOS CLIENTE --------")
         nome = input("Nome: ")
         cpf = input("CPF: ")
-        idade = input("Idade: ")
+        idade = int(input("Idade: "))
         telefone = input("Telefone: ")
         endereco = input("Endereco: ")
         if isinstance(nome, str) and isinstance(cpf, str) and \

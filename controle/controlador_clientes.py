@@ -1,12 +1,12 @@
 from entidade.cliente import Cliente
-
+from limite.tela_cliente import TelaCliente
 
 class ControladorClientes:
 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__clientes = []
-        self.__tela_cliente = None #TelaCliente()
-        self.__controlador_sistema = None #ControladorHotel()
+        self.__tela_cliente = TelaCliente()
+        self.__controlador_sistema = controlador_sistema
 
     def pega_cliente_por_cpf(self, cpf: str):
         if isinstance(cpf, str):

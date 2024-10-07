@@ -15,5 +15,5 @@ class TelaSistema:
         if escolha in escolhas:
             return escolha
         else:
-            print("Ecolha inválida")
+            print("Escolha inválida")
             self.tela_opcoes()
