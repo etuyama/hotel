@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="commit inicial com .gitignore">
-      <change afterPath="$PROJECT_DIR$/cliente.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/funcionario.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pessoa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/realiza_servico.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servico.py" afterDir="false" />
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="adicionando classes relacionadas a pessoas e serviços">
+      <change afterPath="$PROJECT_DIR$/TelaCliente.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controlador_sistema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tela_sistema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,12 +25,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "etuyama"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:egerassi/hotel.git",
+    "accountId": "b2403ba1-93ad-42c0-9887-12d82234205d"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/funcionario.py" root0="SKIP_INSPECTION" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2menix2zcnuhWaa4kAHmYw4WaIU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -41,20 +51,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/egera/PycharmProjects/exercicios DSO",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.completion",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/egera/PycharmProjects/exercicios DSO&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -71,7 +81,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727446039908</updated>
-      <workItem from="1727446041320" duration="3559000" />
+      <workItem from="1727446041320" duration="3913000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -81,7 +91,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727446168374</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adicionando classes relacionadas a pessoas e serviços">
+      <option name="closed" value="true" />
+      <created>1727449984830</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727449984830</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,6 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit inicial com .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit inicial com .gitignore" />
+    <MESSAGE value="adicionando classes relacionadas a pessoas e serviços" />
+    <option name="LAST_COMMIT_MESSAGE" value="adicionando classes relacionadas a pessoas e serviços" />
   </component>
 </project>
