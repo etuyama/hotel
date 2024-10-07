@@ -56,7 +56,7 @@ class Hotel:
                 self.__quartos.append(quarto)
 
             else:
-                return 'tipo de quarto inválido'
+                return 'Tipo de quarto inválido'
 
     def adicionar_funcionario(self, funcionario: Funcionario):
 
@@ -91,7 +91,7 @@ class Hotel:
     def consultar_reserva(self, cliente: Cliente):
 
         if isinstance(cliente, Cliente):
-        
+
             for reserva in self.__reservas:
                 
                 if reserva.cliente == cliente:
