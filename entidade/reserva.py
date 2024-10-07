@@ -1,5 +1,5 @@
-from cliente import Cliente
-from quarto import Quarto
+from entidade.cliente import Cliente
+from entidade.quarto import Quarto
 
 class Reserva:
 

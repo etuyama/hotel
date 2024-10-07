@@ -1,7 +1,7 @@
-from quarto import Quarto
+from entidade.quarto import Quarto
 
 
-class QuartoStandard(Quarto):
+class QuartoSuite(Quarto):
 
     def __init__(self, numero: int, valor_diaria: int, descricao: str):
 

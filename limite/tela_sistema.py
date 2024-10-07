@@ -1,5 +1,5 @@
 
-class TelaSistema():
+class TelaSistema:
 
     def tela_opcoes(self):
         escolhas = [1,2,3,4,0]

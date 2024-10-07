@@ -1,8 +1,8 @@
-from hotel import Hotel
-from cliente import Cliente
-from funcionario import Funcionario
-from servico import Servico
-from realiza_servico import RealizaServico
+from entidade.hotel import Hotel
+from entidade.cliente import Cliente
+from entidade.funcionario import Funcionario
+from entidade.servico import Servico
+from entidade.realiza_servico import RealizaServico
 
 hotel = Hotel("Panorama")
 hotel.adicionar_quarto(600, 100, "Quarto luxo com vista para o mar, banheira de hidromassagem e cama de casal", "Luxo")

@@ -1,4 +1,4 @@
-from quarto import Quarto
+from entidade.quarto import Quarto
 
 
 class QuartoLuxo(Quarto):

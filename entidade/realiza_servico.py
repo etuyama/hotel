@@ -1,7 +1,7 @@
-from cliente import Cliente
-from funcionario import Funcionario
-from servico import Servico
-from hotel import Hotel
+from entidade.cliente import Cliente
+from entidade.funcionario import Funcionario
+from entidade.servico import Servico
+from entidade.hotel import Hotel
 
 class RealizaServico:
 

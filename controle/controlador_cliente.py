@@ -1,5 +1,4 @@
-from cliente import Cliente
-from tela import Tela
+from entidade.cliente import Cliente
 
 
 class ControladorClientes:
