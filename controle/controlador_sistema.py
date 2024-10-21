@@ -58,5 +58,6 @@ class ControladorSistema:
 
         while True:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
+            print("opcao escolhida", opcao_escolhida)
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

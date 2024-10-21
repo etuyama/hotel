@@ -52,11 +52,8 @@ class ControladorQuartos():
     def alterar_quarto(self):
         lista = self.lista_quartos()
         if not lista:
-            print("OIJDNDFKFNM")
             return False
-        print("1")
         numero_quarto = self.__tela_quarto.seleciona_quarto()
-        print("3")
         quarto = self.pega_quarto_por_numero(numero_quarto)
 
         if isinstance(quarto, Quarto):

@@ -1,5 +1,7 @@
+from tela import Tela
 
-class TelaSistema:
+
+class TelaSistema(Tela):
 
     def tela_opcoes(self):
         escolhas = [1,2,3,4,0]
@@ -10,10 +12,14 @@ class TelaSistema:
         print("3 - Serviços")
         print("4 - Quartos")
         print("0 - Sair")
-        escolha = int(input("Escolha: "))
+        while True:
+            try:
+                escolha = int(input("Escolha: "))
+                print(escolha)
+                if escolha not in escolhas:
+                    raise ValueError #CRIAR ERRO ESPECÍFICO
+                return escolha
 
-        if escolha in escolhas:
-            return escolha
-        else:
-            print("Escolha inválida")
-            self.tela_opcoes()
+            except ValueError:
+                print("Valor inserido inválido")
+            
