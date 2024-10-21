@@ -10,7 +10,7 @@ class TelaCliente():
         print("4 - Excluir Cliente")
         print("0 - Retornar")
 
-        escolha = int(input("Escolha: "))
+        escolha = int(input("Escolha: ")) #FALTA APLICAR TRY EXCEPT
         if escolha in escolhas:
             return escolha
         else:
@@ -19,6 +19,7 @@ class TelaCliente():
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE --------")
+        #APLICAR TRY EXCEPT?
         nome = input("Nome: ")
         cpf = input("CPF: ")
         idade = int(input("Idade: "))
@@ -27,8 +28,8 @@ class TelaCliente():
         if isinstance(nome, str) and isinstance(cpf, str) and \
                 isinstance(idade, int) and isinstance(telefone, str) and \
                 isinstance(endereco, str):
-            return {"nome" : nome, "cpf" : cpf, "telefone" : telefone,
-                    "idade" : idade, "endereco" : endereco}
+            return {"nome": nome, "cpf": cpf, "telefone": telefone,
+                    "idade": idade, "endereco": endereco}
         else:
             print("Dados inválidos")
             self.pega_dados_cliente()
@@ -42,6 +43,7 @@ class TelaCliente():
         print("\n")
 
     def seleciona_cliente(self):
+        #VALIDADOR DE CPF?
         cpf = str(input("CPF do cliente que deseja selecionar: "))
         return cpf
 

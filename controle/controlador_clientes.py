@@ -34,7 +34,7 @@ class ControladorClientes:
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
         if isinstance(cliente, Cliente):
-            self.__tela_cliente.mostra_mensagem("**ALTERANDO DADOS CLIENTE**")
+            self.__tela_cliente.mostra_mensagem("**ALTERANDO DADOS DO CLIENTE**")
             novos_dados_cliente = self.__tela_cliente.pega_dados_cliente()
             cliente.cpf = novos_dados_cliente["cpf"]
             cliente.nome = novos_dados_cliente["nome"]
@@ -46,6 +46,7 @@ class ControladorClientes:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
     def lista_clientes(self):
+
         if len(self.__clientes) > 0:
             for cliente in self.__clientes:
                 self.__tela_cliente.mostra_cliente({"cpf": cliente.cpf, "nome": cliente.nome, 

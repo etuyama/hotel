@@ -2,7 +2,7 @@ from limite.tela_sistema import TelaSistema
 #from controle.controlador_reservas import ControladorReservas
 from controle.controlador_clientes import ControladorClientes
 #from controle.controlador_servicos import ControladorServicos
-#from controle.controlador_quartos import ControladorQuartos
+from controle.controlador_quartos import ControladorQuartos
 
 class ControladorSistema:
 
@@ -11,7 +11,7 @@ class ControladorSistema:
         self.__controlador_clientes = ControladorClientes(self)
         #self.__controlador_reservas = ControladorReservas(self)
         #self.__controlador_servicos = ControladorServicos(self)
-        #self.__controlador_quartos = ControladorQuartos(self)
+        self.__controlador_quartos = ControladorQuartos(self)
 
 
     @property
