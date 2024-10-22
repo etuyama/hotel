@@ -3,6 +3,7 @@ from limite.tela_sistema import TelaSistema
 from controle.controlador_clientes import ControladorClientes
 #from controle.controlador_servicos import ControladorServicos
 from controle.controlador_quartos import ControladorQuartos
+from controle.controlador_funcionarios import ControladorFuncionarios
 
 class ControladorSistema:
 
@@ -11,6 +12,7 @@ class ControladorSistema:
         self.__controlador_clientes = ControladorClientes(self)
         #self.__controlador_reservas = ControladorReservas(self)
         #self.__controlador_servicos = ControladorServicos(self)
+        self.__controlador_funcionarios = ControladorFuncionarios(self)
         self.__controlador_quartos = ControladorQuartos(self)
 
 
@@ -30,6 +32,10 @@ class ControladorSistema:
     def controlador_quartos(self):
         return self.__controlador_quartos
 
+    @property
+    def controlador_funcionarios(self):
+        return self.__controlador_funcionarios
+
     def inicializa_sistema(self):
         self.abre_tela()
 
@@ -45,6 +51,9 @@ class ControladorSistema:
     def cadastra_quartos(self):
         self.__controlador_quartos.abre_tela()
 
+    def cadastra_funcionarios(self):
+        self.__controlador_funcionarios.abre_tela()
+
     def encerra_sistema(self):
         exit(0)
 
@@ -53,7 +62,8 @@ class ControladorSistema:
                         2 : self.cadastra_reservas,
                         3 : self.cadastra_servicos,
                         4 : self.cadastra_quartos,
-                        0 : self.encerra_sistema
+                        0 : self.encerra_sistema,
+                        5 : self.cadastra_funcionarios
                         }
 
         while True:
