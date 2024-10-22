@@ -1,4 +1,7 @@
-class TelaQuarto():
+from limite.tela import Tela
+
+
+class TelaQuarto(Tela):
 
     def tela_opcoes(self):
         escolhas = [1,2,3,4,0]
@@ -9,12 +12,12 @@ class TelaQuarto():
         print("3- Listar Quartos")
         print("4- Excluir Quarto")
         print("0- Retornar")
+
         while True:
             try:
-                escolha = int(input("Escolha: "))
-                if escolha not in escolhas:
-                    raise ValueError #CRIAR ERRO ESPECÍFICO
+                escolha = super().le_num_inteiro("Escolha: ", escolhas)
                 return escolha
+
             except ValueError:
                 print("Escolha inválida")
 
@@ -27,15 +30,13 @@ class TelaQuarto():
         tipos_validos = [1,2,3]
         while True:
             try:
-                tipo = int(input("Tipo: "))
-                if tipo not in tipos_validos:
-                    raise ValueError #CRIAR ERRO ESPECÍFICO
+                tipo = super().le_num_inteiro("Tipo: ", tipos_validos)
 
-                numero = int(input("Número: "))
+                numero = super().le_num_inteiro("Número: ")
                 if numero <= 0:
                     raise ValueError #CRIAR ERRO ESPECÍFICO?
 
-                valor_diaria = int(input("Valor da diária: "))
+                valor_diaria = super().le_num_inteiro("Valor da diária: ")
                 if valor_diaria <= 0:
                     raise ValueError #CRIAR ERRO ESPECÍFICO?
 
@@ -47,21 +48,21 @@ class TelaQuarto():
                 print("Valores inseridos inválidos")
 
     #Não será possível alterar o tipo do quarto, logo foi necessária uma nova função mais específica    
-    def pega_dados_alteracao_quarto(self, quarto):
+    def pega_dados_alteracao_quarto(self):
         print("-------- DADOS QUARTO --------")
         while True:
             try:
-                numero = int(input("Número: "))
-                if numero <= 0:
+                numero = super().le_num_inteiro("Número: ")
+                if numero <= 0 :
                     raise ValueError #CRIAR ERRO ESPECÍFICO?
 
-                valor_diaria = int(input("Valor da diária: "))
+                valor_diaria = super().le_num_inteiro("Valor da diária: ")
                 if valor_diaria <= 0:
                     raise ValueError #CRIAR ERRO ESPECÍFICO?
                 descricao = input("Descrição: ")
 
                 return {"numero": numero, "valor_diaria": valor_diaria,
-                        "descricao": descricao, "tipo": quarto.tipo}
+                        "descricao": descricao}
 
             except ValueError:
                 print("Valores inseridos inválidos")        
@@ -76,7 +77,7 @@ class TelaQuarto():
     def seleciona_quarto(self):
         while True:
             try:
-                numero = int(input("Número do quarto que deseja selecionar: "))
+                numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
                 return numero
 
             except ValueError:

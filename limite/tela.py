@@ -6,7 +6,6 @@ class Tela(ABC):
     def mostra_mensagem(self, mensagem):
         print(mensagem)
 
-    #TESTE
     def le_num_inteiro(self, mensagem="", inteiros_validos = None):
         while True:
             valor_lido = input(mensagem)
@@ -17,7 +16,7 @@ class Tela(ABC):
                 return valor_inteiro
 
             except ValueError:
-                print("Valor incorreto!")
+                print("Valor inserido inválido")
                 if inteiros_validos:
                     print("Valores válidos: ", inteiros_validos)
 

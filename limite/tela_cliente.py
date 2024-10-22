@@ -1,5 +1,8 @@
+from limite.tela import Tela
 
-class TelaCliente():
+
+class TelaCliente(Tela):
+
     def tela_opcoes(self):
         escolhas = [1,2,3,4,0]
         print("-------- CLIENTES ----------")
@@ -9,30 +12,27 @@ class TelaCliente():
         print("3 - Listar Clientes")
         print("4 - Excluir Cliente")
         print("0 - Retornar")
+        while True:
+            try:
+                escolha = super().le_num_inteiro("Escolha: ", [1,2,3,4,0]) #FALTA APLICAR TRY EXCEPT
+                return escolha
 
-        escolha = int(input("Escolha: ")) #FALTA APLICAR TRY EXCEPT
-        if escolha in escolhas:
-            return escolha
-        else:
-            print("Escolha inválida")
-            self.tela_opcoes()
+            except ValueError:
+                print("Valor inserido inválido")
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE --------")
-        #APLICAR TRY EXCEPT?
-        nome = input("Nome: ")
-        cpf = input("CPF: ")
-        idade = int(input("Idade: "))
-        telefone = input("Telefone: ")
-        endereco = input("Endereco: ")
-        if isinstance(nome, str) and isinstance(cpf, str) and \
-                isinstance(idade, int) and isinstance(telefone, str) and \
-                isinstance(endereco, str):
-            return {"nome": nome, "cpf": cpf, "telefone": telefone,
-                    "idade": idade, "endereco": endereco}
-        else:
-            print("Dados inválidos")
-            self.pega_dados_cliente()
+        while True:
+            try:
+                nome = input("Nome: ")
+                cpf = input("CPF: ")
+                idade = super().le_num_inteiro("Idade: ")
+                telefone = input("Telefone: ")
+                endereco = input("Endereco: ")
+                return {"nome": nome, "cpf": cpf, "telefone": telefone,
+                        "idade": idade, "endereco": endereco}
+            except:
+                print("Dados inválidos")
 
     def mostra_cliente(self, dados_cliente):
         print("Nome do cliente: ", dados_cliente["nome"])
@@ -43,8 +43,7 @@ class TelaCliente():
         print("\n")
 
     def seleciona_cliente(self):
-        #VALIDADOR DE CPF?
-        cpf = str(input("CPF do cliente que deseja selecionar: "))
+        cpf = input("CPF do cliente que deseja selecionar: ")
         return cpf
 
     def mostra_mensagem(self, mensagem):

@@ -1,4 +1,4 @@
-from tela import Tela
+from limite.tela import Tela
 
 
 class TelaSistema(Tela):
@@ -14,10 +14,7 @@ class TelaSistema(Tela):
         print("0 - Sair")
         while True:
             try:
-                escolha = int(input("Escolha: "))
-                print(escolha)
-                if escolha not in escolhas:
-                    raise ValueError #CRIAR ERRO ESPECÍFICO
+                escolha = super().le_num_inteiro("Escolha: ", escolhas)
                 return escolha
 
             except ValueError:

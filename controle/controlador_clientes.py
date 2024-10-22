@@ -27,6 +27,7 @@ class ControladorClientes:
                           dados_cliente["telefone"], dados_cliente["endereco"])
 
         self.__clientes.append(cliente)
+        self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} cadastrado com sucesso")
 
     def alterar_cliente(self):
         self.lista_clientes()
@@ -36,12 +37,19 @@ class ControladorClientes:
         if isinstance(cliente, Cliente):
             self.__tela_cliente.mostra_mensagem("**ALTERANDO DADOS DO CLIENTE**")
             novos_dados_cliente = self.__tela_cliente.pega_dados_cliente()
+
+            if (self.pega_cliente_por_cpf(novos_dados_cliente["cpf"]) and
+                cpf_cliente != novos_dados_cliente["cpf"]):
+
+                self.__tela_cliente.mostra_mensagem("CPF já cadastrado")
+                return False
+
             cliente.cpf = novos_dados_cliente["cpf"]
             cliente.nome = novos_dados_cliente["nome"]
             cliente.idade = novos_dados_cliente["idade"]
             cliente.telefone = novos_dados_cliente["telefone"]
             cliente.endereco = novos_dados_cliente["endereco"]
-            self.lista_clientes()
+            self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
@@ -62,7 +70,7 @@ class ControladorClientes:
 
         if isinstance(cliente, Cliente):
             self.__clientes.remove(cliente)
-            self.lista_clientes()
+            self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} removido com sucesso")
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
