@@ -1,6 +1,7 @@
+from limite.tela import Tela
 
 
-class TelaFuncionario:
+class TelaFuncionario(Tela):
     def tela_opcoes(self):
         escolhas = [1,2,3,4,5,0]
         print("-------- FUNCIONARIOS ----------")
@@ -11,30 +12,32 @@ class TelaFuncionario:
         print("4 - Excluir Funcionário")
         print("5 - Listar Funcionários por cargo")
         print("0 - Retornar")
+        while True:
+            try:
+                escolha = super().le_num_inteiro("Escolha: ", escolhas)
+                return escolha
 
-        escolha = int(input("Escolha: "))
-        if escolha in escolhas:
-            return escolha
-        else:
-            print("Escolha inválida")
-            self.tela_opcoes()
+            except ValueError:
+                print("Escolha inválida")
 
     def pega_dados_funcionario(self):
         print("-------- DADOS FUNCIONÁRIO --------")
+        while True:
+            try:
+                nome = input("Nome: ")
+                cpf = input("CPF: ")
+                cargo = input("Cargo: ")
+                data_admissao = input("Data de admissão: ")
 
-        nome = input("Nome: ")
-        cpf = input("CPF: ")
-        cargo = input("Cargo: ")
-        data_admissao = input("Data de admissão: ")
-        salario = int(input("Salario: "))
-        if isinstance(nome, str) and isinstance(cpf, str) and \
-            isinstance(cargo, str) and isinstance(data_admissao, str) and \
-            isinstance(salario, int):
-            return {"nome": nome, "cpf": cpf, "cargo": cargo,
-                    "data_admissao": data_admissao, "salario": salario}
-        else:
-            print("Dados inválidos")
-            self.pega_dados_funcionario()
+                salario = super().le_num_inteiro("Salário: ")
+                if salario <= 0:
+                    raise ValueError #CRIAR ERRO ESPECÍFICO?
+
+                return {"nome": nome, "cpf": cpf, "cargo": cargo,
+                        "data_admissao": data_admissao, "salario": salario}
+
+            except ValueError:
+                print("Dados inválidos")
 
     def mostra_funcionario(self, dados_funcionario):
         print("Nome do funcionario: ", dados_funcionario["nome"])
@@ -45,12 +48,9 @@ class TelaFuncionario:
         print("\n")
 
     def seleciona_funcionario(self):
-        cpf = str(input("CPF do funcionário que deseja funcionar: "))
+        cpf = input("CPF do funcionário que deseja selecionar: ")
         return cpf
 
     def seleciona_por_cargo(self):
         cargo = input("Digite o cargo que deseja buscar: ")
         return cargo
-
-    def mostra_mensagem(self, mensagem):
-        print(mensagem)

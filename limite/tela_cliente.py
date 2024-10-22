@@ -14,11 +14,11 @@ class TelaCliente(Tela):
         print("0 - Retornar")
         while True:
             try:
-                escolha = super().le_num_inteiro("Escolha: ", [1,2,3,4,0]) #FALTA APLICAR TRY EXCEPT
+                escolha = super().le_num_inteiro("Escolha: ", escolhas)
                 return escolha
 
             except ValueError:
-                print("Valor inserido inválido")
+                print("Escolha inválida")
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE --------")
@@ -46,5 +46,3 @@ class TelaCliente(Tela):
         cpf = input("CPF do cliente que deseja selecionar: ")
         return cpf
 
-    def mostra_mensagem(self, mensagem):
-        print(mensagem)

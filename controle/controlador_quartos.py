@@ -32,21 +32,21 @@ class ControladorQuartos():
             quarto = QuartoStandard(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                     dados_quarto["descricao"])
             self.__quartos.append(quarto)
-            self.__tela_quarto.mostra_mensagem(f"Quarto Standard número: {dados_quarto["numero"]} adicionado com sucesso")
+            self.__tela_quarto.mostra_mensagem(f"Quarto Standard número {dados_quarto["numero"]} adicionado com sucesso")
             return quarto
 
         if dados_quarto["tipo"] == 2:
             quarto = QuartoSuite(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                     dados_quarto["descricao"])
             self.__quartos.append(quarto)
-            self.__tela_quarto.mostra_mensagem(f"Quarto Suíte número: {dados_quarto["numero"]} adicionado com sucesso")
+            self.__tela_quarto.mostra_mensagem(f"Quarto Suíte número {dados_quarto["numero"]} adicionado com sucesso")
             return quarto
 
         if dados_quarto["tipo"] == 3:
             quarto = QuartoLuxo(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                     dados_quarto["descricao"])
             self.__quartos.append(quarto)
-            self.__tela_quarto.mostra_mensagem(f"Quarto Luxo número: {dados_quarto["numero"]} adicionado com sucesso")
+            self.__tela_quarto.mostra_mensagem(f"Quarto Luxo número {dados_quarto["numero"]} adicionado com sucesso")
             return quarto
 
     def alterar_quarto(self):
@@ -89,18 +89,20 @@ class ControladorQuartos():
                                            "tipo": quarto.tipo})
             return True
         else:
-            self.__tela_quarto.mostra_mensagem("Lista vazia")
+            self.__tela_quarto.mostra_mensagem("Lista de quartos vazia")
             return None
 
     def excluir_quarto(self):
         lista = self.lista_quartos()
         if not lista:
             return False
+
         numero_quarto = self.__tela_quarto.seleciona_quarto()
         quarto = self.pega_quarto_por_numero(numero_quarto)
+
         if isinstance(quarto, Quarto):
             self.__quartos.remove(quarto)
-            self.__tela_quarto.mostra_mensagem(f"Quarto número: {quarto.numero} removido com sucesso")
+            self.__tela_quarto.mostra_mensagem(f"Quarto número {quarto.numero} removido com sucesso")
         else:
             self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
 

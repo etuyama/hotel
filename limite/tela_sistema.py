@@ -1,4 +1,6 @@
 from limite.tela import Tela
+# COLOCAR \n em algumas mensagens para melhorar a visibilidade do usuário(todas as telas)
+# Função listar dos controladores ficando com dois espaços entre os dados
 
 
 class TelaSistema(Tela):

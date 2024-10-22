@@ -82,6 +82,3 @@ class TelaQuarto(Tela):
 
             except ValueError:
                 print("Valor inserido inválido")
-
-    def mostra_mensagem(self, mensagem):
-        print(mensagem)

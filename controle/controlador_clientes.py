@@ -60,16 +60,20 @@ class ControladorClientes:
                 self.__tela_cliente.mostra_cliente({"cpf": cliente.cpf, "nome": cliente.nome, 
                                                     "idade": cliente.idade, "telefone": cliente.telefone,
                                                     "endereco": cliente.endereco })
+            return True
         else:
-            self.__tela_cliente.mostra_mensagem("Lista vazia")
+            self.__tela_cliente.mostra_mensagem("Lista de clientes vazia")
+            return None
 
     def excluir_cliente(self):
-        self.lista_clientes()
+        lista = self.lista_clientes()
+        if not lista:
+            return False
+
         cpf_cliente = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
         if isinstance(cliente, Cliente):
-            self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} excluído.\n")
             self.__clientes.remove(cliente)
             self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} removido com sucesso")
         else:
