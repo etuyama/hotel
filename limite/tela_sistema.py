@@ -2,13 +2,14 @@
 class TelaSistema:
 
     def tela_opcoes(self):
-        escolhas = [1,2,3,4,0]
+        escolhas = [1,2,3,4,5,0]
         print("-------- SisHotel -------- ")
         print("Escolha uma opção")
         print("1 - Clientes")
         print("2 - Reservas")
         print("3 - Serviços")
         print("4 - Quartos")
+        print("5 - Funcionários")
         print("0 - Sair")
         escolha = int(input("Escolha: "))
 

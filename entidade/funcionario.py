@@ -1,9 +1,10 @@
 from entidade.pessoa import Pessoa
 
+
 class Funcionario(Pessoa):
     def __init__(self, cpf: str, nome: str, cargo: str, data_admissao: str, salario: int):
         if isinstance(cargo, str) and isinstance(data_admissao, str) and isinstance(salario, int):
-            super().__init__(cpf, nome)
+            super().__init__(nome, cpf)
             self.__cargo = cargo
             self.__data_admissao = data_admissao
             self.__salario = salario

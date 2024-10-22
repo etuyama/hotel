@@ -50,7 +50,7 @@ class ControladorClientes:
         if len(self.__clientes) > 0:
             for cliente in self.__clientes:
                 self.__tela_cliente.mostra_cliente({"cpf": cliente.cpf, "nome": cliente.nome, 
-                                                    "idade": cliente.idade, "telefone": cliente.telefone, 
+                                                    "idade": cliente.idade, "telefone": cliente.telefone,
                                                     "endereco": cliente.endereco })
         else:
             self.__tela_cliente.mostra_mensagem("Lista vazia")
@@ -61,6 +61,7 @@ class ControladorClientes:
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
         if isinstance(cliente, Cliente):
+            self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} excluído.\n")
             self.__clientes.remove(cliente)
             self.lista_clientes()
         else:
