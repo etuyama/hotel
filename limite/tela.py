@@ -12,7 +12,14 @@ class Tela(ABC):
             try:
                 valor_inteiro = int(valor_lido)
                 if inteiros_validos and valor_inteiro not in inteiros_validos:
-                    raise ValueError
+                    raise ValueError #CRIAR ERRO ESPECÍFICO
+
+                if inteiros_validos and valor_inteiro in inteiros_validos:
+                    return valor_inteiro
+
+                if valor_inteiro <= 0:
+                    raise ValueError #CRIAR ERRO ESPECÍFICO
+
                 return valor_inteiro
 
             except ValueError:

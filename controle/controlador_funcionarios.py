@@ -47,7 +47,10 @@ class ControladorFuncionarios:
         self.__tela_funcionario.mostra_mensagem(f"Funcionário {funcionario.nome} cadastrado com sucesso")
 
     def alterar_funcionario(self):
-        self.lista_funcionarios()
+        lista = self.lista_funcionarios()
+        if not lista:
+            return False
+
         cpf_funcionario = self.__tela_funcionario.seleciona_funcionario()
         funcionario = self.pega_funcionario_por_cpf(cpf_funcionario)
 
@@ -80,9 +83,9 @@ class ControladorFuncionarios:
                                                             "data_admissao": funcionario.data_admissao,
                                                             "salario": funcionario.salario})
             return True
-        else:
-            self.__tela_funcionario.mostra_mensagem("Lista de funcionários vazia")
-            return None
+
+        self.__tela_funcionario.mostra_mensagem("Lista de funcionários vazia")
+        return None
 
     def excluir_funcionario(self):
         lista = self.lista_funcionarios()

@@ -5,7 +5,7 @@ class TelaFuncionario(Tela):
     def tela_opcoes(self):
         escolhas = [1,2,3,4,5,0]
         print("-------- FUNCIONARIOS ----------")
-        print("Escolha a opção")
+        print("Escolha uma opção")
         print("1 - Incluir Funcionário")
         print("2 - Alterar Funcionário")
         print("3 - Listar Funcionários")
@@ -30,8 +30,6 @@ class TelaFuncionario(Tela):
                 data_admissao = input("Data de admissão: ")
 
                 salario = super().le_num_inteiro("Salário: ")
-                if salario <= 0:
-                    raise ValueError #CRIAR ERRO ESPECÍFICO?
 
                 return {"nome": nome, "cpf": cpf, "cargo": cargo,
                         "data_admissao": data_admissao, "salario": salario}

@@ -70,12 +70,9 @@ class ControladorQuartos():
             quarto.numero = novos_dados_quarto["numero"]
             quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
             quarto.descricao = novos_dados_quarto["descricao"]
+            quarto.status = novos_dados_quarto["status"]
 
             self.__tela_quarto.mostra_mensagem("Dados alterados com sucesso")
-            self.__tela_quarto.mostra_quarto({"numero": quarto.numero,
-                                              "valor_diaria": quarto.valor_diaria,
-                                              "descricao": quarto.descricao,
-                                              "tipo": quarto.tipo})
         else:
             self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
 
@@ -84,13 +81,14 @@ class ControladorQuartos():
         if len(self.__quartos) > 0:
             for quarto in self.__quartos:
                 self.__tela_quarto.mostra_quarto({"numero": quarto.numero,
-                                           "valor_diaria": quarto.valor_diaria,
-                                           "descricao": quarto.descricao,
-                                           "tipo": quarto.tipo})
+                                                  "valor_diaria": quarto.valor_diaria,
+                                                  "descricao": quarto.descricao,
+                                                  "tipo": quarto.tipo,
+                                                  "status": quarto.status})
             return True
-        else:
-            self.__tela_quarto.mostra_mensagem("Lista de quartos vazia")
-            return None
+
+        self.__tela_quarto.mostra_mensagem("Lista de quartos vazia")
+        return None
 
     def excluir_quarto(self):
         lista = self.lista_quartos()
@@ -115,5 +113,5 @@ class ControladorQuartos():
 
         while True:
             lista_opcoes[self.__tela_quarto.tela_opcoes()]()
-            
+  
 

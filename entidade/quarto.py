@@ -11,7 +11,7 @@ class Quarto(ABC):
             self.__numero = numero
             self.__valor_diaria = valor_diaria
             self.__descricao = descricao
-            self.__status = "Disponível"  # poderia ser True/ False, se trocar isso, trocar o isinstance do setter
+            self.__status = "Disponível"
 
     @property
     def numero(self):

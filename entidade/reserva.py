@@ -3,11 +3,12 @@ from entidade.quarto import Quarto
 
 class Reserva:
 
-    def __init__(self, quarto: Quarto, tempo_estadia: int, cliente: Cliente):
+    def __init__(self, quarto: Quarto, tempo_estadia: int, cliente: Cliente, id: int):
 
         self.__quarto = quarto
         self.__tempo_estadia = tempo_estadia
         self.__cliente = cliente
+        self.__id = id
         self.__valor_total = quarto.valor_diaria * tempo_estadia
 
     @property
@@ -31,6 +32,10 @@ class Reserva:
     @property
     def cliente(self):
         return self.__cliente
+
+    @property
+    def id(self):
+        return self.__id
 
     def extender_estadia(self, dias: int):
 

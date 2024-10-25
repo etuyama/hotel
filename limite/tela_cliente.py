@@ -6,7 +6,7 @@ class TelaCliente(Tela):
     def tela_opcoes(self):
         escolhas = [1,2,3,4,0]
         print("-------- CLIENTES ----------")
-        print("Escolha a opção")
+        print("Escolha uma opção")
         print("1 - Incluir Cliente")
         print("2 - Alterar Cliente")
         print("3 - Listar Clientes")

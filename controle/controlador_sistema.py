@@ -1,20 +1,23 @@
 from limite.tela_sistema import TelaSistema
-#from controle.controlador_reservas import ControladorReservas
+from controle.controlador_reservas import ControladorReservas
 from controle.controlador_clientes import ControladorClientes
-#from controle.controlador_servicos import ControladorServicos
+from controle.controlador_servicos import ControladorServicos
 from controle.controlador_quartos import ControladorQuartos
 from controle.controlador_funcionarios import ControladorFuncionarios
+
 
 class ControladorSistema:
 
     def __init__(self):
         self.__tela_sistema = TelaSistema()
         self.__controlador_clientes = ControladorClientes(self)
-        #self.__controlador_reservas = ControladorReservas(self)
-        #self.__controlador_servicos = ControladorServicos(self)
+        self.__controlador_servicos = ControladorServicos(self)
         self.__controlador_funcionarios = ControladorFuncionarios(self)
         self.__controlador_quartos = ControladorQuartos(self)
-
+        self.__controlador_reservas = ControladorReservas(self,
+                                                          self.__controlador_clientes,
+                                                          self.__controlador_quartos,
+                                                          self.__controlador_servicos)
 
     @property
     def controlador_clientes(self):
@@ -68,6 +71,6 @@ class ControladorSistema:
 
         while True:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
-            print("opcao escolhida", opcao_escolhida)
+            print("Opção escolhida: ", opcao_escolhida)
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
