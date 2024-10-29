@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Reorganização e renomeação de arquivos">
-      <change afterPath="$PROJECT_DIR$/controle/controlador_funcionarios.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/limite/tela_funcionario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Tela e controlador funcionarios + ajustes">
+      <change afterPath="$PROJECT_DIR$/controle/controlador_servicos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/limite/tela_servico.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_sistema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/funcionario.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/funcionario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_sistema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entidade/servico.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/servico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_funcionario.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_funcionario.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +41,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:egerassi/hotel.git&quot;,
-    &quot;accountId&quot;: &quot;b2403ba1-93ad-42c0-9887-12d82234205d&quot;
+    &quot;url&quot;: &quot;https://github.com/etuyama/hotel.git&quot;,
+    &quot;accountId&quot;: &quot;6819de28-d9a5-4f34-bb1a-b8e6af9abf6f&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -115,8 +114,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
-        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
+        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
       </set>
     </attachedChunks>
   </component>
@@ -129,6 +128,9 @@
       <option name="presentableId" value="Default" />
       <updated>1727446039908</updated>
       <workItem from="1727446041320" duration="3913000" />
+      <workItem from="1729898601668" duration="4539000" />
+      <workItem from="1730219516414" duration="3548000" />
+      <workItem from="1730226636204" duration="3262000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -178,18 +180,38 @@
       <option name="project" value="LOCAL" />
       <updated>1728343766325</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Tela e controlador funcionarios + ajustes">
+      <option name="closed" value="true" />
+      <created>1729555338999</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729555338999</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit inicial com .gitignore" />
     <MESSAGE value="adicionando classes relacionadas a pessoas e serviços" />
     <MESSAGE value="Controlador sistema, tela sistema e tela cliente" />
     <MESSAGE value="Reorganização e renomeação de arquivos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reorganização e renomeação de arquivos" />
+    <MESSAGE value="Tela e controlador funcionarios + ajustes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tela e controlador funcionarios + ajustes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -202,6 +224,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1729555063183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730229702724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

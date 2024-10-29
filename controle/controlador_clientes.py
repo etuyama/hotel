@@ -19,15 +19,26 @@ class ControladorClientes:
 
     def incluir_cliente(self):
         dados_cliente = self.__tela_cliente.pega_dados_cliente()
-        if isinstance( self.pega_cliente_por_cpf(dados_cliente["cpf"]), Cliente):
-            self.__tela_cliente.mostra_mensagem("Este cliente já foi cadastrado")
+        if isinstance(
+            self.pega_cliente_por_cpf(dados_cliente["cpf"]), Cliente
+        ):
+            self.__tela_cliente.mostra_mensagem(
+                "Este cliente já foi cadastrado"
+            )
             return False
 
-        cliente = Cliente(dados_cliente["cpf"], dados_cliente["nome"], dados_cliente["idade"], 
-                          dados_cliente["telefone"], dados_cliente["endereco"])
+        cliente = Cliente(
+            dados_cliente["cpf"],
+            dados_cliente["nome"],
+            dados_cliente["idade"],
+            dados_cliente["telefone"],
+            dados_cliente["endereco"]
+        )
 
         self.__clientes.append(cliente)
-        self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} cadastrado com sucesso")
+        self.__tela_cliente.mostra_mensagem(
+            f"Cliente {cliente.nome} cadastrado com sucesso"
+        )
 
     def alterar_cliente(self):
         self.lista_clientes()
@@ -35,13 +46,18 @@ class ControladorClientes:
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
         if isinstance(cliente, Cliente):
-            self.__tela_cliente.mostra_mensagem("**ALTERANDO DADOS DO CLIENTE**")
+            self.__tela_cliente.mostra_mensagem(
+                "**ALTERANDO DADOS DO CLIENTE**"
+            )
             novos_dados_cliente = self.__tela_cliente.pega_dados_cliente()
 
             if (self.pega_cliente_por_cpf(novos_dados_cliente["cpf"]) and
                 cpf_cliente != novos_dados_cliente["cpf"]):
 
-                self.__tela_cliente.mostra_mensagem("CPF já cadastrado")
+                self.__tela_cliente.mostra_mensagem(
+                    "CPF já cadastrado. Esse cpf pertence ao "
+                    f"cliente {cliente.nome}"
+                )
                 return False
 
             cliente.cpf = novos_dados_cliente["cpf"]
@@ -57,9 +73,13 @@ class ControladorClientes:
 
         if len(self.__clientes) > 0:
             for cliente in self.__clientes:
-                self.__tela_cliente.mostra_cliente({"cpf": cliente.cpf, "nome": cliente.nome, 
-                                                    "idade": cliente.idade, "telefone": cliente.telefone,
-                                                    "endereco": cliente.endereco })
+                self.__tela_cliente.mostra_cliente(
+                    {"cpf": cliente.cpf,
+                     "nome": cliente.nome,
+                     "idade": cliente.idade,
+                     "telefone": cliente.telefone,
+                     "endereco": cliente.endereco}
+                )
             return True
         else:
             self.__tela_cliente.mostra_mensagem("Lista de clientes vazia")
@@ -74,8 +94,11 @@ class ControladorClientes:
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
         if isinstance(cliente, Cliente):
+            self.__tela_cliente.mostra_mensagem(
+                f"Cliente {cliente.nome} com CPF {cliente.cpf}"
+                f" removido com sucesso"
+            )
             self.__clientes.remove(cliente)
-            self.__tela_cliente.mostra_mensagem(f"Cliente {cliente.nome} removido com sucesso")
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
@@ -83,8 +106,13 @@ class ControladorClientes:
         self.__controlador_sistema.abre_tela()
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_cliente, 2: self.alterar_cliente, 3: self.lista_clientes, 
-                        4: self.excluir_cliente, 0: self.retornar}
+        lista_opcoes = {
+            1: self.incluir_cliente,
+            2: self.alterar_cliente,
+            3: self.lista_clientes,
+            4: self.excluir_cliente,
+            0: self.retornar
+        }
 
         while True:
             lista_opcoes[self.__tela_cliente.tela_opcoes()]()

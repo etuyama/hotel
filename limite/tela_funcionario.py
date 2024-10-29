@@ -44,7 +44,7 @@ class TelaFuncionario(Tela):
         print("CPF: ", dados_funcionario["cpf"])
         print("Cargo: ", dados_funcionario["cargo"])
         print("Data de admissão: ", dados_funcionario["data_admissao"])
-        print("Salario: ", dados_funcionario["salario"])
+        print("Salario: R$", dados_funcionario["salario"])
         print("\n")
 
     def seleciona_funcionario(self):
