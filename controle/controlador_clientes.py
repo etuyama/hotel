@@ -1,5 +1,6 @@
 from entidade.cliente import Cliente
 from limite.tela_cliente import TelaCliente
+from exceptions.cadastro_repetido_exception import CadastroRepetidoException
 
 class ControladorClientes:
 
@@ -19,26 +20,26 @@ class ControladorClientes:
 
     def incluir_cliente(self):
         dados_cliente = self.__tela_cliente.pega_dados_cliente()
-        if isinstance(
-            self.pega_cliente_por_cpf(dados_cliente["cpf"]), Cliente
-        ):
-            self.__tela_cliente.mostra_mensagem(
-                "Este cliente já foi cadastrado"
-            )
-            return False
+        cpf = dados_cliente["cpf"]
+        cliente = self.pega_cliente_por_cpf(cpf)
+        try:
+            if cliente is None:
+                cliente = Cliente(
+                    dados_cliente["cpf"],
+                    dados_cliente["nome"],
+                    dados_cliente["idade"],
+                    dados_cliente["telefone"],
+                    dados_cliente["endereco"]
+                )
 
-        cliente = Cliente(
-            dados_cliente["cpf"],
-            dados_cliente["nome"],
-            dados_cliente["idade"],
-            dados_cliente["telefone"],
-            dados_cliente["endereco"]
-        )
-
-        self.__clientes.append(cliente)
-        self.__tela_cliente.mostra_mensagem(
-            f"Cliente {cliente.nome} cadastrado com sucesso"
-        )
+                self.__clientes.append(cliente)
+                self.__tela_cliente.mostra_mensagem(
+                    f"Cliente {cliente.nome} cadastrado com sucesso"
+                )
+            else:
+                raise CadastroRepetidoException(cpf, cliente)
+        except CadastroRepetidoException as e:
+            self.__tela_cliente.mostra_mensagem(e)
 
     def alterar_cliente(self):
         lista = self.lista_clientes()
@@ -48,27 +49,26 @@ class ControladorClientes:
         cpf_cliente = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
-        if isinstance(cliente, Cliente):
+        if cliente:
             self.__tela_cliente.mostra_mensagem(
                 "**ALTERANDO DADOS DO CLIENTE**"
             )
             novos_dados_cliente = self.__tela_cliente.pega_dados_cliente()
 
-            if (self.pega_cliente_por_cpf(novos_dados_cliente["cpf"]) and
-                cpf_cliente != novos_dados_cliente["cpf"]):
+            try:
+                if (self.pega_cliente_por_cpf(novos_dados_cliente["cpf"]) and
+                    cpf_cliente != novos_dados_cliente["cpf"]):
 
-                self.__tela_cliente.mostra_mensagem(
-                    "CPF já cadastrado. Esse cpf pertence ao "
-                    f"cliente {cliente.nome}"
-                )
-                return False
-
-            cliente.cpf = novos_dados_cliente["cpf"]
-            cliente.nome = novos_dados_cliente["nome"]
-            cliente.idade = novos_dados_cliente["idade"]
-            cliente.telefone = novos_dados_cliente["telefone"]
-            cliente.endereco = novos_dados_cliente["endereco"]
-            self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")
+                    raise CadastroRepetidoException(cpf_cliente, cliente)
+                else:
+                    cliente.cpf = novos_dados_cliente["cpf"]
+                    cliente.nome = novos_dados_cliente["nome"]
+                    cliente.idade = novos_dados_cliente["idade"]
+                    cliente.telefone = novos_dados_cliente["telefone"]
+                    cliente.endereco = novos_dados_cliente["endereco"]
+                    self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")
+            except CadastroRepetidoException as e:
+                self.__tela_cliente.mostra_mensagem(e)
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 

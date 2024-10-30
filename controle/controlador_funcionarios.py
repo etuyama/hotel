@@ -1,5 +1,6 @@
 from entidade.funcionario import Funcionario
 from limite.tela_funcionario import TelaFuncionario
+from exceptions.cadastro_repetido_exception import CadastroRepetidoException
 
 
 class ControladorFuncionarios:
@@ -34,17 +35,23 @@ class ControladorFuncionarios:
 
     def incluir_funcionario(self):
         dados_funcionario = self.__tela_funcionario.pega_dados_funcionario()
-        if isinstance(self.pega_funcionario_por_cpf(dados_funcionario["cpf"]), Funcionario):
-            self.__tela_funcionario.mostra_mensagem("Esse funcionário já foi cadastrado")
-            return False
-        funcionario = Funcionario(dados_funcionario["nome"],
-                                  dados_funcionario["cpf"],
-                                  dados_funcionario["cargo"],
-                                  dados_funcionario["data_admissao"], 
-                                  dados_funcionario["salario"])
-
-        self.__funcionarios.append(funcionario)
-        self.__tela_funcionario.mostra_mensagem(f"Funcionário {funcionario.nome} cadastrado com sucesso")
+        cpf = dados_funcionario["cpf"]
+        funcionario = self.pega_funcionario_por_cpf(cpf)
+        try:
+            if funcionario is None:
+                funcionario = Funcionario(dados_funcionario["nome"],
+                                          dados_funcionario["cpf"],
+                                          dados_funcionario["cargo"],
+                                          dados_funcionario["data_admissao"],
+                                          dados_funcionario["salario"])
+                self.__funcionarios.append(funcionario)
+                self.__tela_funcionario.mostra_mensagem(
+                    f"Funcionário {funcionario.nome} cadastrado com sucesso"
+                )
+            else:
+                raise CadastroRepetidoException(cpf, funcionario)
+        except CadastroRepetidoException as e:
+            self.__tela_funcionario.mostra_mensagem(e)
 
     def alterar_funcionario(self):
         lista = self.lista_funcionarios()
@@ -54,22 +61,23 @@ class ControladorFuncionarios:
         cpf_funcionario = self.__tela_funcionario.seleciona_funcionario()
         funcionario = self.pega_funcionario_por_cpf(cpf_funcionario)
 
-        if isinstance(funcionario, Funcionario):
+        if funcionario:
             self.__tela_funcionario.mostra_mensagem("**ALTERANDO DADOS DO FUNCIONARIO**")
             novos_dados_funcionario = self.__tela_funcionario.pega_dados_funcionario()
+            try:
+                if (self.pega_funcionario_por_cpf(novos_dados_funcionario["cpf"]) and
+                    cpf_funcionario != novos_dados_funcionario["cpf"]):
 
-            if (self.pega_funcionario_por_cpf(novos_dados_funcionario["cpf"]) and
-                cpf_funcionario != novos_dados_funcionario["cpf"]):
-
-                self.__tela_funcionario.mostra_mensagem("CPF já cadastrado")
-                return False
-
-            funcionario.nome = novos_dados_funcionario["nome"]
-            funcionario.cpf = novos_dados_funcionario["cpf"]
-            funcionario.cargo = novos_dados_funcionario["cargo"]
-            funcionario.data_admissao= novos_dados_funcionario["data_admissao"]
-            funcionario.salario = novos_dados_funcionario["salario"]
-            self.__tela_funcionario.mostra_mensagem("Dados alterados com sucesso")
+                    raise CadastroRepetidoException(novos_dados_funcionario["cpf"], funcionario)
+                else:
+                    funcionario.nome = novos_dados_funcionario["nome"]
+                    funcionario.cpf = novos_dados_funcionario["cpf"]
+                    funcionario.cargo = novos_dados_funcionario["cargo"]
+                    funcionario.data_admissao= novos_dados_funcionario["data_admissao"]
+                    funcionario.salario = novos_dados_funcionario["salario"]
+                    self.__tela_funcionario.mostra_mensagem("Dados alterados com sucesso")
+            except CadastroRepetidoException as e:
+                self.__tela_funcionario.mostra_mensagem(e)
         else:
             self.__tela_funcionario.mostra_mensagem("Funcionario não encontrado")
 
