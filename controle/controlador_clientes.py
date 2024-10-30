@@ -67,6 +67,7 @@ class ControladorClientes:
                     cliente.telefone = novos_dados_cliente["telefone"]
                     cliente.endereco = novos_dados_cliente["endereco"]
                     self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")
+
             except CadastroRepetidoException as e:
                 self.__tela_cliente.mostra_mensagem(e)
         else:
