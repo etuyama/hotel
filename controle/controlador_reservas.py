@@ -108,6 +108,7 @@ class ControladorReservas:
 
             if reserva.quarto != quarto and quarto.status != "Disponível":
                 self.__tela_reserva.mostra_mensagem(f"Quarto {numero_quarto} não está disponível")
+                #RAISE QUARTOINDISPONIVELEXCEPT
                 return False
 
             reserva.quarto = quarto

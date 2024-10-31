@@ -64,10 +64,12 @@ class ControladorQuartos():
             self.__tela_quarto.mostra_mensagem("**ALTERANDO DADOS DO QUARTO")
             novos_dados_quarto = self.__tela_quarto.pega_dados_alteracao_quarto()
             try:
+
                 #Verifica se está inserindo número de algum outro quarto já existente
                 if (self.pega_quarto_por_numero(novos_dados_quarto["numero"]) and
                     quarto.numero != novos_dados_quarto["numero"]):
                     raise QuartoJaCadastradoException(novos_dados_quarto["numero"])
+
                 quarto.numero = novos_dados_quarto["numero"]
                 quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
                 quarto.descricao = novos_dados_quarto["descricao"]
@@ -77,7 +79,7 @@ class ControladorQuartos():
             except QuartoJaCadastradoException as e:
                 print(e)
         else:
-            self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
+            self.__tela_quarto.mostra_mensagem("Quarto não encontrado")  #RAISE QNAOENCONTRADO
 
     def lista_quartos(self):
 
@@ -105,7 +107,7 @@ class ControladorQuartos():
             self.__quartos.remove(quarto)
             self.__tela_quarto.mostra_mensagem(f"Quarto número {quarto.numero} removido com sucesso")
         else:
-            self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
+            self.__tela_quarto.mostra_mensagem("Quarto não encontrado") #RAISE QNAOENCONTRADO
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
