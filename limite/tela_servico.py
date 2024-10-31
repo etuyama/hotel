@@ -24,11 +24,11 @@ class TelaServico(Tela):
         print("-------- DADOS SERVIÇO --------")
         while True:
             try:
-                nome = input("Nome do Serviço: ")
+                nome = super().le_string("Nome do Serviço: ")
 
                 id = super().le_num_inteiro("ID do serviço: ")
 
-                descricao = input("Descricao: ")
+                descricao = super().le_string("Descricao: ")
 
                 preco = super().le_num_inteiro("Preço: ")
 

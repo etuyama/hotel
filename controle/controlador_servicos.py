@@ -1,4 +1,6 @@
 from entidade.servico import Servico
+from exceptions.servico_id_exception import ServicoIdException
+from exceptions.servico_nome_exception import ServicoNomeException
 from limite.tela_servico import TelaServico
 
 
@@ -23,28 +25,16 @@ class ControladorServicos:
                     return servico
             return False
 
-    def checa_servico_existe(self, servico_id: Servico, servico_nome: Servico):
-        if servico_id:
-            self.__tela_servico.mostra_mensagem(
-                f"Erro: ID já cadastrado. Serviço"
-                f" '{servico_id.nome}' tem o ID {servico_id.id}"
-            )
-            return True
-        if servico_nome:
-            self.__tela_servico.mostra_mensagem(
-                f"Erro: Já existe um serviço com esse nome. "
-                f"Serviço: {servico_nome.nome}, ID: {servico_nome.id}"
-            )
-            return True
-        return False
-
     def incluir_servico(self):
         dados_servico = self.__tela_servico.pega_dados_servico()
+        id = dados_servico["id"]
+        nome = dados_servico["nome"]
+        try:
+            if self.pega_servico_por_id(id):
+                raise ServicoIdException(id)
+            elif self.pega_servico_por_nome(nome):
+                raise ServicoNomeException(nome)
 
-        if not self.checa_servico_existe(
-            self.pega_servico_por_id(dados_servico["id"]),
-            self.pega_servico_por_nome(dados_servico["nome"])
-        ):
             servico = Servico(dados_servico["nome"],
                               dados_servico["descricao"],
                               dados_servico["preco"],
@@ -53,10 +43,12 @@ class ControladorServicos:
             self.__servicos.append(servico)
             self.__tela_servico.mostra_mensagem(
                 f"Serviço {servico.nome} cadastrado com sucesso!"
-            )
-        else:
-            pass
-            #RAISE CADASTROREPETIDOEXCEPTION?
+                )
+
+        except ServicoIdException as e:
+            print(e)
+        except ServicoNomeException as x:
+            print(x)
 
     def alterar_servico(self):
         lista = self.lista_servicos()
@@ -71,19 +63,14 @@ class ControladorServicos:
                 "**ALTERANDO DADOS DO SERVIÇO**"
             )
             novos_dados_servico = self.__tela_servico.pega_dados_servico()
-            #Criei uma lógica para poder usar a função checa_servico_existe
-            checa_id = False if novos_dados_servico["id"] == \
-                servico.id else self.pega_servico_por_id(
-                novos_dados_servico["id"]
-            )
-            checa_nome = False if novos_dados_servico["nome"] == \
-                servico.nome else self.pega_servico_por_nome(
-                novos_dados_servico["nome"]
-            )
-            if not self.checa_servico_existe(
-                    checa_id,
-                    checa_nome
-            ):
+            id = novos_dados_servico["id"]
+            nome = novos_dados_servico["nome"]
+
+            try:
+                if self.pega_servico_por_id(id) and id != id_servico:
+                    raise ServicoIdException(id)
+                if self.pega_servico_por_nome(nome) and nome != servico.nome:
+                    raise ServicoNomeException(nome)
 
                 servico.id = novos_dados_servico["id"]
                 servico.nome = novos_dados_servico["nome"]
@@ -93,9 +80,11 @@ class ControladorServicos:
                 self.__tela_servico.mostra_mensagem(
                     "Dados alterados com sucesso"
                 )
-            else:
-                pass
-                #RAISE CADASTROREPETIDOEXCEPTION
+            except ServicoIdException as e:
+                print(e)
+            except ServicoNomeException as x:
+                print(x)
+
         else:
             self.__tela_servico.mostra_mensagem("Serviço não encontrado")
 

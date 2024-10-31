@@ -24,11 +24,12 @@ class TelaFuncionario(Tela):
         print("-------- DADOS FUNCIONÁRIO --------")
         while True:
             try:
-                nome = input("Nome: ")
-                cpf = input("CPF: ")
-                cargo = input("Cargo: ")
-                data_admissao = input("Data de admissão: ")
-
+                nome = super().le_string("Nome: ")
+                cpf = super().le_cpf("CPF: ")
+                cargo = super().le_string("Cargo: ")
+                data_admissao = super().le_data(
+                    "Data de admissão (DD/MM/AAAA): "
+                )
                 salario = super().le_num_inteiro("Salário: ")
 
                 return {"nome": nome, "cpf": cpf, "cargo": cargo,
@@ -46,6 +47,7 @@ class TelaFuncionario(Tela):
         print("\n")
 
     def seleciona_funcionario(self):
+        #Aqui é melhor não usar le_cpf()
         cpf = input("CPF do funcionário que deseja selecionar: ")
         return cpf
 
