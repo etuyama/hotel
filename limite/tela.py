@@ -5,6 +5,7 @@ class Tela(ABC):
 
     def mostra_mensagem(self, mensagem):
         print(mensagem)
+        print()
 
     def le_num_inteiro(self, mensagem="", inteiros_validos = None):
         while True:
@@ -26,13 +27,3 @@ class Tela(ABC):
                 print("Valor inserido inválido")
                 if inteiros_validos:
                     print("Valores válidos: ", inteiros_validos)
-
-    def tela_opcoes(self):
-        print("-------- SisLivros ---------")
-        print("Escolha sua opcao")
-        print("1 - Livros")
-        print("2 - Amigos")
-        print("3 - Emprestimos")
-        print("0 - Finalizar sistema")
-        opcao = self.le_num_inteiro("Escolha a opcao:", [0,1,2,3])
-        return opcao

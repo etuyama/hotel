@@ -62,7 +62,7 @@ class TelaQuarto(Tela):
     def mostra_quarto(self, dados_quarto):
         print("Quarto tipo", dados_quarto["tipo"])
         print("Número: ", dados_quarto["numero"])
-        print("Valor da diária: ", dados_quarto["valor_diaria"])
+        print(f"Valor da diária: R${dados_quarto['valor_diaria']},00")
         print("Descrição: ", dados_quarto["descricao"])
         print("Status: ", dados_quarto["status"])
         print("\n")

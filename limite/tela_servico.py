@@ -39,7 +39,7 @@ class TelaServico(Tela):
                     "id": id
                 }
             except ValueError:
-                print("Valor inserido inválido.")
+                print("Valores inseridos inválidos.")
 
 
     def mostra_servico(self, dados_servico):

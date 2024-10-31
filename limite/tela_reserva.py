@@ -4,7 +4,7 @@ from limite.tela import Tela
 class TelaReserva(Tela):
 
     def tela_opcoes(self):
-        escolhas = [0,1,2,3,4,5]
+        escolhas = [0,1,2,3,4,5,6,7]
         print("-------- RESERVAS ----------")
         print("Escolha uma opção")
         print("1- Efetuar Reserva")
@@ -12,6 +12,8 @@ class TelaReserva(Tela):
         print("3- Listar Reservas")
         print("4- Excluir Reservas")
         print("5- Adicionar Serviço Utilizado")
+        print("6- Extender Estadia")
+        print("7- Adicionar Valor Extra")
         print("0- Retornar")
         while True:
             try:
@@ -43,6 +45,24 @@ class TelaReserva(Tela):
             except ValueError:
                 print("Valor inserido inválido")
 
+    def pega_dias_extensao(self):
+        while True:
+            try:
+                qt_dias = super().le_num_inteiro("Quantos dias deseja adicionar à estadia: ")
+                return qt_dias
+
+            except ValueError:
+                print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
+
+    def pega_valor_extra(self):
+        while True:
+            try:
+                valor_extra = super().le_num_inteiro("Valor extra que deseja adicionar à reserva: ")
+                return valor_extra
+
+            except ValueError:
+                print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
+
     def pega_tempo_estadia(self):
         while True:
             try:
@@ -52,13 +72,22 @@ class TelaReserva(Tela):
             except ValueError:
                 print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
 
+    def seleciona_servico(self):
+        while True:
+            try:
+                id = super().le_num_inteiro("ID do serviço que deseja selecionar: ")
+                return id
+
+            except ValueError:
+                print("Valor inserido inválido")
+
     def mostra_reserva(self, dados_reserva):
         print("ID: ", dados_reserva["id"])
         print("Nome do Cliente: ", dados_reserva["nome_cliente"])
         print("CPF do Cliente: ", dados_reserva["cpf_cliente"])
         print("Número do Quarto: ", dados_reserva["numero_quarto"])
-        print("Valor da Diária: ", dados_reserva["valor_diaria"])
+        print(f"Valor da Diária: R${dados_reserva['valor_diaria']},00")
         print("Tempo de Estadia: ", dados_reserva["tempo_estadia"])
-        #print("Serviços Utilizados: ", dados_reserva["servicos_utilizados"])
-        print("Valor Total: ", dados_reserva["valor_total"])
+        print("Serviços Utilizados: ", dados_reserva["servicos_utilizados"])
+        print(f"Valor Total: R${dados_reserva['valor_total']},00")
         print("\n")
