@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Exceptions serviço e leituras nos quartos">
-      <change afterPath="$PROJECT_DIR$/exceptions/cliente_menor_de_idade_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions/quarto_indisponivel_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions/quarto_ja_cadastrado_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions/quarto_nao_encontrado_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions/telefone_invalido_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_quartos.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_quartos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_reservas.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_reservas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_reserva.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_reserva.py" afterDir="false" />
-    </list>
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Exceptions finais e leitura de telefone" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,7 +230,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730401928449</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Exceptions finais e leitura de telefone">
+      <option name="closed" value="true" />
+      <created>1730405650820</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1730405650820</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +264,8 @@
     <MESSAGE value="Exceptions controlador_clientes e controlador_funcionarios" />
     <MESSAGE value="Mais exceptions e leitura de dados nas telas" />
     <MESSAGE value="Exceptions serviço e leituras nos quartos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exceptions serviço e leituras nos quartos" />
+    <MESSAGE value="Exceptions finais e leitura de telefone" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions finais e leitura de telefone" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
