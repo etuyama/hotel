@@ -24,20 +24,24 @@ class TelaCliente(Tela):
         print("-------- DADOS CLIENTE --------")
         while True:
             try:
-                nome = input("Nome: ")
-                cpf = input("CPF: ")
-                idade = super().le_num_inteiro("Idade: ")
-                telefone = input("Telefone: ")
-                endereco = input("Endereco: ")
+                nome = super().le_string("Nome: ")
+                cpf = super().le_cpf("CPF: ")
+                data_nascimento = super().le_data(
+                    "Data de nascimento (DD/MM/AAAA): "
+                )
+                telefone = input("Telefone: "
+                )
+                endereco = super().le_string("Endereco: ")
                 return {"nome": nome, "cpf": cpf, "telefone": telefone,
-                        "idade": idade, "endereco": endereco}
-            except:
-                print("Dados inválidos")
+                        "data_nascimento": data_nascimento, "endereco": endereco}
+            except ValueError:
+                print("Dados inválidos.")
+
 
     def mostra_cliente(self, dados_cliente):
         print("Nome do cliente: ", dados_cliente["nome"])
         print("CPF: ", dados_cliente["cpf"])
-        print("Idade: ", dados_cliente["idade"])
+        print("Data de nascimento: ", dados_cliente["data_nascimento"])
         print("Telefone: ", dados_cliente["telefone"])
         print("Endereco: ", dados_cliente["endereco"])
         print("\n")

@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Tela e controlador funcionarios + ajustes">
-      <change afterPath="$PROJECT_DIR$/exceptions/cadastro_repetido_exception.py" afterDir="false" />
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Exceptions controlador_clientes e controlador_funcionarios">
+      <change afterPath="$PROJECT_DIR$/exceptions/cpf_invalido_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/data_futura_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/data_invalida_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/entrada_vazia_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/menor_que_zero_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/nao_eh_string_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/valor_invalido_exception.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_funcionarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_funcionarios.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entidade/cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/cadastro_repetido_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/cadastro_repetido_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_funcionario.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_funcionario.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +71,7 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/etuyama/Downloads/ExemploMVCException",
+    "last_opened_file_path": "/home/etuyama/PycharmProjects/hotel/exceptions",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -72,6 +82,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/exceptions" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\egera\PycharmProjects\hotel\entidade" />
       <recent name="C:\Users\egera\PycharmProjects\hotel\limite" />
@@ -208,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729555338999</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Exceptions controlador_clientes e controlador_funcionarios">
+      <option name="closed" value="true" />
+      <created>1730311093570</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1730311093570</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +252,8 @@
     <MESSAGE value="Controlador sistema, tela sistema e tela cliente" />
     <MESSAGE value="Reorganização e renomeação de arquivos" />
     <MESSAGE value="Tela e controlador funcionarios + ajustes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tela e controlador funcionarios + ajustes" />
+    <MESSAGE value="Exceptions controlador_clientes e controlador_funcionarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions controlador_clientes e controlador_funcionarios" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -244,6 +266,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730310634815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730399691171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
