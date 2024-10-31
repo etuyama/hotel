@@ -58,7 +58,7 @@ class TelaReserva(Tela):
         print("CPF do Cliente: ", dados_reserva["cpf_cliente"])
         print("Número do Quarto: ", dados_reserva["numero_quarto"])
         print("Valor da Diária: ", dados_reserva["valor_diaria"])
-        print("Tempo de Estadia: ", dados_reserva["tempo_estadia"])
+        print("Tempo de Estadia (em dias): ", dados_reserva["tempo_estadia"])
         #print("Serviços Utilizados: ", dados_reserva["servicos_utilizados"])
         print("Valor Total: ", dados_reserva["valor_total"])
         print("\n")

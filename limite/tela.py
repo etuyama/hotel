@@ -6,6 +6,7 @@ from exceptions.entrada_vazia_exception import EntradaVaziaException
 from exceptions.cpf_invalido_exception import CPFInvalidoException
 from exceptions.menor_que_zero_exception import MenorQueZeroException
 from exceptions.nao_eh_string_exception import NaoEhStringException
+from exceptions.telefone_invalido_exception import TelefoneInvalidoException
 from exceptions.valor_invalido_exception import ValorInvalidoException
 
 
@@ -66,7 +67,17 @@ class Tela(ABC):
                 print(e)
 
     def le_telefone(self, mensagem=""):
-        pass
+        while True:
+            telefone = input(mensagem)
+            try:
+                if not telefone.isdigit() or len(telefone) != 12:
+                    raise TelefoneInvalidoException
+                if int(telefone) <= 0:
+                    raise TelefoneInvalidoException
+                return telefone
+            except TelefoneInvalidoException as e:
+                print(e)
+
     def le_data(self, mensagem=""):
         while True:
             data = input(mensagem)

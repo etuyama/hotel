@@ -29,7 +29,8 @@ class TelaCliente(Tela):
                 data_nascimento = super().le_data(
                     "Data de nascimento (DD/MM/AAAA): "
                 )
-                telefone = input("Telefone: "
+                telefone = super().le_telefone(
+                    "Telefone (Formato: DDD123456789, DDD com 0 na frente): "
                 )
                 endereco = super().le_string("Endereco: ")
                 return {"nome": nome, "cpf": cpf, "telefone": telefone,

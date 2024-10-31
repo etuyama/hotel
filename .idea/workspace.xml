@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Mais exceptions e leitura de dados nas telas">
-      <change afterPath="$PROJECT_DIR$/exceptions/servico_id_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/exceptions/servico_nome_exception.py" afterDir="false" />
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Exceptions serviço e leituras nos quartos">
+      <change afterPath="$PROJECT_DIR$/exceptions/cliente_menor_de_idade_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/quarto_indisponivel_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/quarto_ja_cadastrado_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/quarto_nao_encontrado_exception.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/exceptions/telefone_invalido_exception.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_servicos.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_servicos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_quarto.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_quarto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_servico.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_servico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_quartos.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_quartos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_reservas.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_reservas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_reserva.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_reserva.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730399826014</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Exceptions serviço e leituras nos quartos">
+      <option name="closed" value="true" />
+      <created>1730401928449</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1730401928449</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,7 +267,8 @@
     <MESSAGE value="Tela e controlador funcionarios + ajustes" />
     <MESSAGE value="Exceptions controlador_clientes e controlador_funcionarios" />
     <MESSAGE value="Mais exceptions e leitura de dados nas telas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mais exceptions e leitura de dados nas telas" />
+    <MESSAGE value="Exceptions serviço e leituras nos quartos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions serviço e leituras nos quartos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -267,6 +281,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730401806764" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730405528543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

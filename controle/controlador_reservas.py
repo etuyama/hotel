@@ -1,4 +1,7 @@
 from entidade.reserva import Reserva
+from exceptions.cliente_menor_de_idade_exception import ClienteMenorDeIdadeException
+from exceptions.quarto_indisponivel_exception import QuartoIndisponivelException
+from exceptions.quarto_nao_encontrado_exception import QuartoNaoEncontradoException
 from limite.tela_reserva import TelaReserva
 from controle.controlador_clientes import ControladorClientes
 from controle.controlador_quartos import ControladorQuartos
@@ -44,30 +47,38 @@ class ControladorReservas:
         cpf_cliente = self.__tela_reserva.seleciona_cliente()
         cliente = self.__controlador_clientes.pega_cliente_por_cpf(cpf_cliente)
 
-        if not isinstance(cliente, Cliente):
+        if not cliente:
             self.__tela_reserva.mostra_mensagem("Cliente não encontrado")
             return False
 
-        self.__controlador_quartos.lista_quartos()
-        numero_quarto = self.__tela_reserva.seleciona_quarto()
-        quarto = self.__controlador_quartos.pega_quarto_por_numero(numero_quarto)
+        try:
+            if not cliente.validar_maioridade():
+                raise ClienteMenorDeIdadeException(cliente.calcular_idade())
 
-        if not isinstance(quarto, Quarto):
-            self.__tela_reserva.mostra_mensagem("Quarto não encontrado")
-            return False
+            self.__controlador_quartos.lista_quartos()
+            numero_quarto = self.__tela_reserva.seleciona_quarto()
+            quarto = self.__controlador_quartos.pega_quarto_por_numero(numero_quarto)
 
-        if quarto.status != "Disponível":
-            self.__tela_reserva.mostra_mensagem("Quarto não está disponível")
-            return False
+            if not quarto:
+                raise QuartoNaoEncontradoException(numero_quarto)
 
-        tempo_estadia = self.__tela_reserva.pega_tempo_estadia()
+            if quarto.status != "Disponível":
+                raise QuartoIndisponivelException
 
-        reserva = Reserva(quarto, tempo_estadia, cliente, self.__id)
-        self.__reservas.append(reserva)
+            tempo_estadia = self.__tela_reserva.pega_tempo_estadia()
 
-        quarto.status = "Ocupado"
+            reserva = Reserva(quarto, tempo_estadia, cliente, self.__id)
+            self.__reservas.append(reserva)
 
-        self.__id = self.__id + 1
+            quarto.status = "Ocupado"
+
+            self.__id = self.__id + 1
+        except ClienteMenorDeIdadeException as e:
+            print(e)
+        except QuartoNaoEncontradoException as x:
+            print(x)
+        except QuartoIndisponivelException as c:
+            print(c)
 
     def alterar_reserva(self):
         lista = self.lista_reservas()
@@ -77,14 +88,14 @@ class ControladorReservas:
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
 
-        if isinstance(reserva, Reserva):
+        if reserva:
             self.__tela_reserva.mostra_mensagem("**ALTERANDO DADOS DA RESERVA**")
 
             self.__controlador_clientes.lista_clientes()
             cpf_cliente = self.__tela_reserva.seleciona_cliente()
             cliente = self.__controlador_clientes.pega_cliente_por_cpf(cpf_cliente)
 
-            if not isinstance(cliente, Cliente):
+            if not cliente:
                 self.__tela_reserva.mostra_mensagem("Cliente não encontrado")
                 return False
 
@@ -97,7 +108,7 @@ class ControladorReservas:
             numero_quarto = self.__tela_reserva.seleciona_quarto()
             quarto = self.__controlador_quartos.pega_quarto_por_numero(numero_quarto)
 
-            if not isinstance(quarto, Quarto):
+            if not quarto:
                 self.__tela_reserva.mostra_mensagem("Quarto não encontrado")
                 return False
 
@@ -133,7 +144,7 @@ class ControladorReservas:
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
 
-        if isinstance(reserva, Reserva):
+        if reserva:
             self.__reservas.remove(reserva)
             self.__tela_reserva.mostra_mensagem("Reserva removida com sucesso")
         else:
