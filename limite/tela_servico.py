@@ -27,15 +27,10 @@ class TelaServico(Tela):
                 nome = input("Nome do Serviço: ")
 
                 id = super().le_num_inteiro("ID do serviço: ")
-                if id <= 0:
-                    raise ValueError
 
                 descricao = input("Descricao: ")
 
                 preco = super().le_num_inteiro("Preço: ")
-
-                if preco < 0:
-                    raise ValueError
 
                 return {
                     "nome": nome,

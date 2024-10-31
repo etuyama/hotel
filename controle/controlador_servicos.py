@@ -23,17 +23,17 @@ class ControladorServicos:
                     return servico
             return False
 
-    def checa_servico_existe(self, id: Servico, nome: Servico):
-        if id:
+    def checa_servico_existe(self, servico_id: Servico, servico_nome: Servico):
+        if servico_id:
             self.__tela_servico.mostra_mensagem(
                 f"Erro: ID já cadastrado. Serviço"
-                f" '{id.nome}' tem o ID {id.id}"
+                f" '{servico_id.nome}' tem o ID {servico_id.id}"
             )
             return True
-        elif nome:
+        if servico_nome:
             self.__tela_servico.mostra_mensagem(
                 f"Erro: Já existe um serviço com esse nome. "
-                f"Serviço: {nome.nome}, ID: {nome.id}"
+                f"Serviço: {servico_nome.nome}, ID: {servico_nome.id}"
             )
             return True
         return False
@@ -54,6 +54,9 @@ class ControladorServicos:
             self.__tela_servico.mostra_mensagem(
                 f"Serviço {servico.nome} cadastrado com sucesso!"
             )
+        else:
+            pass
+            #RAISE CADASTROREPETIDOEXCEPTION?
 
     def alterar_servico(self):
         lista = self.lista_servicos()
@@ -90,13 +93,16 @@ class ControladorServicos:
                 self.__tela_servico.mostra_mensagem(
                     "Dados alterados com sucesso"
                 )
+            else:
+                pass
+                #RAISE CADASTROREPETIDOEXCEPTION
         else:
             self.__tela_servico.mostra_mensagem("Serviço não encontrado")
 
     def lista_servicos(self):
 
         if len(self.__servicos) > 0:
-            self.__tela_servico.mostra_mensagem("\n**LISTANDO SERVIÇOS**\n")
+            self.__tela_servico.mostra_mensagem("\n**LISTANDO SERVIÇOS**\n")  #NÃO tem essa mensagem nos outros controladores,da pra apagar aqui ou mudar nos outros
             for servico in self.__servicos:
                 self.__tela_servico.mostra_servico(
                     {
@@ -107,12 +113,13 @@ class ControladorServicos:
                      }
                 )
             return True
-        else:
-            self.__tela_servico.mostra_mensagem("Lista de serviços vazia.")
-            return False
+
+        self.__tela_servico.mostra_mensagem("Lista de serviços vazia.")
+        return None
 
     def excluir_servico(self):
-        if not self.lista_servicos():
+        lista = self.lista_servicos()
+        if not lista:
             return False
 
         id_servico = self.__tela_servico.seleciona_servico()
