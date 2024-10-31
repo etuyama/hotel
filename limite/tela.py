@@ -14,6 +14,7 @@ class Tela(ABC):
 
     def mostra_mensagem(self, mensagem):
         print(mensagem)
+        print()
 
     def le_num_inteiro(self, mensagem="", inteiros_validos = None):
         while True:
