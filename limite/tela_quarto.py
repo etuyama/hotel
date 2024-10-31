@@ -33,7 +33,7 @@ class TelaQuarto(Tela):
                 tipo = super().le_num_inteiro("Tipo: ", tipos_validos)
                 numero = super().le_num_inteiro("Número: ")
                 valor_diaria = super().le_num_inteiro("Valor da diária: ")
-                descricao = input("Descrição: ")
+                descricao = super().le_string("Descrição: ")
 
                 return {"numero": numero, "valor_diaria": valor_diaria,
                         "descricao": descricao, "tipo": tipo}
@@ -49,7 +49,7 @@ class TelaQuarto(Tela):
             try:
                 numero = super().le_num_inteiro("Número: ")
                 valor_diaria = super().le_num_inteiro("Valor da diária: ")
-                descricao = input("Descrição: ")
+                descricao = super().le_string("Descrição: ")
                 print("\n")
                 status = self.pega_status_quarto()
 
