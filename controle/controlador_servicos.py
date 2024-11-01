@@ -46,9 +46,9 @@ class ControladorServicos:
                 )
 
         except ServicoIdException as e:
-            print(e)
+            self.__tela_servico.mostra_mensagem(e)
         except ServicoNomeException as x:
-            print(x)
+            self.__tela_servico.mostra_mensagem(x)
 
     def alterar_servico(self):
         lista = self.lista_servicos()
@@ -81,9 +81,9 @@ class ControladorServicos:
                     "Dados alterados com sucesso"
                 )
             except ServicoIdException as e:
-                print(e)
+                self.__tela_servico.mostra_mensagem(e)
             except ServicoNomeException as x:
-                print(x)
+                self.__tela_servico.mostra_mensagem(x)
 
         else:
             self.__tela_servico.mostra_mensagem("Serviço não encontrado")

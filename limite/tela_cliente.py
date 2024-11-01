@@ -18,7 +18,7 @@ class TelaCliente(Tela):
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE --------")
-        #Sem try except aqui pois exceções esstão sendo tratadas na leitura
+        #Sem try except aqui pois exceções estão sendo tratadas na leitura
         nome = super().le_string("Nome: ")
         cpf = super().le_cpf("CPF: ")
         data_nascimento = super().le_data(

@@ -51,7 +51,7 @@ class ControladorQuartos():
                 self.__tela_quarto.mostra_mensagem(f"Quarto Luxo número {dados_quarto["numero"]} adicionado com sucesso")
                 return quarto
         except QuartoJaCadastradoException as e:
-            print(e)
+            self.__tela_quarto.mostra_mensagem(e)
 
     def alterar_quarto(self):
         lista = self.lista_quartos()
@@ -77,7 +77,7 @@ class ControladorQuartos():
 
                 self.__tela_quarto.mostra_mensagem("Dados alterados com sucesso")
             except QuartoJaCadastradoException as e:
-                print(e)
+                self.__tela_quarto.mostra_mensagem(e)
         else:
             self.__tela_quarto.mostra_mensagem("Quarto não encontrado")  #RAISE QNAOENCONTRADO
 
