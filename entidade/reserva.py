@@ -1,6 +1,8 @@
 from entidade.cliente import Cliente
 from entidade.quarto import Quarto
 from entidade.servico import Servico
+from datetime import date
+
 
 class Reserva:
 
@@ -12,6 +14,7 @@ class Reserva:
         self.__id = id
         self.__servicos_utilizados = []
         self.__valor_total = quarto.valor_diaria * tempo_estadia
+        self.__data_reserva = None
         self.__situacao = "Pendente"
 
     @property
@@ -49,6 +52,14 @@ class Reserva:
     @property
     def servicos_utilizados(self):
         return self.__servicos_utilizados
+
+    @property
+    def data_reserva(self):
+        return self.__data_reserva
+
+    @data_reserva.setter
+    def data_reserva(self, data_reserva):
+        self.__data_reserva = data_reserva
 
     @property
     def situacao(self):

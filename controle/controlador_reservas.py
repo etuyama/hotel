@@ -4,6 +4,7 @@ from exceptions.quarto_indisponivel_exception import QuartoIndisponivelException
 from exceptions.quarto_nao_encontrado_exception import QuartoNaoEncontradoException
 from exceptions.reserva_finalizada_exception import ReservaFinalizadaException
 from limite.tela_reserva import TelaReserva
+from datetime import date
 
 
 class ControladorReservas:
@@ -66,6 +67,7 @@ class ControladorReservas:
             tempo_estadia = self.__tela_reserva.pega_tempo_estadia()
 
             reserva = Reserva(quarto, tempo_estadia, cliente, self.__id)
+            reserva.data_reserva = date.today().strftime("%d/%m/%Y")
             self.__reservas.append(reserva)
 
             quarto.status = "Ocupado"
@@ -137,6 +139,7 @@ class ControladorReservas:
                 try:
                     self.verifica_situacao_reserva(reserva)
                     self.__tela_reserva.mostra_reserva({"id": reserva.id,
+                                                        "data_reserva": reserva.data_reserva,
                                                         "situacao": reserva.situacao,
                                                         "nome_cliente": reserva.cliente.nome,
                                                         "cpf_cliente": reserva.cliente.cpf,
@@ -158,16 +161,19 @@ class ControladorReservas:
             for reserva in self.__reservas:
 
                 self.verifica_situacao_reserva(reserva)
-                self.__tela_reserva.mostra_reserva({"id": reserva.id,
-                                                    "situacao": reserva.situacao,
-                                                    "nome_cliente": reserva.cliente.nome,
-                                                    "cpf_cliente": reserva.cliente.cpf,
-                                                    "numero_quarto": reserva.quarto.numero,
-                                                    "tipo_quarto": reserva.quarto.tipo,
-                                                    "valor_diaria": reserva.quarto.valor_diaria,
-                                                    "tempo_estadia": reserva.tempo_estadia,
-                                                    "servicos_utilizados": self.lista_servicos(reserva),
-                                                    "valor_total": reserva.valor_total})
+                self.__tela_reserva.mostra_reserva({
+                    "id": reserva.id,
+                    "data_reserva": reserva.data_reserva,
+                    "situacao": reserva.situacao,
+                    "nome_cliente": reserva.cliente.nome,
+                    "cpf_cliente": reserva.cliente.cpf,
+                    "numero_quarto": reserva.quarto.numero,
+                    "tipo_quarto": reserva.quarto.tipo,
+                    "valor_diaria": reserva.quarto.valor_diaria,
+                    "tempo_estadia": reserva.tempo_estadia,
+                    "servicos_utilizados": self.lista_servicos(reserva),
+                    "valor_total": reserva.valor_total}
+                )
             return True
 
         self.__tela_reserva.mostra_mensagem("Lista de reservas vazia")

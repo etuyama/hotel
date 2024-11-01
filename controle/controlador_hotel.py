@@ -26,9 +26,9 @@ class ControladorHotel:
 
             reserva.quarto.status = "Manutenção"
             self.__tela_hotel.mostra_mensagem(
-                f"Check-out da reserva do cliente: 
-                {reserva.cliente.nome}(CPF:{reserva.cliente.cpf}) 
-                no quarto {reserva.quarto.numero} realizado com sucesso"
+                f"Check-out da reserva do cliente: "
+                f"{reserva.cliente.nome}(CPF:{reserva.cliente.cpf}) "
+                f"no quarto {reserva.quarto.numero} realizado com sucesso"
                 )
 
             self.__tela_hotel.mostra_mensagem(f"Valor total da reserva: {reserva.valor_total}")
