@@ -12,6 +12,7 @@ class Reserva:
         self.__id = id
         self.__servicos_utilizados = []
         self.__valor_total = quarto.valor_diaria * tempo_estadia
+        self.__situacao = "Pendente"
 
     @property
     def tempo_estadia(self):
@@ -48,6 +49,15 @@ class Reserva:
     @property
     def servicos_utilizados(self):
         return self.__servicos_utilizados
+
+    @property
+    def situacao(self):
+        return self.__situacao
+
+    @situacao.setter
+    def situacao(self, situacao):
+        if (situacao == "Pendente" or situacao == "Finalizada"):
+            self.__situacao = situacao
 
     def extender_estadia(self, dias: int):
 

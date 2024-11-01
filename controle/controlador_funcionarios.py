@@ -121,4 +121,7 @@ class ControladorFuncionarios:
                         0: self.retornar}
         
         while True:
-            lista_opcoes[self.__tela_funcionario.tela_opcoes()]()
+            opcao_escolhida = self.__tela_funcionario.tela_opcoes()
+            print("Opção escolhida: ", opcao_escolhida)
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()

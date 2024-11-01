@@ -86,6 +86,11 @@ class ControladorReservas:
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
+
+            if reserva.situacao == "Finalizada":
+                self.__tela_reserva.mostra_mensagem(f"Reserva de ID: {reserva.id} já foi finalizada")
+                return False
+
             self.__tela_reserva.mostra_mensagem("**ALTERANDO DADOS DA RESERVA**")
 
             self.__controlador_clientes.lista_clientes()
@@ -122,6 +127,7 @@ class ControladorReservas:
         if len(self.__reservas) > 0:
             for reserva in self.__reservas:
                 self.__tela_reserva.mostra_reserva({"id": reserva.id,
+                                                    "situacao": reserva.situacao,
                                                     "nome_cliente": reserva.cliente.nome,
                                                     "cpf_cliente": reserva.cliente.cpf,
                                                     "numero_quarto": reserva.quarto.numero,
@@ -144,6 +150,11 @@ class ControladorReservas:
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
+
+            if reserva.situacao == "Finalizada":
+                self.__tela_reserva.mostra_mensagem(f"Reserva de ID: {reserva.id} já foi finalizada")
+                return False
+
             self.__reservas.remove(reserva)
             reserva.quarto.status = "Disponível"
             self.__tela_reserva.mostra_mensagem("Reserva removida com sucesso")
@@ -154,10 +165,15 @@ class ControladorReservas:
         lista = self.lista_reservas()
         if not lista:
             return False
+
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
         if not isinstance(reserva, Reserva):
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
+            return False
+
+        if reserva.situacao == "Finalizada":
+            self.__tela_reserva.mostra_mensagem(f"Reserva de ID: {reserva.id} já foi finalizada")
             return False
 
         self.__controlador_servicos.lista_servicos()
@@ -193,6 +209,11 @@ class ControladorReservas:
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
+
+            if reserva.situacao == "Finalizada":
+                self.__tela_reserva.mostra_mensagem(f"Reserva de ID: {reserva.id} já foi finalizada")
+                return False
+
             qt_dias = self.__tela_reserva.pega_dias_extensao()
             reserva.extender_estadia(qt_dias)
             self.__tela_reserva.mostra_mensagem(f"Foram adicionados {qt_dias} dias na reserva de ID: {reserva.id}")
@@ -208,11 +229,20 @@ class ControladorReservas:
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
+
+            self.verifica_situacao(reserva) #EXCEPTION
+
             valor_extra = self.__tela_reserva.pega_valor_extra()
             reserva.adiciona_valor_extra(valor_extra)
             self.__tela_reserva.mostra_mensagem(f"R${valor_extra},00 adicionado à reserva de ID: {reserva.id}")
         else:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
+
+    def verifica_situacao(self, reserva):
+
+        if reserva.situacao == "Finalizada":
+            self.__tela_reserva.mostra_mensagem(f"Reserva de ID: {reserva.id} já foi finalizada")
+            return False
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -223,4 +253,7 @@ class ControladorReservas:
                         5: self.adiciona_servico, 6: self.extender_estadia,
                         7: self.adiciona_valor_extra, 0: self.retornar}
         while True:
-            lista_opcoes[self.__tela_reserva.tela_opcoes()]()
+            opcao_escolhida = self.__tela_reserva.tela_opcoes()
+            print("Opção escolhida: ", opcao_escolhida)
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()

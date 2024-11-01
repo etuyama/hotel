@@ -136,4 +136,7 @@ class ControladorServicos:
         }
 
         while True:
-            lista_opcoes[self.__tela_servico.tela_opcoes()]()
+            opcao_escolhida = self.__tela_servico.tela_opcoes()
+            print("Opção escolhida: ", opcao_escolhida)
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()

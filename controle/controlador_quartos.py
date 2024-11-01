@@ -117,6 +117,9 @@ class ControladorQuartos():
                         4: self.excluir_quarto, 0: self.retornar}
 
         while True:
-            lista_opcoes[self.__tela_quarto.tela_opcoes()]()
+            opcao_escolhida = self.__tela_quarto.tela_opcoes()
+            print("Opção escolhida: ", opcao_escolhida)
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
   
 

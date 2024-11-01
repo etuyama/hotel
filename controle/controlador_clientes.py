@@ -119,4 +119,7 @@ class ControladorClientes:
         }
 
         while True:
-            lista_opcoes[self.__tela_cliente.tela_opcoes()]()
+            opcao_escolhida = self.__tela_cliente.tela_opcoes()
+            print("Opção escolhida: ", opcao_escolhida)
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()

@@ -4,7 +4,7 @@ from controle.controlador_clientes import ControladorClientes
 from controle.controlador_servicos import ControladorServicos
 from controle.controlador_quartos import ControladorQuartos
 from controle.controlador_funcionarios import ControladorFuncionarios
-
+from controle.controlador_hotel import ControladorHotel
 
 class ControladorSistema:
 
@@ -18,6 +18,10 @@ class ControladorSistema:
                                                           self.__controlador_clientes,
                                                           self.__controlador_quartos,
                                                           self.__controlador_servicos)
+
+        self.__controlador_hotel = ControladorHotel(self,
+                                                    self.__controlador_reservas,
+                                                    self.__controlador_funcionarios)
 
     @property
     def controlador_clientes(self):
@@ -39,6 +43,10 @@ class ControladorSistema:
     def controlador_funcionarios(self):
         return self.__controlador_funcionarios
 
+    @property
+    def controlador_hotel(self):
+        return self.__controlador_hotel
+
     def inicializa_sistema(self):
         self.abre_tela()
 
@@ -57,6 +65,9 @@ class ControladorSistema:
     def cadastra_funcionarios(self):
         self.__controlador_funcionarios.abre_tela()
 
+    def sistema_hotel(self):
+        self.__controlador_hotel.abre_tela()
+
     def encerra_sistema(self):
         exit(0)
 
@@ -65,8 +76,9 @@ class ControladorSistema:
                         2 : self.cadastra_reservas,
                         3 : self.cadastra_servicos,
                         4 : self.cadastra_quartos,
+                        5 : self.cadastra_funcionarios,
+                        6 : self.sistema_hotel,
                         0 : self.encerra_sistema,
-                        5 : self.cadastra_funcionarios
                         }
 
         while True:

@@ -83,6 +83,7 @@ class TelaReserva(Tela):
 
     def mostra_reserva(self, dados_reserva):
         print("ID: ", dados_reserva["id"])
+        print("SITUAÇÃO: ", dados_reserva["situacao"])
         print("Nome do Cliente: ", dados_reserva["nome_cliente"])
         print("CPF do Cliente: ", dados_reserva["cpf_cliente"])
         print("Número do Quarto: ", dados_reserva["numero_quarto"])
