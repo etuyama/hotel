@@ -96,24 +96,25 @@ class ControladorReservas:
                 self.__tela_reserva.mostra_mensagem("Cliente não encontrado")
                 return False
 
-            reserva.cliente = cliente
+            try:
+                reserva.cliente = cliente
 
-            self.__controlador_quartos.lista_quartos()
-            numero_quarto = self.__tela_reserva.seleciona_quarto()
-            quarto = self.__controlador_quartos.pega_quarto_por_numero(numero_quarto)
+                self.__controlador_quartos.lista_quartos()
+                numero_quarto = self.__tela_reserva.seleciona_quarto()
+                quarto = self.__controlador_quartos.pega_quarto_por_numero(numero_quarto)
 
-            if not quarto:
-                self.__tela_reserva.mostra_mensagem("Quarto não encontrado")
-                return False
+                if not quarto:
+                    raise QuartoNaoEncontradoException(numero_quarto)
+                if reserva.quarto != quarto and quarto.status != "Disponível":
+                    raise QuartoIndisponivelException
 
-            if reserva.quarto != quarto and quarto.status != "Disponível":
-                self.__tela_reserva.mostra_mensagem(f"Quarto {numero_quarto} não está disponível")
-                #RAISE QUARTOINDISPONIVELEXCEPT
-                return False
+                reserva.quarto = quarto
+                self.__tela_reserva.mostra_mensagem("Dados alterados com sucesso")
 
-            reserva.quarto = quarto
-            self.__tela_reserva.mostra_mensagem("Dados alterados com sucesso")
-
+            except QuartoNaoEncontradoException as e:
+                print(e)
+            except QuartoIndisponivelException as x:
+                print(x)
         else:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
 

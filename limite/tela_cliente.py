@@ -12,31 +12,24 @@ class TelaCliente(Tela):
         print("3 - Listar Clientes")
         print("4 - Excluir Cliente")
         print("0 - Retornar")
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
 
-            except ValueError:
-                print("Escolha inválida")
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
 
     def pega_dados_cliente(self):
         print("-------- DADOS CLIENTE --------")
-        while True:
-            try:
-                nome = super().le_string("Nome: ")
-                cpf = super().le_cpf("CPF: ")
-                data_nascimento = super().le_data(
-                    "Data de nascimento (DD/MM/AAAA): "
-                )
-                telefone = super().le_telefone(
-                    "Telefone (Formato: DDD123456789, DDD com 0 na frente): "
-                )
-                endereco = super().le_string("Endereco: ")
-                return {"nome": nome, "cpf": cpf, "telefone": telefone,
-                        "data_nascimento": data_nascimento, "endereco": endereco}
-            except ValueError:
-                print("Dados inválidos.")
+        #Sem try except aqui pois exceções esstão sendo tratadas na leitura
+        nome = super().le_string("Nome: ")
+        cpf = super().le_cpf("CPF: ")
+        data_nascimento = super().le_data(
+            "Data de nascimento (DD/MM/AAAA): "
+        )
+        telefone = super().le_telefone(
+            "Telefone (Formato: DDD123456789, DDD com 0 na frente): "
+        )
+        endereco = super().le_string("Endereco: ")
+        return {"nome": nome, "cpf": cpf, "telefone": telefone,
+                "data_nascimento": data_nascimento, "endereco": endereco}
 
 
     def mostra_cliente(self, dados_cliente):

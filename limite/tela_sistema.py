@@ -15,11 +15,6 @@ class TelaSistema(Tela):
         print("4 - Quartos")
         print("5 - Funcionários")
         print("0 - Sair")
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
 
-            except ValueError:
-                print("Valor inserido inválido")
-            
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha

@@ -15,7 +15,7 @@ class ControladorFuncionarios:
 
         lista_vazia = True
         for funcionario in self.__funcionarios:
-            if cargo in funcionario.cargo:
+            if cargo.lower() == funcionario.cargo.lower():
                 lista_vazia = False
                 self.__tela_funcionario.mostra_funcionario({"cpf": funcionario.cpf,
                                                             "nome": funcionario.nome,

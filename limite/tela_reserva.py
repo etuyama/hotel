@@ -15,71 +15,40 @@ class TelaReserva(Tela):
         print("6- Extender Estadia")
         print("7- Adicionar Valor Extra")
         print("0- Retornar")
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
 
-            except ValueError:
-                print("Escolha inválida")
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
+
 
     def seleciona_reserva(self):
-        while True:
-            try:
-                id = super().le_num_inteiro("ID da reserva que deseja selecionar: ")
-                return id
-
-            except ValueError:
-                print("Valor inserido inválido")
+        id = super().le_num_inteiro("ID da reserva que deseja selecionar: ")
+        return id
 
     def seleciona_cliente(self):
         cpf = input("CPF do cliente que deseja selecionar: ")
         return cpf
 
     def seleciona_quarto(self):
-        while True:
-            try:
-                numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
-                return numero
+        numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
+        return numero
 
-            except ValueError:
-                print("Valor inserido inválido")
 
     def pega_dias_extensao(self):
-        while True:
-            try:
-                qt_dias = super().le_num_inteiro("Quantos dias deseja adicionar à estadia: ")
-                return qt_dias
+        qt_dias = super().le_num_inteiro("Quantos dias deseja adicionar à estadia: ")
+        return qt_dias
 
-            except ValueError:
-                print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
 
     def pega_valor_extra(self):
-        while True:
-            try:
-                valor_extra = super().le_num_inteiro("Valor extra que deseja adicionar à reserva: ")
-                return valor_extra
-
-            except ValueError:
-                print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
+        valor_extra = super().le_num_inteiro("Valor extra que deseja adicionar à reserva: ")
+        return valor_extra
 
     def pega_tempo_estadia(self):
-        while True:
-            try:
-                tempo_estadia = super().le_num_inteiro("Tempo de estadia: ")
-                return tempo_estadia
-
-            except ValueError:
-                print("Valor inserido inválido, por favor insira um número inteiro maior do que 0")
+        tempo_estadia = super().le_num_inteiro("Tempo de estadia: ")
+        return tempo_estadia
 
     def seleciona_servico(self):
-        while True:
-            try:
-                id = super().le_num_inteiro("ID do serviço que deseja selecionar: ")
-                return id
-
-            except ValueError:
-                print("Valor inserido inválido")
+        id = super().le_num_inteiro("ID do serviço que deseja selecionar: ")
+        return id
 
     def mostra_reserva(self, dados_reserva):
         print("ID: ", dados_reserva["id"])
