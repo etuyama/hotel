@@ -6,7 +6,6 @@ from exceptions.reserva_finalizada_exception import ReservaFinalizadaException
 from limite.tela_reserva import TelaReserva
 from datetime import date
 
-
 class ControladorReservas:
 
     def __init__(self,
@@ -296,7 +295,7 @@ class ControladorReservas:
         elif escolha == 2:
             self.gera_relatorio_meses()
         elif escolha == 3:
-            pass
+            self.gera_relatorio_clientes()
         elif escolha == 0:
             self.__tela_reserva.tela_opcoes()
 
@@ -345,6 +344,22 @@ class ControladorReservas:
 
         for i, (mes, qtd) in enumerate(ranking, start=1):
             self.__tela_reserva.mostra_mensagem(f"{i}º - {nomes_meses[mes]}: {qtd} reservas")
+
+    def gera_relatorio_clientes(self):
+        clientes_contagem = {}
+
+        for reserva in self.__reservas:
+            if reserva.cliente.cpf not in clientes_contagem:
+                clientes_contagem[reserva.cliente.cpf] = 1
+            else:
+                clientes_contagem[reserva.cliente.cpf] += 1
+
+        ranking = sorted(clientes_contagem.items(), key=lambda item: item[1], reverse=True)
+
+        self.__tela_reserva.mostra_mensagem("Ranking dos clientes com mais reservas realizadas:")
+
+        for i, (cpf, qtd) in enumerate(ranking, start=1):
+            self.__tela_reserva.mostra_mensagem(f"{i}º - {self.__controlador_clientes.pega_cliente_por_cpf(cpf).nome} (CPF {cpf}): {qtd} reservas")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
