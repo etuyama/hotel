@@ -3,6 +3,7 @@ from entidade.quarto_standard import QuartoStandard
 from entidade.quarto_suite import QuartoSuite
 from entidade.quarto import Quarto
 from exceptions.quarto_ja_cadastrado_exception import QuartoJaCadastradoException
+from exceptions.quarto_nao_encontrado_exception import QuartoNaoEncontradoException
 from limite.tela_quarto import TelaQuarto
 
 
@@ -59,27 +60,26 @@ class ControladorQuartos():
             return False
         numero_quarto = self.__tela_quarto.seleciona_quarto()
         quarto = self.pega_quarto_por_numero(numero_quarto)
-
-        if quarto:
+        try:
+            if not quarto:
+                raise QuartoNaoEncontradoException(numero_quarto)
             self.__tela_quarto.mostra_mensagem("**ALTERANDO DADOS DO QUARTO")
             novos_dados_quarto = self.__tela_quarto.pega_dados_alteracao_quarto()
-            try:
+            #Verifica se está inserindo número de algum outro quarto já existente
+            if (self.pega_quarto_por_numero(novos_dados_quarto["numero"]) and
+                quarto.numero != novos_dados_quarto["numero"]):
+                raise QuartoJaCadastradoException(novos_dados_quarto["numero"])
 
-                #Verifica se está inserindo número de algum outro quarto já existente
-                if (self.pega_quarto_por_numero(novos_dados_quarto["numero"]) and
-                    quarto.numero != novos_dados_quarto["numero"]):
-                    raise QuartoJaCadastradoException(novos_dados_quarto["numero"])
+            quarto.numero = novos_dados_quarto["numero"]
+            quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
+            quarto.descricao = novos_dados_quarto["descricao"]
+            quarto.status = novos_dados_quarto["status"]
 
-                quarto.numero = novos_dados_quarto["numero"]
-                quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
-                quarto.descricao = novos_dados_quarto["descricao"]
-                quarto.status = novos_dados_quarto["status"]
-
-                self.__tela_quarto.mostra_mensagem("Dados alterados com sucesso")
-            except QuartoJaCadastradoException as e:
-                self.__tela_quarto.mostra_mensagem(e)
-        else:
-            self.__tela_quarto.mostra_mensagem("Quarto não encontrado")  #RAISE QNAOENCONTRADO
+            self.__tela_quarto.mostra_mensagem("Dados alterados com sucesso")
+        except QuartoJaCadastradoException as e:
+            self.__tela_quarto.mostra_mensagem(e)
+        except QuartoNaoEncontradoException as x:
+            self.__tela_quarto.mostra_mensagem(x)
 
     def lista_quartos(self):
 
@@ -102,12 +102,13 @@ class ControladorQuartos():
 
         numero_quarto = self.__tela_quarto.seleciona_quarto()
         quarto = self.pega_quarto_por_numero(numero_quarto)
-
-        if isinstance(quarto, Quarto):
+        try:
+            if not quarto:
+                raise QuartoNaoEncontradoException(numero_quarto)
             self.__quartos.remove(quarto)
             self.__tela_quarto.mostra_mensagem(f"Quarto número {quarto.numero} removido com sucesso")
-        else:
-            self.__tela_quarto.mostra_mensagem("Quarto não encontrado") #RAISE QNAOENCONTRADO
+        except QuartoNaoEncontradoException as e:
+            self.__tela_quarto.mostra_mensagem(e)
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()

@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Remoção de try excepts desnecessários">
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Data nas reservas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_hotel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_quartos.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_quartos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_reservas.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_reservas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/reserva.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/reserva.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entidade/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/hotel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_hotel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/limite/tela_reserva.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_reserva.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +157,8 @@
       <workItem from="1730219516414" duration="3548000" />
       <workItem from="1730226636204" duration="3262000" />
       <workItem from="1730406209092" duration="292000" />
-      <workItem from="1730479147454" duration="6158000" />
+      <workItem from="1730479147454" duration="11682000" />
+      <workItem from="1730495914003" duration="2614000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -262,7 +264,23 @@
       <option name="project" value="LOCAL" />
       <updated>1730482053132</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Remoção de try excepts desnecessários">
+      <option name="closed" value="true" />
+      <created>1730488252788</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1730488252788</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Data nas reservas">
+      <option name="closed" value="true" />
+      <created>1730489056449</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1730489056449</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,19 +320,10 @@
     <MESSAGE value="Exceptions serviço e leituras nos quartos" />
     <MESSAGE value="Exceptions finais e leitura de telefone" />
     <MESSAGE value="Remoção de try excepts desnecessários" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remoção de try excepts desnecessários" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Data nas reservas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Data nas reservas" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730487835003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730498139231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
