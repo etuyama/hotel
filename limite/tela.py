@@ -36,6 +36,8 @@ class Tela(ABC):
                 print(e)
             except MenorQueZeroException as e:
                 print(e)
+            except ValueError:
+                print("Valor inválido inserido")
 
     def le_string(self, mensagem=""):
         while True:

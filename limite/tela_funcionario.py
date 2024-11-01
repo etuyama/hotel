@@ -12,31 +12,22 @@ class TelaFuncionario(Tela):
         print("4 - Excluir Funcionário")
         print("5 - Listar Funcionários por cargo")
         print("0 - Retornar")
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
 
-            except ValueError:
-                print("Escolha inválida")
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
 
     def pega_dados_funcionario(self):
         print("-------- DADOS FUNCIONÁRIO --------")
-        while True:
-            try:
-                nome = super().le_string("Nome: ")
-                cpf = super().le_cpf("CPF: ")
-                cargo = super().le_string("Cargo: ")
-                data_admissao = super().le_data(
-                    "Data de admissão (DD/MM/AAAA): "
-                )
-                salario = super().le_num_inteiro("Salário: ")
+        nome = super().le_string("Nome: ")
+        cpf = super().le_cpf("CPF: ")
+        cargo = super().le_string("Cargo: ")
+        data_admissao = super().le_data(
+            "Data de admissão (DD/MM/AAAA): "
+        )
+        salario = super().le_num_inteiro("Salário: ")
 
-                return {"nome": nome, "cpf": cpf, "cargo": cargo,
-                        "data_admissao": data_admissao, "salario": salario}
-
-            except ValueError:
-                print("Dados inválidos")
+        return {"nome": nome, "cpf": cpf, "cargo": cargo,
+                "data_admissao": data_admissao, "salario": salario}
 
     def mostra_funcionario(self, dados_funcionario):
         print("Nome do funcionario: ", dados_funcionario["nome"])

@@ -12,35 +12,27 @@ class TelaServico(Tela):
         print("3 - Listar Serviços")
         print("4 - Excluir Serviço")
         print("0 - Retornar")
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
 
-            except ValueError:
-                print("Escolha inválida")
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
 
     def pega_dados_servico(self):
         print("-------- DADOS SERVIÇO --------")
-        while True:
-            try:
-                nome = super().le_string("Nome do Serviço: ")
 
-                id = super().le_num_inteiro("ID do serviço: ")
+        nome = super().le_string("Nome do Serviço: ")
 
-                descricao = super().le_string("Descricao: ")
+        id = super().le_num_inteiro("ID do serviço: ")
 
-                preco = super().le_num_inteiro("Preço: ")
+        descricao = super().le_string("Descricao: ")
 
-                return {
-                    "nome": nome,
-                    "descricao": descricao,
-                    "preco": preco,
-                    "id": id
-                }
-            except ValueError:
-                print("Valores inseridos inválidos.")
+        preco = super().le_num_inteiro("Preço: ")
 
+        return {
+            "nome": nome,
+            "descricao": descricao,
+            "preco": preco,
+            "id": id
+        }
 
     def mostra_servico(self, dados_servico):
         print("Serviço: ", dados_servico["nome"])
@@ -50,15 +42,11 @@ class TelaServico(Tela):
         print("\n")
 
     def seleciona_servico(self):
-        while True:
-            try:
-                id = super().le_num_inteiro(
-                    "Digite o ID do serviço que deseja selecionar: "
-                )
-                return id
 
-            except ValueError:
-                print("Valor inserido inválido.")
+        id = super().le_num_inteiro(
+            "Digite o ID do serviço que deseja selecionar: "
+        )
+        return id
 
     def mostra_mensagem(self, mensagem):
         print(mensagem)

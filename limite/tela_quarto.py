@@ -13,13 +13,8 @@ class TelaQuarto(Tela):
         print("4- Excluir Quarto")
         print("0- Retornar")
 
-        while True:
-            try:
-                escolha = super().le_num_inteiro("Escolha: ", escolhas)
-                return escolha
-
-            except ValueError:
-                print("Escolha inválida")
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
 
     def pega_dados_quarto(self):
         print("-------- DADOS QUARTO --------")
@@ -28,36 +23,28 @@ class TelaQuarto(Tela):
         print("2- Suíte")
         print("3- Luxo")
         tipos_validos = [1,2,3]
-        while True:
-            try:
-                tipo = super().le_num_inteiro("Tipo: ", tipos_validos)
-                numero = super().le_num_inteiro("Número: ")
-                valor_diaria = super().le_num_inteiro("Valor da diária: ")
-                descricao = super().le_string("Descrição: ")
+        tipo = super().le_num_inteiro("Tipo: ", tipos_validos)
+        numero = super().le_num_inteiro("Número: ")
+        valor_diaria = super().le_num_inteiro("Valor da diária: ")
+        descricao = super().le_string("Descrição: ")
 
-                return {"numero": numero, "valor_diaria": valor_diaria,
-                        "descricao": descricao, "tipo": tipo}
-
-            except ValueError:
-                print("Valores inseridos inválidos")
+        return {"numero": numero, "valor_diaria": valor_diaria,
+                "descricao": descricao, "tipo": tipo}
 
     #Não será possível alterar o tipo do quarto, e será possível alterar o status,
     #logo foi necessária uma nova função mais específica
     def pega_dados_alteracao_quarto(self):
         print("-------- DADOS QUARTO --------")
-        while True:
-            try:
-                numero = super().le_num_inteiro("Número: ")
-                valor_diaria = super().le_num_inteiro("Valor da diária: ")
-                descricao = super().le_string("Descrição: ")
-                print("\n")
-                status = self.pega_status_quarto()
 
-                return {"numero": numero, "valor_diaria": valor_diaria,
-                        "descricao": descricao, "status": status}
+        numero = super().le_num_inteiro("Número: ")
+        valor_diaria = super().le_num_inteiro("Valor da diária: ")
+        descricao = super().le_string("Descrição: ")
+        print("\n")
+        status = self.pega_status_quarto()
 
-            except ValueError: 
-                print("Valores inseridos inválidos")        
+        return {"numero": numero, "valor_diaria": valor_diaria,
+                "descricao": descricao, "status": status}
+
 
     def mostra_quarto(self, dados_quarto):
         print("Quarto tipo", dados_quarto["tipo"])
@@ -68,13 +55,8 @@ class TelaQuarto(Tela):
         print("\n")
 
     def seleciona_quarto(self):
-        while True:
-            try:
-                numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
-                return numero
-
-            except ValueError:
-                print("Valor inserido inválido")
+        numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
+        return numero
 
     def pega_status_quarto(self):
         escolhas = [1,2,3]
@@ -83,14 +65,11 @@ class TelaQuarto(Tela):
         print("1- Disponível")
         print("2- Ocupado")
         print("3- Manutenção")
-        while True:
-            try:
-                status = super().le_num_inteiro("Status: ", escolhas) #CRIAR ERRO ESPECÍFICO?
-                if status == 1:
-                    return "Disponível"
-                if status == 2:
-                    return "Ocupado"
-                if status == 3:
-                    return "Manutenção"
-            except ValueError:
-                print("Valor inserido inválido")
+
+        status = super().le_num_inteiro("Status: ", escolhas) #CRIAR ERRO ESPECÍFICO?
+        if status == 1:
+            return "Disponível"
+        if status == 2:
+            return "Ocupado"
+        if status == 3:
+            return "Manutenção"
