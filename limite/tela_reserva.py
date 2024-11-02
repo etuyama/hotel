@@ -4,18 +4,18 @@ from limite.tela import Tela
 class TelaReserva(Tela):
 
     def tela_opcoes(self):
-        escolhas = [0,1,2,3,4,5,6,7]
+        escolhas = [0,1,2,3,4,5,6,7,8]
         print("-------- RESERVAS ----------")
         print("Escolha uma opção")
-        print("1- Efetuar Reserva")
-        print("2- Alterar Reserva")
-        print("3- Listar Reservas Pendentes")
-        print("4- Excluir Reservas")
-        print("5- Adicionar Serviço Utilizado")
-        print("6- Extender Estadia")
-        print("7- Adicionar Valor Extra")
-        print("8- Listar Todas Reservas")
-        print("0- Retornar")
+        print("1 - Efetuar Reserva")
+        print("2 - Alterar Reserva")
+        print("3 - Listar Reservas Pendentes")
+        print("4 - Excluir Reservas")
+        print("5 - Adicionar Serviço Utilizado")
+        print("6 - Extender Estadia")
+        print("7 - Adicionar Valor Extra")
+        print("8 - Listar Todas Reservas")
+        print("0 - Retornar")
 
         escolha = super().le_num_inteiro("Escolha: ", escolhas)
         return escolha

@@ -92,7 +92,7 @@ class ControladorQuartos():
                                                   "status": quarto.status})
             return True
 
-        self.__tela_quarto.mostra_mensagem("Lista de quartos vazia")
+        self.__tela_quarto.mostra_mensagem("Não há quartos cadastrados")
         return None
 
     def excluir_quarto(self):
@@ -118,7 +118,7 @@ class ControladorQuartos():
 
         while True:
             opcao_escolhida = self.__tela_quarto.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_quarto.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
   

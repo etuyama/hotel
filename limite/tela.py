@@ -19,6 +19,7 @@ class Tela(ABC):
     def le_num_inteiro(self, mensagem="", inteiros_validos = None):
         while True:
             valor_lido = input(mensagem)
+            print()
             try:
                 valor_inteiro = int(valor_lido)
                 if inteiros_validos and valor_inteiro not in inteiros_validos:
@@ -42,6 +43,7 @@ class Tela(ABC):
     def le_string(self, mensagem=""):
         while True:
             entrada = input(mensagem)
+            print()
             try:
                 #Checa se a entrada é vazia
                 if entrada == "":
@@ -59,6 +61,7 @@ class Tela(ABC):
     def le_cpf(self, mensagem=""):
         while True:
             cpf = input(mensagem)
+            print()
             try:
                 if len(cpf) != 11 or not cpf.isdigit():
                     raise CPFInvalidoException
@@ -72,6 +75,7 @@ class Tela(ABC):
     def le_telefone(self, mensagem=""):
         while True:
             telefone = input(mensagem)
+            print()
             try:
                 if not telefone.isdigit() or len(telefone) != 12:
                     raise TelefoneInvalidoException
@@ -84,6 +88,7 @@ class Tela(ABC):
     def le_data(self, mensagem=""):
         while True:
             data = input(mensagem)
+            print()
             dia = data[0:2]
             mes = data[3:5]
             ano = data[6:10]

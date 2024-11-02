@@ -7,11 +7,11 @@ class TelaQuarto(Tela):
         escolhas = [1,2,3,4,0]
         print("-------- QUARTOS ----------")
         print("Escolha uma opção")
-        print("1- Incluir Quarto")
-        print("2- Alterar Quarto")
-        print("3- Listar Quartos")
-        print("4- Excluir Quarto")
-        print("0- Retornar")
+        print("1 - Incluir Quarto")
+        print("2 - Alterar Quarto")
+        print("3 - Listar Quartos")
+        print("4 - Excluir Quarto")
+        print("0 - Retornar")
 
         escolha = super().le_num_inteiro("Escolha: ", escolhas)
         return escolha

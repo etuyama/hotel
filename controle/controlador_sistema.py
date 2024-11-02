@@ -21,7 +21,8 @@ class ControladorSistema:
 
         self.__controlador_hotel = ControladorHotel(self,
                                                     self.__controlador_reservas,
-                                                    self.__controlador_funcionarios)
+                                                    self.__controlador_funcionarios,
+                                                    self.__controlador_quartos)
 
     @property
     def controlador_clientes(self):
@@ -83,6 +84,6 @@ class ControladorSistema:
 
         while True:
             opcao_escolhida = self.__tela_sistema.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_sistema.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

@@ -92,7 +92,7 @@ class ControladorFuncionarios:
                                                             "salario": funcionario.salario})
             return True
 
-        self.__tela_funcionario.mostra_mensagem("Lista de funcionários vazia")
+        self.__tela_funcionario.mostra_mensagem("Não há funcionários cadastrados")
         return None
 
     def excluir_funcionario(self):
@@ -122,6 +122,6 @@ class ControladorFuncionarios:
         
         while True:
             opcao_escolhida = self.__tela_funcionario.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_funcionario.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

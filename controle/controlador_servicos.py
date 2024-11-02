@@ -103,7 +103,7 @@ class ControladorServicos:
                 )
             return True
 
-        self.__tela_servico.mostra_mensagem("Lista de serviços vazia.")
+        self.__tela_servico.mostra_mensagem("Não há serviços cadastrados.")
         return None
 
     def excluir_servico(self):
@@ -137,6 +137,6 @@ class ControladorServicos:
 
         while True:
             opcao_escolhida = self.__tela_servico.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_servico.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

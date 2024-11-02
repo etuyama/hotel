@@ -70,6 +70,7 @@ class ControladorReservas:
             reserva.data_reserva = date.today().strftime("%d/%m/%Y")
             self.__reservas.append(reserva)
 
+            self.__tela_reserva.mostra_mensagem("Reserva efetuada com sucesso")
             quarto.status = "Ocupado"
 
             self.__id = self.__id + 1
@@ -132,35 +133,46 @@ class ControladorReservas:
         else:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
 
+    #Lista as reservas pendentes
     def lista_reservas(self):
 
         if len(self.__reservas) > 0:
-            for reserva in self.__reservas:
-                try:
-                    self.verifica_situacao_reserva(reserva)
-                    self.__tela_reserva.mostra_reserva({"id": reserva.id,
-                                                        "data_reserva": reserva.data_reserva,
-                                                        "situacao": reserva.situacao,
-                                                        "nome_cliente": reserva.cliente.nome,
-                                                        "cpf_cliente": reserva.cliente.cpf,
-                                                        "numero_quarto": reserva.quarto.numero,
-                                                        "tipo_quarto": reserva.quarto.tipo,
-                                                        "valor_diaria": reserva.quarto.valor_diaria,
-                                                        "tempo_estadia": reserva.tempo_estadia,
-                                                        "servicos_utilizados": self.lista_servicos(reserva),
-                                                        "valor_total": reserva.valor_total})
 
-                except ReservaFinalizadaException:
-                    pass
+                cont_reservas_finalizadas = 0
+                for reserva in self.__reservas:
 
-            return True
+                        try:
+                            self.verifica_situacao_reserva(reserva)
+
+                            self.__tela_reserva.mostra_reserva({"id": reserva.id,
+                                                                "data_reserva": reserva.data_reserva,
+                                                                "situacao": reserva.situacao,
+                                                                "nome_cliente": reserva.cliente.nome,
+                                                                "cpf_cliente": reserva.cliente.cpf,
+                                                                "numero_quarto": reserva.quarto.numero,
+                                                                "tipo_quarto": reserva.quarto.tipo,
+                                                                "valor_diaria": reserva.quarto.valor_diaria,
+                                                                "tempo_estadia": reserva.tempo_estadia,
+                                                                "servicos_utilizados": self.lista_servicos(reserva),
+                                                                "valor_total": reserva.valor_total})
+
+                        except ReservaFinalizadaException:
+                            cont_reservas_finalizadas = cont_reservas_finalizadas + 1
+
+                if cont_reservas_finalizadas == len(self.__reservas):
+                    self.__tela_reserva.mostra_mensagem("Não há reservas pendentes")
+                    return None
+
+                return True
+
+        self.__tela_reserva.mostra_mensagem("Ainda não há reservas registradas")
+        return None
 
     def lista_todas_reservas(self):
 
         if len(self.__reservas) > 0:
             for reserva in self.__reservas:
 
-                self.verifica_situacao_reserva(reserva)
                 self.__tela_reserva.mostra_reserva({
                     "id": reserva.id,
                     "data_reserva": reserva.data_reserva,
@@ -176,7 +188,7 @@ class ControladorReservas:
                 )
             return True
 
-        self.__tela_reserva.mostra_mensagem("Lista de reservas vazia")
+        self.__tela_reserva.mostra_mensagem("Ainda não há reservas registradas")
         return None
 
     def excluir_reserva(self):
@@ -301,6 +313,6 @@ class ControladorReservas:
                         0: self.retornar}
         while True:
             opcao_escolhida = self.__tela_reserva.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_reserva.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

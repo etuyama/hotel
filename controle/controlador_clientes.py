@@ -86,7 +86,7 @@ class ControladorClientes:
                 )
             return True
 
-        self.__tela_cliente.mostra_mensagem("Lista de clientes vazia")
+        self.__tela_cliente.mostra_mensagem("Não há clientes cadastrados")
         return None
 
     def excluir_cliente(self):
@@ -120,6 +120,6 @@ class ControladorClientes:
 
         while True:
             opcao_escolhida = self.__tela_cliente.tela_opcoes()
-            print("Opção escolhida: ", opcao_escolhida)
+            self.__tela_cliente.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
