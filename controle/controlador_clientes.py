@@ -63,7 +63,7 @@ class ControladorClientes:
                 else:
                     cliente.cpf = novos_dados_cliente["cpf"]
                     cliente.nome = novos_dados_cliente["nome"]
-                    cliente.idade = novos_dados_cliente["data_nascimento"]
+                    cliente.data_nascimento = novos_dados_cliente["data_nascimento"]
                     cliente.telefone = novos_dados_cliente["telefone"]
                     cliente.endereco = novos_dados_cliente["endereco"]
                     self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")

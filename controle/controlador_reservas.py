@@ -6,7 +6,6 @@ from exceptions.reserva_finalizada_exception import ReservaFinalizadaException
 from limite.tela_reserva import TelaReserva
 from datetime import date
 
-
 class ControladorReservas:
 
     def __init__(self,
@@ -125,7 +124,7 @@ class ControladorReservas:
                 except QuartoNaoEncontradoException as e:
                     self.__tela_reserva.mostra_mensagem(e)
                 except QuartoIndisponivelException as x:
-                    self.__tela_reserva.mostra_mensagem(e)
+                    self.__tela_reserva.mostra_mensagem(x)
 
             except ReservaFinalizadaException as e:
                 self.__tela_reserva.mostra_mensagem(e)
@@ -301,6 +300,78 @@ class ControladorReservas:
 
         if reserva.situacao == "Finalizada":
             raise ReservaFinalizadaException(reserva)
+    def gera_relatorios(self):
+        escolha = self.__tela_reserva.tela_relatorio()
+        if escolha == 1:
+            self.gera_relatorio_tipo_mais_reservado()
+        elif escolha == 2:
+            self.gera_relatorio_meses()
+        elif escolha == 3:
+            self.gera_relatorio_clientes()
+        elif escolha == 0:
+            self.__tela_reserva.tela_opcoes()
+
+    def gera_relatorio_tipo_mais_reservado(self):
+        contagem = {"Standard" : 0, "Suíte" : 0, "Luxo" : 0}
+
+        for reserva in self.__reservas:
+            if reserva.quarto.tipo == "Standard":
+                contagem["Standard"] += 1
+            elif reserva.quarto.tipo == "Suíte":
+                contagem["Suíte"] += 1
+            elif reserva.quarto.tipo == "Luxo":
+                contagem["Luxo"] += 1
+
+        ranking = sorted(contagem.items(), key=lambda item: item[1], reverse=True)
+        self.__tela_reserva.mostra_mensagem("Tipos de quartos mais reservados:")
+        for i, (tipo, qtd) in enumerate(ranking, start=1):
+            if qtd == 0:
+                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: Nenhuma reserva")
+            elif qtd == 1:
+                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: {qtd} reserva")
+            else:
+                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: {qtd} reservas")
+
+    def gera_relatorio_meses(self):
+        ano = str(self.__tela_reserva.seleciona_ano())
+        meses = {
+            "01" : 0, "02" : 0, "03" : 0, "04" : 0, "05" : 0, "06" : 0,
+            "07" : 0, "08" : 0, "09" : 0, "10" : 0, "11" : 0, "12" : 0
+        }
+
+        for reserva in self.__reservas:
+            if reserva.data_reserva[6:10] == ano:
+                meses[reserva.data_reserva[3:5]] += 1
+
+        ranking = sorted(meses.items(), key=lambda item: item[1], reverse=True)
+
+        nomes_meses = {
+            "01": "Janeiro", "02": "Fevereiro", "03": "Março", "04": "Abril",
+            "05": "Maio", "06": "Junho", "07": "Julho", "08": "Agosto",
+            "09": "Setembro", "10": "Outubro", "11": "Novembro",
+            "12": "Dezembro"
+        }
+
+        self.__tela_reserva.mostra_mensagem(f"Ranking dos meses com mais reservas no ano de {ano}:")
+
+        for i, (mes, qtd) in enumerate(ranking, start=1):
+            self.__tela_reserva.mostra_mensagem(f"{i}º - {nomes_meses[mes]}: {qtd} reservas")
+
+    def gera_relatorio_clientes(self):
+        clientes_contagem = {}
+
+        for reserva in self.__reservas:
+            if reserva.cliente.cpf not in clientes_contagem:
+                clientes_contagem[reserva.cliente.cpf] = 1
+            else:
+                clientes_contagem[reserva.cliente.cpf] += 1
+
+        ranking = sorted(clientes_contagem.items(), key=lambda item: item[1], reverse=True)
+
+        self.__tela_reserva.mostra_mensagem("Ranking dos clientes com mais reservas realizadas:")
+
+        for i, (cpf, qtd) in enumerate(ranking, start=1):
+            self.__tela_reserva.mostra_mensagem(f"{i}º - {self.__controlador_clientes.pega_cliente_por_cpf(cpf).nome} (CPF {cpf}): {qtd} reservas")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -310,7 +381,7 @@ class ControladorReservas:
                         3: self.lista_reservas, 4: self.excluir_reserva,
                         5: self.adiciona_servico, 6: self.extender_estadia,
                         7: self.adiciona_valor_extra, 8: self.lista_todas_reservas,
-                        0: self.retornar}
+                        9: self.gera_relatorios, 0: self.retornar}
         while True:
             opcao_escolhida = self.__tela_reserva.tela_opcoes()
             self.__tela_reserva.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")

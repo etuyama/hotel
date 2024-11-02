@@ -4,22 +4,22 @@ from limite.tela import Tela
 class TelaReserva(Tela):
 
     def tela_opcoes(self):
-        escolhas = [0,1,2,3,4,5,6,7,8]
+        escolhas = [0,1,2,3,4,5,6,7,8,9]
         print("-------- RESERVAS ----------")
         print("Escolha uma opção")
-        print("1 - Efetuar Reserva")
-        print("2 - Alterar Reserva")
-        print("3 - Listar Reservas Pendentes")
-        print("4 - Excluir Reservas")
-        print("5 - Adicionar Serviço Utilizado")
-        print("6 - Extender Estadia")
-        print("7 - Adicionar Valor Extra")
-        print("8 - Listar Todas Reservas")
-        print("0 - Retornar")
+        print("1- Efetuar Reserva")
+        print("2- Alterar Reserva")
+        print("3- Listar Reservas Pendentes")
+        print("4- Excluir Reservas")
+        print("5- Adicionar Serviço Utilizado")
+        print("6- Extender Estadia")
+        print("7- Adicionar Valor Extra")
+        print("8- Listar Todas Reservas")
+        print("9- Gerar relatórios")
+        print("0- Retornar")
 
         escolha = super().le_num_inteiro("Escolha: ", escolhas)
         return escolha
-
 
     def seleciona_reserva(self):
         id = super().le_num_inteiro("ID da reserva que deseja selecionar: ")
@@ -33,11 +33,9 @@ class TelaReserva(Tela):
         numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
         return numero
 
-
     def pega_dias_extensao(self):
         qt_dias = super().le_num_inteiro("Quantos dias deseja adicionar à estadia: ")
         return qt_dias
-
 
     def pega_valor_extra(self):
         valor_extra = super().le_num_inteiro("Valor extra que deseja adicionar à reserva: ")
@@ -47,10 +45,26 @@ class TelaReserva(Tela):
         tempo_estadia = super().le_num_inteiro("Tempo de estadia: ")
         return tempo_estadia
 
+    def tela_relatorio(self):
+        escolhas = [0,1,2,3]
+        print("Selecione o tipo de relatório que deseja gerar:")
+        print("1- Tipos de quarto mais reservados")
+        print("2- Meses com mais reservas realizadas")
+        print("3- Clientes que mais fizeram reservas")
+        print("0- Retornar")
+
+        escolha = super().le_num_inteiro("Escolha: ", escolhas)
+        return escolha
+
     def seleciona_servico(self):
         id = super().le_num_inteiro("ID do serviço que deseja selecionar: ")
         return id
 
+    def seleciona_ano(self):
+        ano = super().le_num_inteiro(
+            "Para qual ano deseja gerar o relatório? (Ex 2024): "
+        )
+        return ano
     def mostra_reserva(self, dados_reserva):
         print("ID: ", dados_reserva["id"])
         print("Data da reserva: ", dados_reserva["data_reserva"])
