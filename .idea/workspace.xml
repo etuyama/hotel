@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Primeiros relatórios">
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Relatório de clientes com mais reservas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controle/controlador_reservas.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_reservas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entidade/hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/hotel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_hotel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entidade/cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/entidade/cliente.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/menor_de_idade_exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_quarto.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_quarto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_sistema.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +157,8 @@
       <workItem from="1730226636204" duration="3262000" />
       <workItem from="1730406209092" duration="292000" />
       <workItem from="1730479147454" duration="11682000" />
-      <workItem from="1730495914003" duration="4866000" />
+      <workItem from="1730495914003" duration="5353000" />
+      <workItem from="1730552880505" duration="8569000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -287,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730498621689</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Relatório de clientes com mais reservas">
+      <option name="closed" value="true" />
+      <created>1730500808067</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1730500808067</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,9 +338,10 @@
     <MESSAGE value="Remoção de try excepts desnecessários" />
     <MESSAGE value="Data nas reservas" />
     <MESSAGE value="Primeiros relatórios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Primeiros relatórios" />
+    <MESSAGE value="Relatório de clientes com mais reservas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Relatório de clientes com mais reservas" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730500641717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1730554168683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

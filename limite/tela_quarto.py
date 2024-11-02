@@ -66,7 +66,7 @@ class TelaQuarto(Tela):
         print("2- Ocupado")
         print("3- Manutenção")
 
-        status = super().le_num_inteiro("Status: ", escolhas) #CRIAR ERRO ESPECÍFICO?
+        status = super().le_num_inteiro("Status: ", escolhas)
         if status == 1:
             return "Disponível"
         if status == 2:
