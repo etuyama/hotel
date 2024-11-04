@@ -29,7 +29,7 @@ nas classes acima, fazendo as verificações se o nome e o id já existem.
 ## Reservas
 
 
-A classe reserva é a classe chave do sistema, ela faz uma *associação* com a classe Quarto, e com a classe Cliente. Além disso, essa classe
+A classe reserva é a classe chave de *Registro* do sistema, ela faz uma *associação* com a classe Quarto, e com a classe Cliente. Além disso, essa classe
 possui um tempo de estadia dessa reserva, uma lista com os serviços utilizados(objetos da classe Serviço), um valor total que inicialmente
 é calculado pelo valor da diária do quarto multiplicado pelo atributo tempo de estadia da reserva, a data que foi efetuada, e sua situação, que
 inicia como Pendente, mas pode ser trocada para Finalizada.
