@@ -47,7 +47,7 @@ class Cliente(Pessoa):
             idade -= 1
         return idade
 
-    def validar_maioridade(self):  # essa função poderia ser na classe hotel dentro do metodo de efetuar a reserva
+    def validar_maioridade(self):
         if self.calcular_idade() >= 18:
             return True
         return False

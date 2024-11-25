@@ -252,7 +252,7 @@ class ControladorReservas:
 
         return string_servicos
 
-    def extender_estadia(self):
+    def estender_estadia(self):
         lista = self.lista_reservas()
         if not lista:
             return False
@@ -265,7 +265,7 @@ class ControladorReservas:
             try:
                 self.verifica_situacao_reserva(reserva)
                 qt_dias = self.__tela_reserva.pega_dias_extensao()
-                reserva.extender_estadia(qt_dias)
+                reserva.estender_estadia(qt_dias)
                 self.__tela_reserva.mostra_mensagem(f"Foram adicionados {qt_dias} dias na reserva de ID: {reserva.id}")
 
             except ReservaFinalizadaException as e:
@@ -300,6 +300,7 @@ class ControladorReservas:
 
         if reserva.situacao == "Finalizada":
             raise ReservaFinalizadaException(reserva)
+
     def gera_relatorios(self):
         escolha = self.__tela_reserva.tela_relatorio()
         if escolha == 1:
@@ -379,7 +380,7 @@ class ControladorReservas:
     def abre_tela(self):
         lista_opcoes = {1: self.efetuar_reserva, 2: self.alterar_reserva,
                         3: self.lista_reservas, 4: self.excluir_reserva,
-                        5: self.adiciona_servico, 6: self.extender_estadia,
+                        5: self.adiciona_servico, 6: self.estender_estadia,
                         7: self.adiciona_valor_extra, 8: self.lista_todas_reservas,
                         9: self.gera_relatorios, 0: self.retornar}
         while True:

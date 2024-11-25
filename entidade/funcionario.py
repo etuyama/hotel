@@ -36,14 +36,3 @@ class Funcionario(Pessoa):
 
         if isinstance(salario, int):
             self.__salario = salario
-
-    def atualizar_status_quarto(self, quarto, novo_status):
-
-        if isinstance(novo_status, str):
-            quarto.status = novo_status
-
-    def registrar_check_in(self, quarto):
-        quarto.status = 'Ocupado'
-
-    def registrar_check_out(self, quarto):
-        quarto.status = 'Manutenção'
