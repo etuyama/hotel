@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Adiciona tela do cliente">
-      <change afterPath="$PROJECT_DIR$/DAOs/cliente_dao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DAOs/dao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAOs/funcionario_dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAOs/cliente_dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/DAOs/cliente_dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controle/controlador_clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_funcionario.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_funcionario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_hotel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_funcionarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_funcionarios.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +163,7 @@
       <workItem from="1731018785212" duration="1342000" />
       <workItem from="1732570867983" duration="36000" />
       <workItem from="1732571177546" duration="4755000" />
-      <workItem from="1733175115529" duration="1288000" />
+      <workItem from="1733175115529" duration="4901000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -367,6 +365,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Adiciona PySimpleGUI na tela do sistema" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1732581747894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1733178374183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

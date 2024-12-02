@@ -7,11 +7,11 @@ class ClienteDAO(DAO):
         super().__init__('cliente.pkl')
 
     def add(self, cliente: Cliente):
-        if ((cliente is not None) and isinstance(cliente, Cliente) and isinstance(cliente.cpf, str)):
+        if cliente is not None and isinstance(cliente, Cliente) and isinstance(cliente.cpf, str):
             super().add(cliente.cpf, cliente)
 
     def update(self, cliente: Cliente):
-        if ((cliente is not None) and isinstance(cliente, Cliente) and isinstance(cliente.cpf, str)):
+        if cliente is not None and isinstance(cliente, Cliente) and isinstance(cliente.cpf, str):
             super().update(cliente.cpf, cliente)
 
     def get(selfself, key):

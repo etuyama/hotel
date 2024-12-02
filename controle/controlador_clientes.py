@@ -31,7 +31,6 @@ class ControladorClientes:
                     dados_cliente["telefone"],
                     dados_cliente["endereco"]
                 )
-
                 self.__cliente_dao.add(cliente)
             else:
                 raise CadastroRepetidoException(cpf, cliente)
@@ -63,45 +62,29 @@ class ControladorClientes:
                     cliente.data_nascimento = novos_dados_cliente["data_nascimento"]
                     cliente.telefone = novos_dados_cliente["telefone"]
                     cliente.endereco = novos_dados_cliente["endereco"]
-                    self.__tela_cliente.mostra_mensagem("Dados alterados com sucesso")
-
+                    self.__cliente_dao.update(cliente.cpf)
+                    self.lista_clientes()
             except CadastroRepetidoException as e:
                 self.__tela_cliente.mostra_mensagem(e)
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
     def lista_clientes(self):
-
-        if len(self.__clientes) > 0:
-            dados_cliente = []
-            for cliente in self.__clientes:
-                dados_cliente.append(
-                    {"cpf": cliente.cpf,
-                     "nome": cliente.nome,
-                     "data_nascimento": cliente.data_nascimento,
-                     "telefone": cliente.telefone,
-                     "endereco": cliente.endereco}
-                )
-            self.__tela_cliente.mostra_cliente(dados_cliente)
-            return True
-
-        self.__tela_cliente.mostra_mensagem("Não há clientes cadastrados")
-        return None
+        dados_clientes = []
+        for cliente in self.__cliente_dao.get_all():
+            dados_clientes.append({"nome": cliente.nome, "telefone": cliente.telefone, "cpf": cliente.cpf,
+                                   "data_nascimento": cliente.data_nascimento, "endereco": cliente.endereco})
+        self.__tela_cliente.mostra_cliente(dados_clientes)
+        return len(dados_clientes)
 
     def excluir_cliente(self):
-        lista = self.lista_clientes()
-        if not lista:
-            return False
-
+        self.lista_clientes()
         cpf_cliente = self.__tela_cliente.seleciona_cliente()
         cliente = self.pega_cliente_por_cpf(cpf_cliente)
 
-        if isinstance(cliente, Cliente):
-            self.__tela_cliente.mostra_mensagem(
-                f"Cliente {cliente.nome} com CPF {cliente.cpf}"
-                f" removido com sucesso"
-            )
-            self.__clientes.remove(cliente)
+        if cliente is not None:
+            self.__cliente_dao.remove(cliente.cpf)
+            self.lista_clientes()
         else:
             self.__tela_cliente.mostra_mensagem("Cliente não encontrado")
 
@@ -119,6 +102,5 @@ class ControladorClientes:
 
         while True:
             opcao_escolhida = self.__tela_cliente.tela_opcoes()
-            self.__tela_cliente.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
