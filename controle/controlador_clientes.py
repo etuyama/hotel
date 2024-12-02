@@ -1,3 +1,4 @@
+from DAOs.cliente_dao import ClienteDAO
 from entidade.cliente import Cliente
 from limite.tela_cliente import TelaCliente
 from exceptions.cadastro_repetido_exception import CadastroRepetidoException
@@ -5,15 +6,14 @@ from exceptions.cadastro_repetido_exception import CadastroRepetidoException
 class ControladorClientes:
 
     def __init__(self, controlador_sistema):
-        self.__clientes = []
+        self.__cliente_dao = ClienteDAO()
         self.__tela_cliente = TelaCliente()
         self.__controlador_sistema = controlador_sistema
 
     def pega_cliente_por_cpf(self, cpf: str):
         if isinstance(cpf, str):
 
-            for cliente in self.__clientes:
-
+            for cliente in self.__cliente_dao.get_all():
                 if cliente.cpf == cpf:
                     return cliente
             return None
@@ -32,10 +32,7 @@ class ControladorClientes:
                     dados_cliente["endereco"]
                 )
 
-                self.__clientes.append(cliente)
-                self.__tela_cliente.mostra_mensagem(
-                    f"Cliente {cliente.nome} cadastrado com sucesso"
-                )
+                self.__cliente_dao.add(cliente)
             else:
                 raise CadastroRepetidoException(cpf, cliente)
         except CadastroRepetidoException as e:
@@ -76,14 +73,16 @@ class ControladorClientes:
     def lista_clientes(self):
 
         if len(self.__clientes) > 0:
+            dados_cliente = []
             for cliente in self.__clientes:
-                self.__tela_cliente.mostra_cliente(
+                dados_cliente.append(
                     {"cpf": cliente.cpf,
                      "nome": cliente.nome,
                      "data_nascimento": cliente.data_nascimento,
                      "telefone": cliente.telefone,
                      "endereco": cliente.endereco}
                 )
+            self.__tela_cliente.mostra_cliente(dados_cliente)
             return True
 
         self.__tela_cliente.mostra_mensagem("Não há clientes cadastrados")

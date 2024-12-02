@@ -1,47 +1,112 @@
 from limite.tela import Tela
-
+import PySimpleGUI as sg
 
 class TelaFuncionario(Tela):
+    def __init__(self):
+        self.__window = None
+        self.init_opcoes()
+
     def tela_opcoes(self):
-        escolhas = [1,2,3,4,5,0]
-        print("-------- FUNCIONARIOS ----------")
-        print("Escolha uma opção")
-        print("1 - Incluir Funcionário")
-        print("2 - Alterar Funcionário")
-        print("3 - Listar Funcionários")
-        print("4 - Excluir Funcionário")
-        print("5 - Listar Funcionários por cargo")
-        print("0 - Retornar")
+        self.init_opcoes()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
 
-        escolha = super().le_num_inteiro("Escolha: ", escolhas)
-        return escolha
-
+    def init_opcoes(self):
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Funcionarios', font=('Helvetica', 25))],
+            [sg.Text('Escolha sua opção', font=('Helvetica', 15))],
+            [sg.Radio('Incluir Funcionario', 'F01', key='1')],
+            [sg.Radio('Alterar Funcionario', 'F01', key='2')],
+            [sg.Radio('Listar Funcionarios', 'F01', key='3')],
+            [sg.Radio('Excluir Funcionario', 'F01', key='4')],
+            [sg.Radio('Listar Funcionários por cargo', 'F01', key='5')],
+            [sg.Radio('Retornar', 'C01', key='0')],
+            [sg.Button('Funcionarios'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Funcionario').Layout(layout)
     def pega_dados_funcionario(self):
-        print("-------- DADOS FUNCIONÁRIO --------")
-        nome = super().le_string("Nome: ")
-        cpf = super().le_cpf("CPF: ")
-        cargo = super().le_string("Cargo: ")
-        data_admissao = super().le_data(
-            "Data de admissão (DD/MM/AAAA): "
-        )
-        salario = super().le_num_inteiro("Salário: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Dados do Funcionario', font=("Helvica", 25))],
+            [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
+            [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
+            [sg.Text('Cargo:', size=(15, 1)), sg.InputText('', key='cargo')],
+            [sg.Text('Data de admissão:', size=(15, 1)), sg.InputText('', key='data_admissao')],
+            [sg.Text('Salário:', size=(15, 1)), sg.InputText('', key='salario')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Funcionarios').Layout(layout)
 
+        button, values = self.open()
+        nome = values['nome']
+        cpf = values['cpf']
+        cargo = values['cargo']
+        data_admissao = values['data_admissao']
+        salario = values['salario']
+
+        self.close()
         return {"nome": nome, "cpf": cpf, "cargo": cargo,
                 "data_admissao": data_admissao, "salario": salario}
 
-    def mostra_funcionario(self, dados_funcionario):
-        print("Nome do funcionario: ", dados_funcionario["nome"])
-        print("CPF: ", dados_funcionario["cpf"])
-        print("Cargo: ", dados_funcionario["cargo"])
-        print("Data de admissão: ", dados_funcionario["data_admissao"])
-        print(f"Salario: R${dados_funcionario['salario']},00")
-        print("\n")
+    def mostra_funcionario(self, dados):
+        string_todos_funcionarios = ""
+        string_todos_funcionarios = string_todos_funcionarios + "Nome do Funcionario: " + dados["nome"] + '\n'
+        string_todos_funcionarios = string_todos_funcionarios + "CPF do Funcionario: " + dados["cpf"] + '\n'
+        string_todos_funcionarios = string_todos_funcionarios + "Cargo do Funcionario: " + dados["cargo"] + '\n'
+        string_todos_funcionarios = string_todos_funcionarios + "Data de Admissão do Funcionario: " + str(dados["data_admissao"]) + '\n'
+        string_todos_funcionarios = string_todos_funcionarios + "Salario do Funcionario: " + dados["salario"] + '\n\n'
+
+        sg.Popup('Lista de Funcionarios', string_todos_funcionarios)
 
     def seleciona_funcionario(self):
-        #Aqui é melhor não usar le_cpf()
-        cpf = input("CPF do funcionário que deseja selecionar: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Selecionar Funcionario', font=("Helvica", 25))],
+            [sg.Text('Digite o CPF do Funcionario que deseja selecionar:', font=("Helvica", 15))],
+            [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Seleciona Funcionario').Layout(layout)
+
+        button, values = self.open()
+        cpf = values['cpf']
+        self.close()
         return cpf
 
     def seleciona_por_cargo(self):
-        cargo = input("Digite o cargo que deseja buscar: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Selecionar Funcionario', font=("Helvica", 25))],
+            [sg.Text('Digite o Cargo do funcionario que deseja buscar:', font=("Helvica", 15))],
+            [sg.Text('Cargo::', size=(15, 1)), sg.InputText('', key='cargo')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Seleciona Funcionario').Layout(layout)
+
+        button, values = self.open()
+        cargo = values['cargo']
+        self.close()
         return cargo
+    def mostra_mensagem(self, msg):
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values

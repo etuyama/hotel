@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Adiciona PySimpleGUI na tela do sistema">
+    <list default="true" id="68e3dddb-6e5d-4625-b640-a55befe3a0fe" name="Changes" comment="Adiciona tela do cliente">
+      <change afterPath="$PROJECT_DIR$/DAOs/cliente_dao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DAOs/dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controle/controlador_clientes.py" beforeDir="false" afterPath="$PROJECT_DIR$/controle/controlador_clientes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/limite/tela_cliente.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_cliente.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_sistema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_funcionario.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_funcionario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_hotel.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_hotel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +64,7 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "interface-gui",
-    "last_opened_file_path": "/home/etuyama/Downloads/PequenoExemploMVCInterface/PequenoExemploMVC",
+    "last_opened_file_path": "/home/etuyama/Downloads/exemplo MVC persistencia",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -136,8 +140,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
-        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.24807.21" />
+        <option value="bundled-python-sdk-00717045f1d3-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.24807.21" />
       </set>
     </attachedChunks>
   </component>
@@ -161,6 +165,7 @@
       <workItem from="1731018785212" duration="1342000" />
       <workItem from="1732570867983" duration="36000" />
       <workItem from="1732571177546" duration="4755000" />
+      <workItem from="1733175115529" duration="1288000" />
     </task>
     <task id="LOCAL-00001" summary="commit inicial com .gitignore">
       <option name="closed" value="true" />
@@ -362,6 +367,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Adiciona PySimpleGUI na tela do sistema" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1732575903234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/hotel$main.coverage" NAME="main Coverage Results" MODIFIED="1732581747894" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

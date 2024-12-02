@@ -4,7 +4,6 @@ import PySimpleGUI as sg
 class TelaCliente(Tela):
 
     def __init__(self):
-        super().__init__()
         self.__window = None
         self.init_opcoes()
 
@@ -41,7 +40,7 @@ class TelaCliente(Tela):
     def pega_dados_cliente(self):
         sg.ChangeLookAndFeel('Dark')
         layout = [
-            [sg.Text('Dados Cliente', font=("Helvica", 25))],
+            [sg.Text('Dados do Cliente', font=("Helvica", 25))],
             [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
             [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
             [sg.Text('Telefone:', size=(15, 1)), sg.InputText('', key='telefone')],
@@ -63,13 +62,14 @@ class TelaCliente(Tela):
                 "data_nascimento": data_nascimento, "endereco": endereco}
 
 
-    def mostra_cliente(self, dados_cliente):
+    def mostra_cliente(self, dados):
         string_todos_clientes = ""
-        string_todos_clientes = string_todos_clientes + "Nome do Cliente: " + dados_cliente["nome"] + '\n'
-        string_todos_clientes = string_todos_clientes + "CPF do Cliente: " + dados_cliente["cpf"] + '\n'
-        string_todos_clientes = string_todos_clientes + "Telefone do Cliente: " + dados_cliente["telefone"] + '\n'
-        string_todos_clientes = string_todos_clientes + "Data de nascimento do Cliente: " + str(dados_cliente["data_nascimento"]) + '\n'
-        string_todos_clientes = string_todos_clientes + "Endereço do Cliente: " + dados_cliente["endereco"] + '\n\n'
+        for dado in dados:
+            string_todos_clientes = string_todos_clientes + "Nome do Cliente: " + dado["nome"] + '\n'
+            string_todos_clientes = string_todos_clientes + "CPF do Cliente: " + dado["cpf"] + '\n'
+            string_todos_clientes = string_todos_clientes + "Telefone do Cliente: " + dado["telefone"] + '\n'
+            string_todos_clientes = string_todos_clientes + "Data de nascimento do Cliente: " + str(dado["data_nascimento"]) + '\n'
+            string_todos_clientes = string_todos_clientes + "Endereço do Cliente: " + dado["endereco"] + '\n\n'
 
         sg.Popup('Lista de Clientes', string_todos_clientes)
 
@@ -81,7 +81,7 @@ class TelaCliente(Tela):
             [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Seleciona cliente').Layout(layout)
+        self.__window = sg.Window('Seleciona Cliente').Layout(layout)
 
         button, values = self.open()
         cpf = values['cpf']

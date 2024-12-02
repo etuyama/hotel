@@ -1,24 +1,50 @@
 from limite.tela import Tela
 from exceptions.valor_invalido_exception import ValorInvalidoException
+import PySimpleGUI as sg
 
 class TelaHotel(Tela):
 
+    def __init__(self):
+        self.__window = None
+        self.init_opcoes()
+
     def tela_opcoes(self):
-        escolhas = [1,2,3,4,5,6,0]
-        print("-------- HOTEL ---------- ")
-        print("Escolha uma opção")
-        print("1 - Realizar Check-out")
-        print("2 - Finalizar Manutenção de Quarto")
-        print("3 - Pagar Funcionário")
-        print("4 - Pagar Despesa")
-        print("5 - Mostrar Avaliação")
-        print("6 - Mostrar Saldo")
-        print("0 - Retornar")
+        self.init_opcoes()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['6']:
+            opcao = 6
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
 
-        escolha = super().le_num_inteiro("Escolha: ", escolhas)
-        print()
-        return escolha
+    def init_opcoes(self):
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Escolha sua opção', font=('Helvetica', 15))],
+            [sg.Radio('Realizar Check-out', 'H01', key='1')],
+            [sg.Radio('Finalizar Manutenção de Quarto', 'H01', key='2')],
+            [sg.Radio('Pagar Funcionário', 'H01', key='3')],
+            [sg.Radio('Pagar Despesa', 'H01', key='4')],
+            [sg.Radio('Mostrar Avaliação', 'H01', key='5')],
+            [sg.Radio('Mostrar Saldo', 'H01', key='6')],
+            [sg.Radio('Retornar', 'H01', key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Hotel').Layout(layout)
 
+    #Alterar esse método para mostrar usando PySimpleGUI
     def le_avaliacao(self, mensagem, escolhas_validas):
         while True:
             escolha = input(mensagem)
@@ -41,36 +67,89 @@ class TelaHotel(Tela):
                 print(e)
 
     def pega_avaliacao_hotel(self):
-        escolhas = [1,2,3,4,5]
-        print("Qual avaliação do cliente para a reserva?")
-        print("1 - PÉSSIMA")
-        print("2 - RUIM")
-        print("3 - RAZOÁVEL")
-        print("4 - BOA")
-        print("5 - EXCELENTE")
-        print("N - Reserva não avaliada")
-
-        escolha = self.le_avaliacao("Escolha uma opção: ", escolhas)
-        print("Opção escolhida: ", escolha)
-        print()
-        return escolha
-
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Qual avaliação gostaria de dar para o Hotel?', font=('Helvetica', 15))],
+            [sg.Radio('Excelente', "H01", key='5', enable_events=True)],
+            [sg.Radio('Boa', "H01", key='4', enable_events=True)],
+            [sg.Radio('Razoável', "H01", key='3', enable_events=True)],
+            [sg.Radio('Ruim', "H01", key='2', enable_events=True)],
+            [sg.Radio('Péssima', "H01", key='1', enable_events=True)],
+            [sg.Radio('Não avaliar', "H01", key='0', enable_events=True)],
+            [sg.Radio('Retornar', 'H01', key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Hotel').Layout(layout)
     def pega_dados_despesa(self):
-        valor = super().le_num_inteiro("Valor da despesa: ")
-        descricao = super().le_string("Descrição Breve: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Registrar despesa', font=('Helvetica', 15))],
+            [sg.Text('Valor da despesa:', size=(15, 1)), sg.InputText('', key='valor')],
+            [sg.Text('Descricao:', size=(15, 1)), sg.InputText('', key='descricao')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Sistema de livros').Layout(layout)
+
+        button, values = self.open()
+        valor = values['valor']
+        descricao = values['descricao']
         return {"valor": valor, "descricao": descricao}
 
     def seleciona_reserva(self):
-        id = super().le_num_inteiro("ID da reserva que deseja selecionar: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Digite o ID da reserva que deseja selecionar:', font=('Helvetica', 15))],
+            [sg.Text('ID:', size=(15, 1)), sg.InputText('', key='id')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Seleciona ID').Layout(layout)
+
+        button, values = self.open()
+        id = values['id']
+        self.close()
         return id
 
     def seleciona_quarto(self):
-        numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Digite o número do quarto que deseja selecionar', font=('Helvetica', 15))],
+            [sg.Text('Número:', size=(15, 1)), sg.InputText('', key='numero')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Seleciona Número').Layout(layout)
+
+        button, values = self.open()
+        numero = values['numero']
+        self.close()
         return numero
 
     def seleciona_funcionario(self):
-        cpf = input("CPF do funcionário que deseja selecionar: ")
-        print()
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Hotel', font=('Helvetica', 25))],
+            [sg.Text('Digite o CPF do funcionario que deseja selecionar', font=('Helvetica', 15))],
+            [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Seleciona CPF').Layout(layout)
+
+        button, values = self.open()
+        cpf = values['cpf']
+        self.close()
         return cpf
+
+    def mostra_mensagem(self, msg):
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
     
 
