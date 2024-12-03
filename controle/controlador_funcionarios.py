@@ -1,3 +1,4 @@
+from DAOs.funcionario_dao import FuncionarioDAO
 from entidade.funcionario import Funcionario
 from limite.tela_funcionario import TelaFuncionario
 from exceptions.cadastro_repetido_exception import CadastroRepetidoException
@@ -6,31 +7,31 @@ from exceptions.cadastro_repetido_exception import CadastroRepetidoException
 class ControladorFuncionarios:
 
     def __init__(self, controlador_sistema):
-        self.__funcionarios = []
+        self.__funcionario_dao = FuncionarioDAO()
         self.__tela_funcionario = TelaFuncionario()
         self.__controlador_sistema = controlador_sistema
 
     def lista_funcionarios_por_cargo(self):
         cargo  = self.__tela_funcionario.seleciona_por_cargo()
-
+        funcionarios = []
         lista_vazia = True
-        for funcionario in self.__funcionarios:
+        for funcionario in self.__funcionario_dao.get_all():
             if cargo.lower() == funcionario.cargo.lower():
                 lista_vazia = False
-                self.__tela_funcionario.mostra_funcionario({"cpf": funcionario.cpf,
-                                                            "nome": funcionario.nome,
-                                                            "cargo": funcionario.cargo,
-                                                            "data_admissao": funcionario.data_admissao,
-                                                            "salario": funcionario.salario})
+                funcionarios.append({"cpf": funcionario.cpf,
+                                     "nome": funcionario.nome,
+                                     "cargo": funcionario.cargo,
+                                     "data_admissao": funcionario.data_admissao,
+                                     "salario": funcionario.salario})
+        self.__tela_funcionario.mostra_funcionario(funcionarios)
         if lista_vazia:
             self.__tela_funcionario.mostra_mensagem("Não existe nenhum funcionário com esse cargo.")
 
 
     def pega_funcionario_por_cpf(self, cpf: str):
-        if isinstance(cpf, str):
-            for funcionario in self.__funcionarios:
-                if funcionario.cpf == cpf:
-                    return funcionario
+        for funcionario in self.__funcionario_dao.get_all():
+            if funcionario.cpf == cpf:
+                return funcionario
         return None
 
     def incluir_funcionario(self):
@@ -44,25 +45,18 @@ class ControladorFuncionarios:
                                           dados_funcionario["cargo"],
                                           dados_funcionario["data_admissao"],
                                           dados_funcionario["salario"])
-                self.__funcionarios.append(funcionario)
-                self.__tela_funcionario.mostra_mensagem(
-                    f"Funcionário {funcionario.nome} cadastrado com sucesso"
-                )
+                self.__funcionario_dao.add(funcionario.cpf)
             else:
                 raise CadastroRepetidoException(cpf, funcionario)
         except CadastroRepetidoException as e:
             self.__tela_funcionario.mostra_mensagem(e)
 
     def alterar_funcionario(self):
-        lista = self.lista_funcionarios()
-        if not lista:
-            return False
-
+        self.lista_funcionarios()
         cpf_funcionario = self.__tela_funcionario.seleciona_funcionario()
         funcionario = self.pega_funcionario_por_cpf(cpf_funcionario)
 
         if funcionario:
-            self.__tela_funcionario.mostra_mensagem("**ALTERANDO DADOS DO FUNCIONARIO**")
             novos_dados_funcionario = self.__tela_funcionario.pega_dados_funcionario()
             try:
                 if (self.pega_funcionario_por_cpf(novos_dados_funcionario["cpf"]) and
@@ -75,37 +69,32 @@ class ControladorFuncionarios:
                     funcionario.cargo = novos_dados_funcionario["cargo"]
                     funcionario.data_admissao= novos_dados_funcionario["data_admissao"]
                     funcionario.salario = novos_dados_funcionario["salario"]
-                    self.__tela_funcionario.mostra_mensagem("Dados alterados com sucesso")
+                    self.__funcionario_dao.update(funcionario.cpf)
+                    self.lista_funcionarios()
             except CadastroRepetidoException as e:
                 self.__tela_funcionario.mostra_mensagem(e)
         else:
             self.__tela_funcionario.mostra_mensagem("Funcionario não encontrado")
 
     def lista_funcionarios(self):
-        
-        if len(self.__funcionarios) > 0:
-            for funcionario in self.__funcionarios:
-                self.__tela_funcionario.mostra_funcionario({"nome": funcionario.nome,
-                                                            "cpf": funcionario.cpf,
-                                                            "cargo": funcionario.cargo,
-                                                            "data_admissao": funcionario.data_admissao,
-                                                            "salario": funcionario.salario})
-            return True
-
-        self.__tela_funcionario.mostra_mensagem("Não há funcionários cadastrados")
-        return None
+        dados_funcionarios = []
+        for funcionario in self.__funcionario_dao.get_all():
+            dados_funcionarios.append({"nome": funcionario.nome,
+                                                        "cpf": funcionario.cpf,
+                                                        "cargo": funcionario.cargo,
+                                                        "data_admissao": funcionario.data_admissao,
+                                                        "salario": funcionario.salario})
+        self.__tela_funcionario.mostra_funcionario(dados_funcionarios)
+        return len(dados_funcionarios)
 
     def excluir_funcionario(self):
-        lista = self.lista_funcionarios()
-        if not lista:
-            return False
-
+        self.lista_funcionarios()
         cpf_funcionario = self.__tela_funcionario.seleciona_funcionario()
         funcionario = self.pega_funcionario_por_cpf(cpf_funcionario)
 
-        if isinstance(funcionario, Funcionario):
-            self.__tela_funcionario.mostra_mensagem(f"Funcionário {funcionario.nome} removido com sucesso.")
-            self.__funcionarios.remove(funcionario)
+        if funcionario is not None:
+            self.__funcionario_dao.remove(funcionario)
+            self.lista_funcionarios()
         else:
             self.__tela_funcionario.mostra_mensagem("Funcionário não encontrado")
 
@@ -122,6 +111,5 @@ class ControladorFuncionarios:
         
         while True:
             opcao_escolhida = self.__tela_funcionario.tela_opcoes()
-            self.__tela_funcionario.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()

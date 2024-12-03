@@ -1,3 +1,4 @@
+from DAOs.quarto_DAO import QuartoDAO
 from entidade.quarto_luxo import QuartoLuxo
 from entidade.quarto_standard import QuartoStandard
 from entidade.quarto_suite import QuartoSuite
@@ -10,7 +11,7 @@ from limite.tela_quarto import TelaQuarto
 class ControladorQuartos():
 
     def __init__(self, controlador_sistema):
-        self.__quartos = []
+        self.__quarto_dao = QuartoDAO()
         self.__tela_quarto = TelaQuarto()
         self.__controlador_sistema = controlador_sistema
 
@@ -18,8 +19,7 @@ class ControladorQuartos():
 
         if isinstance(numero, int):
 
-            for quarto in self.__quartos:
-
+            for quarto in self.__quarto_dao.get_all():
                 if quarto.numero == numero:
                     return quarto
             return None
@@ -34,22 +34,19 @@ class ControladorQuartos():
             if dados_quarto["tipo"] == 1:
                 quarto = QuartoStandard(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                         dados_quarto["descricao"])
-                self.__quartos.append(quarto)
-                self.__tela_quarto.mostra_mensagem(f"Quarto Standard número {dados_quarto["numero"]} adicionado com sucesso")
+                self.__quarto_dao.add(quarto)
                 return quarto
 
             if dados_quarto["tipo"] == 2:
                 quarto = QuartoSuite(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                         dados_quarto["descricao"])
-                self.__quartos.append(quarto)
-                self.__tela_quarto.mostra_mensagem(f"Quarto Suíte número {dados_quarto["numero"]} adicionado com sucesso")
+                self.__quarto_dao.add(quarto)
                 return quarto
 
             if dados_quarto["tipo"] == 3:
                 quarto = QuartoLuxo(dados_quarto["numero"], dados_quarto["valor_diaria"],
                                         dados_quarto["descricao"])
-                self.__quartos.append(quarto)
-                self.__tela_quarto.mostra_mensagem(f"Quarto Luxo número {dados_quarto["numero"]} adicionado com sucesso")
+                self.__quarto_dao.add(quarto)
                 return quarto
         except QuartoJaCadastradoException as e:
             self.__tela_quarto.mostra_mensagem(e)
@@ -74,41 +71,34 @@ class ControladorQuartos():
             quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
             quarto.descricao = novos_dados_quarto["descricao"]
             quarto.status = novos_dados_quarto["status"]
-
-            self.__tela_quarto.mostra_mensagem("Dados alterados com sucesso")
+            self.__quarto_dao.update(quarto.numero)
         except QuartoJaCadastradoException as e:
             self.__tela_quarto.mostra_mensagem(e)
         except QuartoNaoEncontradoException as x:
             self.__tela_quarto.mostra_mensagem(x)
 
     def lista_quartos(self):
+        dados_quartos = []
 
-        if len(self.__quartos) > 0:
-            for quarto in self.__quartos:
-                self.__tela_quarto.mostra_quarto({"numero": quarto.numero,
-                                                  "valor_diaria": quarto.valor_diaria,
-                                                  "descricao": quarto.descricao,
-                                                  "tipo": quarto.tipo,
-                                                  "status": quarto.status})
-            return True
-
-        self.__tela_quarto.mostra_mensagem("Não há quartos cadastrados")
-        return None
+        for quarto in self.__quarto_dao.get_all():
+            dados_quartos.append({"numero": quarto.numero,
+                                              "valor_diaria": quarto.valor_diaria,
+                                              "descricao": quarto.descricao,
+                                              "tipo": quarto.tipo,
+                                              "status": quarto.status})
+        self.__tela_quarto.mostra_quarto(dados_quartos)
+        return len(dados_quartos)
 
     def excluir_quarto(self):
-        lista = self.lista_quartos()
-        if not lista:
-            return False
-
+        self.lista_quartos()
         numero_quarto = self.__tela_quarto.seleciona_quarto()
         quarto = self.pega_quarto_por_numero(numero_quarto)
-        try:
-            if not quarto:
-                raise QuartoNaoEncontradoException(numero_quarto)
-            self.__quartos.remove(quarto)
-            self.__tela_quarto.mostra_mensagem(f"Quarto número {quarto.numero} removido com sucesso")
-        except QuartoNaoEncontradoException as e:
-            self.__tela_quarto.mostra_mensagem(e)
+
+        if quarto is not None:
+            self.__quarto_dao.remove(quarto)
+            self.lista_quartos()
+        else:
+            self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -119,7 +109,6 @@ class ControladorQuartos():
 
         while True:
             opcao_escolhida = self.__tela_quarto.tela_opcoes()
-            self.__tela_quarto.mostra_mensagem(f"Opção escolhida: {opcao_escolhida}")
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
   

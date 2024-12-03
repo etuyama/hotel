@@ -1,3 +1,4 @@
+from DAOs.reservas_dao import ReservaDAO
 from entidade.reserva import Reserva
 from exceptions.cliente_menor_de_idade_exception import ClienteMenorDeIdadeException
 from exceptions.quarto_indisponivel_exception import QuartoIndisponivelException
@@ -13,8 +14,7 @@ class ControladorReservas:
                  controlador_clientes,
                  controlador_quartos,
                  controlador_servicos):
-
-        self.__reservas = []
+        self.__reserva_dao = ReservaDAO()
         self.__tela_reserva = TelaReserva()
         self.__controlador_sistema = controlador_sistema
         self.__controlador_clientes = controlador_clientes
@@ -24,20 +24,18 @@ class ControladorReservas:
 
     @property
     def reservas(self):
-        return self.__reservas
+        return self.__reserva_dao.get_all()
 
     def pega_reserva_por_id(self, id: int):
         if isinstance(id, int):
 
-            for reserva in self.__reservas:
-
+            for reserva in self.__reserva_dao.get_all():
                 if reserva.id == id:
                     return reserva
             return None
 
     #Só efetua a reserva se o quarto estiver disponível
     def efetuar_reserva(self):
-        self.__tela_reserva.mostra_mensagem("-------- CLIENTES --------\n")
         lista = self.__controlador_clientes.lista_clientes()
         if not lista:
             return False
@@ -51,7 +49,7 @@ class ControladorReservas:
 
         try:
             if not cliente.validar_maioridade():
-                raise ClienteMenorDeIdadeException(cliente.calcular_idade())
+                self.__tela_reserva.mostra_mensagem("Cliente deve ser maior de idade!")
 
             self.__controlador_quartos.lista_quartos()
             numero_quarto = self.__tela_reserva.seleciona_quarto()
@@ -67,15 +65,13 @@ class ControladorReservas:
 
             reserva = Reserva(quarto, tempo_estadia, cliente, self.__id)
             reserva.data_reserva = date.today().strftime("%d/%m/%Y")
-            self.__reservas.append(reserva)
+            self.__reserva_dao.add(reserva)
 
             self.__tela_reserva.mostra_mensagem("Reserva efetuada com sucesso")
             quarto.status = "Ocupado"
 
             self.__id = self.__id + 1
 
-        except ClienteMenorDeIdadeException as e:
-            self.__tela_reserva.mostra_mensagem(e)
         except QuartoNaoEncontradoException as x:
             self.__tela_reserva.mostra_mensagem(x)
         except QuartoIndisponivelException as c:
@@ -95,8 +91,6 @@ class ControladorReservas:
             # id de uma reserva finalizada, por isso é necessário o try
             try:
                 self.verifica_situacao_reserva(reserva)
-
-                self.__tela_reserva.mostra_mensagem("**ALTERANDO DADOS DA RESERVA**")
 
                 self.__controlador_clientes.lista_clientes()
                 cpf_cliente = self.__tela_reserva.seleciona_cliente()
@@ -119,7 +113,7 @@ class ControladorReservas:
                         raise QuartoIndisponivelException
 
                     reserva.quarto = quarto
-                    self.__tela_reserva.mostra_mensagem("Dados alterados com sucesso")
+                    self.__reserva_dao.update(reserva.id)
 
                 except QuartoNaoEncontradoException as e:
                     self.__tela_reserva.mostra_mensagem(e)
@@ -134,92 +128,75 @@ class ControladorReservas:
 
     #Lista as reservas pendentes
     def lista_reservas(self):
+        cont_reservas_finalizadas = 0
+        dados_reservas = []
 
-        if len(self.__reservas) > 0:
+        for reserva in self.__reserva_dao.get_all():
+            try:
+                self.verifica_situacao_reserva(reserva)
 
-                cont_reservas_finalizadas = 0
-                for reserva in self.__reservas:
+                dados_reservas.append({"id": reserva.id,
+                                       "data_reserva": reserva.data_reserva,
+                                       "situacao": reserva.situacao,
+                                       "nome_cliente": reserva.cliente.nome,
+                                       "cpf_cliente": reserva.cliente.cpf,
+                                       "numero_quarto": reserva.quarto.numero,
+                                       "tipo_quarto": reserva.quarto.tipo,
+                                       "valor_diaria": reserva.quarto.valor_diaria,
+                                       "tempo_estadia": reserva.tempo_estadia,
+                                       "servicos_utilizados": self.lista_servicos(reserva),
+                                       "valor_total": reserva.valor_total})
 
-                        try:
-                            self.verifica_situacao_reserva(reserva)
+            except ReservaFinalizadaException:
+                cont_reservas_finalizadas += 1
+                continue
 
-                            self.__tela_reserva.mostra_reserva({"id": reserva.id,
-                                                                "data_reserva": reserva.data_reserva,
-                                                                "situacao": reserva.situacao,
-                                                                "nome_cliente": reserva.cliente.nome,
-                                                                "cpf_cliente": reserva.cliente.cpf,
-                                                                "numero_quarto": reserva.quarto.numero,
-                                                                "tipo_quarto": reserva.quarto.tipo,
-                                                                "valor_diaria": reserva.quarto.valor_diaria,
-                                                                "tempo_estadia": reserva.tempo_estadia,
-                                                                "servicos_utilizados": self.lista_servicos(reserva),
-                                                                "valor_total": reserva.valor_total})
+        if cont_reservas_finalizadas == len(self.__reservas):
+            self.__tela_reserva.mostra_mensagem("Não há reservas pendentes")
+            return None
+        self.__tela_reserva.mostra_reserva("Reservas finalizadas")
+        return len(dados_reservas)
 
-                        except ReservaFinalizadaException:
-                            cont_reservas_finalizadas = cont_reservas_finalizadas + 1
-
-                if cont_reservas_finalizadas == len(self.__reservas):
-                    self.__tela_reserva.mostra_mensagem("Não há reservas pendentes")
-                    return None
-
-                return True
-
-        self.__tela_reserva.mostra_mensagem("Ainda não há reservas registradas")
-        return None
 
     def lista_todas_reservas(self):
-
-        if len(self.__reservas) > 0:
-            for reserva in self.__reservas:
-
-                self.__tela_reserva.mostra_reserva({
-                    "id": reserva.id,
-                    "data_reserva": reserva.data_reserva,
-                    "situacao": reserva.situacao,
-                    "nome_cliente": reserva.cliente.nome,
-                    "cpf_cliente": reserva.cliente.cpf,
-                    "numero_quarto": reserva.quarto.numero,
-                    "tipo_quarto": reserva.quarto.tipo,
-                    "valor_diaria": reserva.quarto.valor_diaria,
-                    "tempo_estadia": reserva.tempo_estadia,
-                    "servicos_utilizados": self.lista_servicos(reserva),
-                    "valor_total": reserva.valor_total}
-                )
-            return True
-
-        self.__tela_reserva.mostra_mensagem("Ainda não há reservas registradas")
-        return None
+        dados_reservas = []
+        for reserva in self.__reserva_dao.get_all():
+            dados_reservas.append({"id": reserva.id,
+                "data_reserva": reserva.data_reserva,
+                "situacao": reserva.situacao,
+                "nome_cliente": reserva.cliente.nome,
+                "cpf_cliente": reserva.cliente.cpf,
+                "numero_quarto": reserva.quarto.numero,
+                "tipo_quarto": reserva.quarto.tipo,
+                "valor_diaria": reserva.quarto.valor_diaria,
+                "tempo_estadia": reserva.tempo_estadia,
+                "servicos_utilizados": self.lista_servicos(reserva),
+                "valor_total": reserva.valor_total})
+        return True
 
     def excluir_reserva(self):
-        lista = self.lista_reservas()
-        if not lista:
-            return False
-
+        self.lista_reservas()
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
-
             try:
                 self.verifica_situacao_reserva(reserva)
-                self.__reservas.remove(reserva)
+                self.__reserva_dao.remove(reserva.id)
                 reserva.quarto.status = "Disponível"
                 self.__tela_reserva.mostra_mensagem("Reserva removida com sucesso")
 
             except ReservaFinalizadaException as e:
                 self.__tela_reserva.mostra_mensagem(e)
-
         else:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
 
     def adiciona_servico(self):
-        lista = self.lista_reservas()
-        if not lista:
-            return False
-
+        self.lista_reservas()
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
-        if not isinstance(reserva, Reserva):
+
+        if not reserva:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
             return False
 
@@ -231,7 +208,7 @@ class ControladorReservas:
 
             if servico:
                 reserva.adiciona_servico(servico)
-                self.__tela_reserva.mostra_mensagem(f"Serviço {servico.id}: {servico.nome} adicionado com sucesso")
+                self.__reserva_dao.update(reserva.id)
             else:
                 self.__tela_reserva.mostra_mensagem(f"Serviço não encontrado")
 
@@ -242,9 +219,6 @@ class ControladorReservas:
     def lista_servicos(self, reserva: Reserva):
         #CONVERTE LISTA DE SERVIÇOS EM LISTA DE STRINGS CONTENDO O NOME DO SERVIÇO E O PREÇO
         servicos = reserva.servicos_utilizados
-        if len(servicos) == 0:
-            return "Nenhum serviço utilizado"
-
         string_servicos = ""
         for servico in servicos:
             string = f"{servico.nome} R${servico.preco},00 | "
@@ -253,19 +227,16 @@ class ControladorReservas:
         return string_servicos
 
     def extender_estadia(self):
-        lista = self.lista_reservas()
-        if not lista:
-            return False
-
+        self.lista_reservas()
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
-
             try:
                 self.verifica_situacao_reserva(reserva)
                 qt_dias = self.__tela_reserva.pega_dias_extensao()
                 reserva.extender_estadia(qt_dias)
+                self.__reserva_dao.update(reserva.id)
                 self.__tela_reserva.mostra_mensagem(f"Foram adicionados {qt_dias} dias na reserva de ID: {reserva.id}")
 
             except ReservaFinalizadaException as e:
@@ -275,20 +246,17 @@ class ControladorReservas:
             self.__tela_reserva.mostra_mensagem("Reserva não encontrada")
 
     def adiciona_valor_extra(self):
-        lista = self.lista_reservas()
-        if not lista:
-            return False
-
+        self.lista_reservas()
         id_reserva = self.__tela_reserva.seleciona_reserva()
         reserva = self.pega_reserva_por_id(id_reserva)
 
         if reserva:
-
             try:
                 self.verifica_situacao_reserva(reserva)
                 valor_extra = self.__tela_reserva.pega_valor_extra()
                 reserva.adiciona_valor_extra(valor_extra)
                 self.__tela_reserva.mostra_mensagem(f"R${valor_extra},00 adicionado à reserva de ID: {reserva.id}")
+                self.__reserva_dao.update(reserva.id)
 
             except ReservaFinalizadaException as e:
                 self.__tela_reserva.mostra_mensagem(e)
@@ -314,7 +282,7 @@ class ControladorReservas:
     def gera_relatorio_tipo_mais_reservado(self):
         contagem = {"Standard" : 0, "Suíte" : 0, "Luxo" : 0}
 
-        for reserva in self.__reservas:
+        for reserva in self.__reserva_dao.get_all():
             if reserva.quarto.tipo == "Standard":
                 contagem["Standard"] += 1
             elif reserva.quarto.tipo == "Suíte":

@@ -1,3 +1,4 @@
+from DAOs.hotel_dao import HotelDAO
 from limite.tela_hotel import TelaHotel
 from entidade.hotel import Hotel
 from exceptions.reserva_finalizada_exception import ReservaFinalizadaException
@@ -12,20 +13,23 @@ class ControladorHotel:
         self.__controlador_reservas = controlador_reservas
         self.__controlador_funcionarios = controlador_funcionarios
         self.__controlador_quartos = controlador_quartos
-        self.__avaliacoes = []
-        self.__transacoes = []
-        self.__hotel = Hotel()
+        self.__hotel_dao = HotelDAO()
+        self.__hotel = self.__hotel_dao.get_hotel() or Hotel()
+        self.__avaliacoes = self.__hotel_dao.get_avaliacoes()
+        self.__transacoes = self.__hotel_dao.get_transacoes()
 
     def avaliar_hotel(self):
         avaliacao = self.__tela_hotel.pega_avaliacao_hotel()
 
-        if avaliacao != "N/A":
-
+        if avaliacao != "0":
             self.__avaliacoes.append(avaliacao)
+            self.__hotel_dao.save_avaliacoes(self.__avaliacoes)
+
             media = sum(self.__avaliacoes) / len(self.__avaliacoes)
             media_avaliacao = round(media, 1)
 
             self.__hotel.avaliacao_hotel = media_avaliacao
+            self.__hotel_dao.save_hotel(self.__hotel)
 
     def mostra_avaliacao_hotel(self):
 
@@ -54,34 +58,27 @@ class ControladorHotel:
         reserva = self.__controlador_reservas.pega_reserva_por_id(id_reserva)
 
         if reserva:
-
-            try:            
+            try:
                 self.__controlador_reservas.verifica_situacao_reserva(reserva)
                 reserva.situacao = "Finalizada"
 
                 valor_reserva = reserva.valor_total
                 self.__hotel.incrementar_saldo(valor_reserva)
+                self.__hotel_dao.save_hotel(self.__hotel)  # Persiste o hotel
 
                 self.__transacoes.append(f" Reserva(+R${reserva.valor_total},00) ")
+                self.__hotel_dao.save_transacoes(self.__transacoes)  # Persiste transações
 
                 reserva.quarto.status = "Manutenção"
-
                 self.avaliar_hotel()
 
                 self.__tela_hotel.mostra_mensagem(
                     f"Check-out da reserva do cliente:"
                     f" {reserva.cliente.nome}(CPF:{reserva.cliente.cpf})"
                     f" no quarto {reserva.quarto.numero} realizado com sucesso"
-                    )
-
-                self.__tela_hotel.mostra_mensagem(
-                    f"Valor total da reserva: R${reserva.valor_total},00"
-                    f" incrementados ao saldo do hotel"
-                    )
-
+                )
             except ReservaFinalizadaException as e:
                 self.__tela_hotel.mostra_mensagem(e)
-
         else:
             self.__tela_hotel.mostra_mensagem("Reserva não encontrada")
 
