@@ -56,13 +56,10 @@ class TelaHotel(Tela):
 
                 return escolha_avaliacao
 
-            #se for inserido qualquer valor não numérico a avaliação é dada como não feita
             except ValueError:
                 escolha = "N/A"
                 return escolha
 
-            #caso tenha sido inserido algum número inteiro inválido,
-            #  o usuário pode tentar novamente
             except ValorInvalidoException as e:
                 print(e)
 
