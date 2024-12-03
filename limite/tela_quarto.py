@@ -1,75 +1,140 @@
 from limite.tela import Tela
+import PySimpleGUI as sg
 
 
 class TelaQuarto(Tela):
 
-    def tela_opcoes(self):
-        escolhas = [1,2,3,4,0]
-        print("-------- QUARTOS ----------")
-        print("Escolha uma opção")
-        print("1 - Incluir Quarto")
-        print("2 - Alterar Quarto")
-        print("3 - Listar Quartos")
-        print("4 - Excluir Quarto")
-        print("0 - Retornar")
+    def __init__(self):
+        self.__window = None
+        self.init_opcoes()
 
-        escolha = super().le_num_inteiro("Escolha: ", escolhas)
-        return escolha
+    def tela_opcoes(self):
+        self.init_opcoes()
+        button, values = self.open()
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['0'] or button in (None, 'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
+
+    def init_opcoes(self):
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Quartos', font=('Helvetica', 25))],
+            [sg.Text('Escolha sua opção', font=('Helvetica', 15))],
+            [sg.Radio('Incluir Quarto', 'Q01', key='1')],
+            [sg.Radio('Alterar Quarto', 'Q01', key='2')],
+            [sg.Radio('Listar Quartos', 'Q01', key='3')],
+            [sg.Radio('Excluir Quarto', 'Q01', key='4')],
+            [sg.Radio('Retornar', 'Q01', key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Quartos').Layout(layout)
 
     def pega_dados_quarto(self):
-        print("-------- DADOS QUARTO --------")
-        print("Qual tipo de quarto deseja?")
-        print("1- Standard")
-        print("2- Suíte")
-        print("3- Luxo")
-        tipos_validos = [1,2,3]
-        tipo = super().le_num_inteiro("Tipo: ", tipos_validos)
-        numero = super().le_num_inteiro("Número: ")
-        valor_diaria = super().le_num_inteiro("Valor da diária: ")
-        descricao = super().le_string("Descrição: ")
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Qual tipo de quarto deseja?', font=("Helvica", 25))],
+            [sg.Radio('Standard', 'T01', key='1')],
+            [sg.Radio('Suíte', 'T02', key='2')],
+            [sg.Radio('Luxo', 'T03', key='3')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Quartos').Layout(layout)
+        button, values = self.open()
+        if values['1']:
+            tipo = 1
+        if values['2']:
+            tipo = 2
+        if values['3']:
+            tipo = 3
+        if button in (None, 'Cancelar'):
+            tipo = 0
+            return None
 
+        self.close()
+
+        sg.ChangeLookAndFeel('Dark')
+        layout = [
+            [sg.Text('Dados do Quarto', font=("Helvica", 25))],
+            [sg.Text('Número:', size=(15, 1)), sg.InputText('', key='numero')],
+            [sg.Text('Valor da Diária:', size=(15, 1)), sg.InputText('', key='valor_diaria')],
+            [sg.Text('Descrição:', size=(15, 1)), sg.InputText('', key='descricao')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+        ]
+        self.__window = sg.Window('Quartos').Layout(layout)
+        button, values = self.open()
+        numero = values['numero']
+        valor_diaria = values['valor_diaria']
+        descricao = values['descricao']
+
+        self.close()
         return {"numero": numero, "valor_diaria": valor_diaria,
                 "descricao": descricao, "tipo": tipo}
 
     #Não será possível alterar o tipo do quarto, e será possível alterar o status,
     #logo foi necessária uma nova função mais específica
     def pega_dados_alteracao_quarto(self):
-        print("-------- DADOS QUARTO --------")
+        while True:
+            sg.ChangeLookAndFeel('Dark')
+            layout = [
+                [sg.Text('Dados do Quarto', font=("Helvica", 25))],
+                [sg.Text('Número:', size=(15, 1)), sg.InputText('', key='numero')],
+                [sg.Text('Valor da Diária:', size=(15, 1)), sg.InputText('', key='valor_diaria')],
+                [sg.Text('Descrição:', size=(15, 1)), sg.InputText('', key='descricao')],
+                [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+            self.__window = sg.Window('Quartos').Layout(layout)
+            button, values = self.open()
+            numero = values['numero']
+            valor_diaria = values['valor_diaria']
+            descricao = values['descricao']
+            if numero and valor_diaria and descricao:
+                return {"numero": numero, "valor_diaria": valor_diaria,
+                        "descricao": descricao}
+            self.close()
 
-        numero = super().le_num_inteiro("Número: ")
-        valor_diaria = super().le_num_inteiro("Valor da diária: ")
-        descricao = super().le_string("Descrição: ")
-        print("\n")
-        status = self.pega_status_quarto()
+    def mostra_quarto(self, dados):
+        string_todos_quartos = ""
+        for dado in dados:
+            string_todos_quartos = string_todos_quartos + "Tipo do Quarto: " + dado["tipo"] + '\n'
+            string_todos_quartos = string_todos_quartos + "Número do Quarto:  " + dado["numero"] + '\n'
+            string_todos_quartos = string_todos_quartos + f"Valor da diária: R${dado['valor_diaria']},00" + '\n'
+            string_todos_quartos = string_todos_quartos + "Descrição: " + dado["descricao"] + '\n'
+            string_todos_quartos = string_todos_quartos + "Status: " + dado["status"] + '\n\n'
 
-        return {"numero": numero, "valor_diaria": valor_diaria,
-                "descricao": descricao, "status": status}
-
-
-    def mostra_quarto(self, dados_quarto):
-        print("Quarto tipo", dados_quarto["tipo"])
-        print("Número: ", dados_quarto["numero"])
-        print(f"Valor da diária: R${dados_quarto['valor_diaria']},00")
-        print("Descrição: ", dados_quarto["descricao"])
-        print("Status: ", dados_quarto["status"])
-        print("\n")
+        sg.Popup('Lista de Quartos', string_todos_quartos)
 
     def seleciona_quarto(self):
-        numero = super().le_num_inteiro("Número do quarto que deseja selecionar: ")
-        return numero
+        while True:
+            sg.ChangeLookAndFeel('Dark')
+            layout = [
+                [sg.Text('Selecionar Quarto', font=("Helvica", 25))],
+                [sg.Text('Digite o número do Quarto que deseja selecionar:', font=("Helvica", 15))],
+                [sg.Text('Número:', size=(15, 1)), sg.InputText('', key='numero')],
+                [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
 
-    def pega_status_quarto(self):
-        escolhas = [1,2,3]
+            self.__window = sg.Window('Seleciona Quarto').Layout(layout)
 
-        print("Qual status você deseja?")
-        print("1- Disponível")
-        print("2- Ocupado")
-        print("3- Manutenção")
+            button, values = self.open()
 
-        status = super().le_num_inteiro("Status: ", escolhas)
-        if status == 1:
-            return "Disponível"
-        if status == 2:
-            return "Ocupado"
-        if status == 3:
-            return "Manutenção"
+            numero = super().le_num_inteiro(values['numero'])
+            if numero:
+                return numero
+
+            self.close()
+
+    def close(self):
+        self.__window.close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values

@@ -45,4 +45,4 @@ class TelaSistema(Tela):
             [sg.Radio('Finalizar Sistema', "S01", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
-        self.__window = sg.Window('Sistema de Hotel').Layout(layout)
+        self.__window = sg.Window('Sistema do Hotel').Layout(layout)

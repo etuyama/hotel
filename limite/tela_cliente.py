@@ -1,6 +1,7 @@
 from limite.tela import Tela
 import PySimpleGUI as sg
 
+
 class TelaCliente(Tela):
 
     def __init__(self):
@@ -84,12 +85,11 @@ class TelaCliente(Tela):
         self.__window = sg.Window('Seleciona Cliente').Layout(layout)
 
         button, values = self.open()
-        cpf = values['cpf']
-        self.close()
-        return cpf
 
-    def mostra_mensagem(self, mensagem):
-        sg.Popup('', mensagem)
+        cpf = super().le_cpf(values['cpf'])
+        self.close()
+
+        return cpf
 
     def close(self):
         self.__window.close()

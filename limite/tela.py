@@ -8,42 +8,36 @@ from exceptions.menor_que_zero_exception import MenorQueZeroException
 from exceptions.nao_eh_string_exception import NaoEhStringException
 from exceptions.telefone_invalido_exception import TelefoneInvalidoException
 from exceptions.valor_invalido_exception import ValorInvalidoException
+import PySimpleGUI as sg
 
 
 class Tela(ABC):
 
     def mostra_mensagem(self, mensagem):
-        print(mensagem)
-        print()
+        sg.Popup('', mensagem)
 
-    def le_num_inteiro(self, mensagem="", inteiros_validos = None):
+    def le_num_inteiro(self, valor_inserido):
+
+        try:
+            valor_inteiro = int(valor_inserido)
+
+            if valor_inteiro <= 0:
+                raise MenorQueZeroException
+
+            return valor_inteiro
+
+        except MenorQueZeroException as e:
+            sg.Popup('', e)
+            return False
+
+        except ValueError:
+            sg.Popup('', 'Valor inválido inserido')
+            return False
+
+    def le_string(self, entrada):
+
         while True:
-            valor_lido = input(mensagem)
-            print()
-            try:
-                valor_inteiro = int(valor_lido)
-                if inteiros_validos and valor_inteiro not in inteiros_validos:
-                    raise ValorInvalidoException
 
-                if inteiros_validos and valor_inteiro in inteiros_validos:
-                    return valor_inteiro
-
-                if valor_inteiro <= 0:
-                    raise MenorQueZeroException
-
-                return valor_inteiro
-
-            except ValorInvalidoException as e:
-                print(e)
-            except MenorQueZeroException as e:
-                print(e)
-            except ValueError:
-                print("Valor inválido inserido")
-
-    def le_string(self, mensagem=""):
-        while True:
-            entrada = input(mensagem)
-            print()
             try:
                 #Checa se a entrada é vazia
                 if entrada == "":
@@ -54,23 +48,25 @@ class Tela(ABC):
                 return entrada
 
             except EntradaVaziaException as e:
-                print(e)
+                sg.Popup(e)
+                return False
             except NaoEhStringException as x:
-                print(x)
+                sg.Popup(x)
+                return False
 
-    def le_cpf(self, mensagem=""):
-        while True:
-            cpf = input(mensagem)
-            print()
-            try:
-                if len(cpf) != 11 or not cpf.isdigit():
-                    raise CPFInvalidoException
-                elif int(cpf) <= 0:
-                    raise CPFInvalidoException
-                return cpf
+    def le_cpf(self, cpf_inserido):
+        try:
+            if len(cpf_inserido) != 11 or not cpf_inserido.isdigit():
+                raise CPFInvalidoException
 
-            except CPFInvalidoException as e:
-                print(e)
+            elif int(cpf_inserido) <= 0:
+                raise CPFInvalidoException
+
+            return cpf_inserido
+
+        except CPFInvalidoException as e:
+            sg.Popup(e)
+            return False
 
     def le_telefone(self, mensagem=""):
         while True:
