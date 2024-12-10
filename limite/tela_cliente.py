@@ -39,28 +39,30 @@ class TelaCliente(Tela):
         self.__window = sg.Window('Clientes').Layout(layout)
 
     def pega_dados_cliente(self):
-        sg.ChangeLookAndFeel('Dark')
-        layout = [
-            [sg.Text('Dados do Cliente', font=("Helvica", 25))],
-            [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
-            [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
-            [sg.Text('Telefone:', size=(15, 1)), sg.InputText('', key='telefone')],
-            [sg.Text('Data de nascimento:', size=(15, 1)), sg.InputText('', key='data_nascimento')],
-            [sg.Text('Endereço:', size=(15, 1)), sg.InputText('', key='endereco')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
-        ]
-        self.__window = sg.Window('Sistema do Hotel').Layout(layout)
+        while True:
+            sg.ChangeLookAndFeel('Dark')
+            layout = [
+                [sg.Text('Dados do Cliente', font=("Helvica", 25))],
+                [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
+                [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
+                [sg.Text('Telefone:', size=(15, 1)), sg.InputText('', key='telefone')],
+                [sg.Text('Data de nascimento:', size=(15, 1)), sg.InputText('', key='data_nascimento')],
+                [sg.Text('Endereço:', size=(15, 1)), sg.InputText('', key='endereco')],
+                [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+            self.__window = sg.Window('Sistema do Hotel').Layout(layout)
 
-        button, values = self.open()
-        nome = values['nome']
-        cpf = values['cpf']
-        telefone = values['telefone']
-        data_nascimento = values['data_nascimento']
-        endereco = values['endereco']
+            button, values = self.open()
+            nome = super().le_string(values['nome'])
+            cpf = super().le_cpf(values['cpf'])
+            telefone = super().le_telefone(values['telefone'])
+            data_nascimento = super().le_data(values['data_nascimento'])
+            endereco = super().le_string(values['endereco'])
 
-        self.close()
-        return {"nome": nome, "cpf": cpf, "telefone": telefone,
-                "data_nascimento": data_nascimento, "endereco": endereco}
+            self.close()
+            if nome and cpf and telefone and data_nascimento and endereco:
+                return {"nome": nome, "cpf": cpf, "telefone": telefone,
+                        "data_nascimento": data_nascimento, "endereco": endereco}
 
 
     def mostra_cliente(self, dados):

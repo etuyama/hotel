@@ -42,28 +42,30 @@ class TelaFuncionario(Tela):
         self.__window = sg.Window('Funcionario').Layout(layout)
 
     def pega_dados_funcionario(self):
-        sg.ChangeLookAndFeel('Dark')
-        layout = [
-            [sg.Text('Dados do Funcionario', font=("Helvica", 25))],
-            [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
-            [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
-            [sg.Text('Cargo:', size=(15, 1)), sg.InputText('', key='cargo')],
-            [sg.Text('Data de admissão:', size=(15, 1)), sg.InputText('', key='data_admissao')],
-            [sg.Text('Salário:', size=(15, 1)), sg.InputText('', key='salario')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
-        ]
-        self.__window = sg.Window('Funcionarios').Layout(layout)
+        while True:
+            sg.ChangeLookAndFeel('Dark')
+            layout = [
+                [sg.Text('Dados do Funcionario', font=("Helvica", 25))],
+                [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome')],
+                [sg.Text('CPF:', size=(15, 1)), sg.InputText('', key='cpf')],
+                [sg.Text('Cargo:', size=(15, 1)), sg.InputText('', key='cargo')],
+                [sg.Text('Data de admissão:', size=(15, 1)), sg.InputText('', key='data_admissao')],
+                [sg.Text('Salário:', size=(15, 1)), sg.InputText('', key='salario')],
+                [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+            self.__window = sg.Window('Funcionarios').Layout(layout)
 
-        button, values = self.open()
-        nome = values['nome']
-        cpf = values['cpf']
-        cargo = values['cargo']
-        data_admissao = values['data_admissao']
-        salario = values['salario']
+            button, values = self.open()
+            nome = super().le_string(values['nome'])
+            cpf = super().le_cpf(values['cpf'])
+            cargo = super().le_string(values['cargo'])
+            data_admissao = super().le_data(values['data_admissao'])
+            salario = super().le_num_inteiro(values['salario'])
 
-        self.close()
-        return {"nome": nome, "cpf": cpf, "cargo": cargo,
-                "data_admissao": data_admissao, "salario": salario}
+            self.close()
+            if nome and cpf and cargo and data_admissao and salario:
+                return {"nome": nome, "cpf": cpf, "cargo": cargo,
+                        "data_admissao": data_admissao, "salario": salario}
 
     def mostra_funcionario(self, dados):
         string_todos_funcionarios = ""

@@ -70,8 +70,7 @@ class ControladorQuartos():
             quarto.numero = novos_dados_quarto["numero"]
             quarto.valor_diaria = novos_dados_quarto["valor_diaria"]
             quarto.descricao = novos_dados_quarto["descricao"]
-            quarto.status = novos_dados_quarto["status"]
-            self.__quarto_dao.update(quarto.numero)
+            self.__quarto_dao.update(quarto)
         except QuartoJaCadastradoException as e:
             self.__tela_quarto.mostra_mensagem(e)
         except QuartoNaoEncontradoException as x:
@@ -95,8 +94,7 @@ class ControladorQuartos():
         quarto = self.pega_quarto_por_numero(numero_quarto)
 
         if quarto is not None:
-            self.__quarto_dao.remove(quarto)
-            self.lista_quartos()
+            self.__quarto_dao.remove(quarto.numero)
         else:
             self.__tela_quarto.mostra_mensagem("Quarto não encontrado")
 

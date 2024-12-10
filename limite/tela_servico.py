@@ -37,8 +37,10 @@ class TelaServico(Tela):
     def mostra_servico(self, dados_servico):
         print("Serviço: ", dados_servico["nome"])
         print("ID: ", dados_servico["id"])
+
+        preco = dados_servico["preco"]
         print("Descriçao: ", dados_servico["descricao"])
-        print(f"Preco: R$ {dados_servico["preco"]},00")
+        print(f"Preco: R$ {preco},00")
         print("\n")
 
     def seleciona_servico(self):
