@@ -1,6 +1,8 @@
 from limite.tela import Tela
 import PySimpleGUI as sg
 
+# Falta implementar os tratamentos de entrada no Funcionário, Quarto e Cliente.
+# 
 
 class TelaQuarto(Tela):
 
