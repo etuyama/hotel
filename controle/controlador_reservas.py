@@ -115,6 +115,8 @@ class ControladorReservas:
                     reserva.quarto = quarto
                     self.__reserva_dao.update(reserva.id)
 
+                    reserva.valor_total = quarto.valor_diaria * reserva.tempo_estadia
+
                 except QuartoNaoEncontradoException as e:
                     self.__tela_reserva.mostra_mensagem(e)
                 except QuartoIndisponivelException as x:
@@ -151,10 +153,10 @@ class ControladorReservas:
                 cont_reservas_finalizadas += 1
                 continue
 
-        if cont_reservas_finalizadas == len(self.__reservas):
+        if cont_reservas_finalizadas == len(self.__reserva_dao.get_all()):
             self.__tela_reserva.mostra_mensagem("Não há reservas pendentes")
             return None
-        self.__tela_reserva.mostra_reserva("Reservas finalizadas")
+        self.__tela_reserva.mostra_reserva(dados_reservas)
         return len(dados_reservas)
 
 
@@ -293,14 +295,16 @@ class ControladorReservas:
                 contagem["Luxo"] += 1
 
         ranking = sorted(contagem.items(), key=lambda item: item[1], reverse=True)
-        self.__tela_reserva.mostra_mensagem("Tipos de quartos mais reservados:")
+        string_relatorio = "Tipos de quartos mais reservados:" + '\n'
         for i, (tipo, qtd) in enumerate(ranking, start=1):
             if qtd == 0:
-                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: Nenhuma reserva")
+                string_relatorio = string_relatorio + f"{i}º - {tipo}: Nenhuma reserva" + '\n'
             elif qtd == 1:
-                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: {qtd} reserva")
+                string_relatorio = string_relatorio + f"{i}º - {tipo}: {qtd} reserva" + '\n'
             else:
-                self.__tela_reserva.mostra_mensagem(f"{i}º - {tipo}: {qtd} reservas")
+                string_relatorio = string_relatorio + f"{i}º - {tipo}: {qtd} reservas" + '\n'
+
+        self.__tela_reserva.mostra_mensagem(string_relatorio)
 
     def gera_relatorio_meses(self):
         ano = str(self.__tela_reserva.seleciona_ano())
@@ -309,7 +313,7 @@ class ControladorReservas:
             "07" : 0, "08" : 0, "09" : 0, "10" : 0, "11" : 0, "12" : 0
         }
 
-        for reserva in self.__reservas:
+        for reserva in self.__reserva_dao.get_all():
             if reserva.data_reserva[6:10] == ano:
                 meses[reserva.data_reserva[3:5]] += 1
 
@@ -322,15 +326,17 @@ class ControladorReservas:
             "12": "Dezembro"
         }
 
-        self.__tela_reserva.mostra_mensagem(f"Ranking dos meses com mais reservas no ano de {ano}:")
+        string_relatorio = f"Ranking dos meses com mais reservas no ano de {ano}:" +  '\n'
 
         for i, (mes, qtd) in enumerate(ranking, start=1):
-            self.__tela_reserva.mostra_mensagem(f"{i}º - {nomes_meses[mes]}: {qtd} reservas")
+            string_relatorio = string_relatorio + f"{i}º - {nomes_meses[mes]}: {qtd} reservas" + '\n'
+
+        self.__tela_reserva.mostra_mensagem(string_relatorio)
 
     def gera_relatorio_clientes(self):
         clientes_contagem = {}
 
-        for reserva in self.__reservas:
+        for reserva in self.__reserva_dao.get_all():
             if reserva.cliente.cpf not in clientes_contagem:
                 clientes_contagem[reserva.cliente.cpf] = 1
             else:
@@ -338,10 +344,12 @@ class ControladorReservas:
 
         ranking = sorted(clientes_contagem.items(), key=lambda item: item[1], reverse=True)
 
-        self.__tela_reserva.mostra_mensagem("Ranking dos clientes com mais reservas realizadas:")
+        string_relatorio = "Ranking dos clientes com mais reservas realizadas:" + '\n'
 
         for i, (cpf, qtd) in enumerate(ranking, start=1):
-            self.__tela_reserva.mostra_mensagem(f"{i}º - {self.__controlador_clientes.pega_cliente_por_cpf(cpf).nome} (CPF {cpf}): {qtd} reservas")
+            string_relatorio = string_relatorio + f"{i}º - {self.__controlador_clientes.pega_cliente_por_cpf(cpf).nome} (CPF {cpf}): {qtd} reservas" + '\n'
+
+        self.__tela_reserva.mostra_mensagem(string_relatorio)
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -349,7 +357,7 @@ class ControladorReservas:
     def abre_tela(self):
         lista_opcoes = {1: self.efetuar_reserva, 2: self.alterar_reserva,
                         3: self.lista_reservas, 4: self.excluir_reserva,
-                        5: self.adiciona_servico, 6: self.estender_estadia,
+                        5: self.adiciona_servico, 6: self.extender_estadia,
                         7: self.adiciona_valor_extra, 8: self.lista_todas_reservas,
                         9: self.gera_relatorios, 0: self.retornar}
         while True:

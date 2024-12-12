@@ -15,14 +15,14 @@ class TelaSistema(Tela):
             opcao = 1
         elif values['2']:
             opcao = 2
-        elif values['3']:
-            opcao = 3
+        # elif values['3']:
+        #     opcao = 3
         elif values['4']:
             opcao = 4
-        elif values['5']:
-            opcao = 5
-        elif values['6']:
-            opcao = 6
+        # elif values['5']:
+        #     opcao = 5
+        # elif values['6']:
+        #     opcao = 6
         elif values['0'] or button in (None,'Cancelar'):
             opcao = 0
         self.close()
@@ -38,10 +38,10 @@ class TelaSistema(Tela):
             [sg.Text('Escolha sua opção', font=('Helvica', 15))],
             [sg.Radio('Clientes', "S01", key='1')],
             [sg.Radio('Reservas', "S01", key='2')],
-            [sg.Radio('Serviços', "S01", key='3')],
+            # [sg.Radio('Serviços', "S01", key='3')],
             [sg.Radio('Quartos', "S01", key='4')],
-            [sg.Radio('Funcionários', "S01", key='5')],
-            [sg.Radio('Hotel ', "S01", key='6')],
+            # [sg.Radio('Funcionários', "S01", key='5')],
+            # [sg.Radio('Hotel ', "S01", key='6')],
             [sg.Radio('Finalizar Sistema', "S01", key='0')],
             [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
         ]
